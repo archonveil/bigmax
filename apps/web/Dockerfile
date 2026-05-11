@@ -20,6 +20,10 @@ FROM node:22-bookworm-slim AS deps
 
 ENV PNPM_HOME=/usr/local/pnpm-home
 ENV PATH=$PNPM_HOME:$PATH
+# HUSKY=0 — husky's `prepare` script пытается установить git-hooks в /app/.git/,
+# которого нет в Docker'е → fail. Этот env-flag заставляет husky no-op'ить.
+# Альтернатива --ignore-scripts ломала prisma's postinstall (`.bin/prisma`).
+ENV HUSKY=0
 RUN corepack enable && corepack prepare pnpm@9.12.0 --activate
 
 WORKDIR /app
@@ -36,7 +40,9 @@ COPY packages/notifications/package.json packages/notifications/
 COPY packages/i18n/package.json packages/i18n/
 COPY packages/ui/package.json packages/ui/
 
-RUN pnpm install --frozen-lockfile --ignore-scripts
+# `--frozen-lockfile` для repeatable builds. БЕЗ `--ignore-scripts` чтобы
+# prisma postinstall set up'ил .bin/prisma корректно.
+RUN pnpm install --frozen-lockfile
 
 
 # ===== Stage 2: builder =====
@@ -44,17 +50,20 @@ FROM node:22-bookworm-slim AS builder
 
 ENV PNPM_HOME=/usr/local/pnpm-home
 ENV PATH=$PNPM_HOME:$PATH
+ENV HUSKY=0
 RUN corepack enable && corepack prepare pnpm@9.12.0 --activate
 
 WORKDIR /app
 
-COPY --from=deps /app/node_modules ./node_modules
+# Полная среда из deps stage (включая весь pnpm-граф + установленные linkers).
+COPY --from=deps /app /app
+# Source files (workspace-packages + apps + scripts + configs). Не перекрывают
+# `/app/node_modules` потому что в host'ном context'е node_modules excluded.
 COPY . .
 
 # Prisma client + binary engines — нужны до next build (catalog.ts читает
 # `@bigmax/db` который re-export'ит client).
-WORKDIR /app/packages/db
-RUN pnpm exec prisma generate --schema=prisma/schema.prisma
+RUN pnpm --filter @bigmax/db exec prisma generate --schema=packages/db/prisma/schema.prisma
 
 # i18n parity check — safety-net перед build'ом.
 WORKDIR /app
