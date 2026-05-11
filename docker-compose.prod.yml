@@ -1,0 +1,138 @@
+# =====================================================================
+# Бигмах (domtextile.uz) — production stack.
+#
+# Запуск:
+#   docker compose -f docker-compose.prod.yml up -d --build
+# Миграции (одноразово после первого запуска или новых migrations):
+#   docker compose -f docker-compose.prod.yml run --rm migrate
+# Логи:
+#   docker compose -f docker-compose.prod.yml logs -f web
+# =====================================================================
+
+name: domtextile-prod
+
+services:
+  # ----- PostgreSQL 16 -----
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-bigmax}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-bigmax}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    # NB: НЕТ `ports:` — Postgres доступен только внутри docker-сети.
+    # Если нужен внешний доступ для бэкапов — добавь `ports: ["127.0.0.1:5432:5432"]`.
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-bigmax} -d ${POSTGRES_DB:-bigmax}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  # ----- Redis 7 -----
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  # ----- Web (Next.js standalone) -----
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    restart: unless-stopped
+    env_file: .env.prod
+    environment:
+      # Override URL'ов на internal-сеть docker'а — БД и Redis доступны
+      # только по service-name'у, не по localhost.
+      DATABASE_URL: "postgresql://${POSTGRES_USER:-bigmax}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-bigmax}"
+      REDIS_URL: "redis://redis:6379"
+      NODE_ENV: production
+    volumes:
+      # Persistent uploads — admin картинки переживают rebuild контейнера.
+      - uploads-data:/app/apps/web/public/uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    # Web не публикует ports — Caddy reverse-proxy'ит через internal-сеть.
+
+  # ----- Migrate (one-off, gates web start) -----
+  # Запускается перед web, выполняет `prisma migrate deploy` и завершается.
+  # `restart: "no"` + `condition: service_completed_successfully` ниже у web.
+  migrate:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    restart: "no"
+    env_file: .env.prod
+    environment:
+      DATABASE_URL: "postgresql://${POSTGRES_USER:-bigmax}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-bigmax}"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    # Внутри standalone-build'а нет `pnpm`, но есть `node_modules/.pnpm/prisma*`.
+    # Запускаем prisma CLI напрямую — bin'ник лежит в `node_modules/.bin/`.
+    working_dir: /app
+    command:
+      - sh
+      - -c
+      - |
+        echo "Running prisma migrate deploy..."
+        node ./node_modules/.pnpm/prisma@*/node_modules/prisma/build/index.js migrate deploy --schema=./packages/db/prisma/schema.prisma
+        echo "Migrations complete."
+
+  # ----- Worker (BullMQ jobs: P4-T9 pull, notifications) -----
+  worker:
+    build:
+      context: .
+      dockerfile: apps/worker/Dockerfile
+    restart: unless-stopped
+    env_file: .env.prod
+    environment:
+      DATABASE_URL: "postgresql://${POSTGRES_USER:-bigmax}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-bigmax}"
+      REDIS_URL: "redis://redis:6379"
+      NODE_ENV: production
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+
+  # ----- Caddy (TLS reverse proxy) -----
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp" # HTTP/3
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      - web
+    environment:
+      DOMAIN: ${DOMAIN:-domtextile.uz}
+
+volumes:
+  postgres-data:
+  redis-data:
+  uploads-data:
+  caddy-data:
+  caddy-config:

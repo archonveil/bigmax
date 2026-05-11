@@ -1,0 +1,58 @@
+# =====================================================================
+# Caddy reverse-proxy для domtextile.uz.
+#
+# Auto-TLS: Caddy сам получает и продлевает Let's Encrypt сертификаты.
+# ОБЯЗАТЕЛЬНО: DNS A-запись domtextile.uz → IP сервера ДО запуска
+# Caddy'я, иначе ACME-challenge упадёт. Caddy retry'ит каждые ~5 минут.
+# =====================================================================
+
+{
+    # Email для Let's Encrypt — для notify'ев о просрочке сертификата.
+    # Заменить на реальный admin email перед deploy'ем (env $ACME_EMAIL).
+    email {$ACME_EMAIL:admin@domtextile.uz}
+}
+
+# Основной домен + www → reverse proxy на web:3000.
+domtextile.uz, www.domtextile.uz {
+    # Gzip + zstd compression для текстовых ответов.
+    encode gzip zstd
+
+    # Reverse proxy на Next.js standalone. Caddy сам balance'ит при
+    # будущей multi-replica конфигурации (по dns lookup).
+    reverse_proxy web:3000 {
+        # Передаём оригинальный hostname в Next, чтобы next-intl /
+        # absolute-URL helpers видели реальный домен.
+        header_up Host {host}
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+
+        # Health-check на 5s timeout — если web упал, Caddy не висит.
+        transport http {
+            response_header_timeout 30s
+        }
+    }
+
+    # Security headers — baseline для PCI / GDPR-compliant'ого магазина.
+    header {
+        # HSTS на 1 год + preload. После первого деплоя браузер запомнит.
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options nosniff
+        X-Frame-Options SAMEORIGIN
+        Referrer-Policy strict-origin-when-cross-origin
+        Permissions-Policy "camera=(), microphone=(), geolocation=(self)"
+        # Скрываем server-header (не отдаём `Server: Caddy` версию).
+        -Server
+    }
+
+    # Логи — JSON-формат для structured-parsing'а если подключим Loki/ELK.
+    log {
+        output stdout
+        format json
+        level INFO
+    }
+}
+
+# WWW → apex redirect (если domain'ы выше будут split-handler'ить,
+# Caddy v2 автоматически combine'ит обе линии в один site-block — это
+# нормально, оба сервают одинаковый контент).
