@@ -81,12 +81,16 @@ COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/static ./apps/web/.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/apps/web/public ./apps/web/public
 
-# Prisma engines + schema нужны для `prisma migrate deploy` (мы запускаем
-# его как одноразовый command перед start'ом web-сервиса в docker-compose).
+# Prisma client engine — standalone-build уже включает `@prisma/client` через
+# nft trace, но binary engine .so/.dylib живут отдельно в .pnpm/, копируем
+# вручную чтобы runtime-query'и работали (next-traced deps включают только
+# JS-файлы, не native binaries).
+COPY --from=builder --chown=nextjs:nodejs /app/node_modules/.prisma/client ./node_modules/.prisma/client
+
+# Schema — нужен на runtime для Prisma'е (`prisma client` читает schema.prisma
+# для метаданных). Migrations прогоняются отдельным `migrate` сервисом из
+# `target: builder` (см. docker-compose.prod.yml).
 COPY --from=builder --chown=nextjs:nodejs /app/packages/db/prisma ./packages/db/prisma
-# Prisma client binary engine.
-COPY --from=builder --chown=nextjs:nodejs /app/node_modules/.pnpm/@prisma+client* ./node_modules/.pnpm/
-COPY --from=builder --chown=nextjs:nodejs /app/node_modules/.pnpm/prisma* ./node_modules/.pnpm/
 
 # Uploads-dir — здесь docker-compose маунтит persistent volume.
 RUN mkdir -p /app/apps/web/public/uploads/products \

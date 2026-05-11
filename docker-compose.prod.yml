@@ -70,12 +70,16 @@ services:
     # Web не публикует ports — Caddy reverse-proxy'ит через internal-сеть.
 
   # ----- Migrate (one-off, gates web start) -----
-  # Запускается перед web, выполняет `prisma migrate deploy` и завершается.
-  # `restart: "no"` + `condition: service_completed_successfully` ниже у web.
+  # Использует `target: builder` — в builder-stage'е лежит полный pnpm-граф
+  # включая `prisma` CLI. Standalone runner-stage urезан и `prisma` бы
+  # пришлось копировать вручную (что хрупко при .pnpm-flat-dirs). Buildkit
+  # переиспользует кэш для builder'а: миграционный образ не пересобирается
+  # с нуля.
   migrate:
     build:
       context: .
       dockerfile: apps/web/Dockerfile
+      target: builder
     restart: "no"
     env_file: .env.prod
     environment:
@@ -83,15 +87,13 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    # Внутри standalone-build'а нет `pnpm`, но есть `node_modules/.pnpm/prisma*`.
-    # Запускаем prisma CLI напрямую — bin'ник лежит в `node_modules/.bin/`.
-    working_dir: /app
+    working_dir: /app/packages/db
     command:
       - sh
       - -c
       - |
         echo "Running prisma migrate deploy..."
-        node ./node_modules/.pnpm/prisma@*/node_modules/prisma/build/index.js migrate deploy --schema=./packages/db/prisma/schema.prisma
+        pnpm exec prisma migrate deploy --schema=prisma/schema.prisma
         echo "Migrations complete."
 
   # ----- Worker (BullMQ jobs: P4-T9 pull, notifications) -----
