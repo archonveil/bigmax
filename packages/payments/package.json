@@ -1,0 +1,29 @@
+{
+  "name": "@bigmax/payments",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Платёжный домен Бигмах: Uniteller (единственный online-эквайер) + COD. Чистые модули — никаких side-effects на импорте.",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./uniteller": "./src/uniteller/index.ts"
+  },
+  "scripts": {
+    "build": "echo 'no build needed — consumers import .ts directly'",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "mock:dev": "tsx src/uniteller/mock-server.ts",
+    "clean": "rimraf dist .turbo"
+  },
+  "dependencies": {
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "rimraf": "^6.0.1",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2",
+    "vitest": "^2.1.4"
+  }
+}

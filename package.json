@@ -1,0 +1,61 @@
+{
+  "name": "bigmax",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Бигмах (bigmax.uz) — интернет-магазин товаров для малышей и мам с доставкой по Узбекистану",
+  "packageManager": "pnpm@9.12.0",
+  "engines": {
+    "node": ">=20.11.0",
+    "pnpm": ">=9.0.0"
+  },
+  "scripts": {
+    "build": "pnpm -r --parallel run build",
+    "dev": "pnpm -r --parallel run dev",
+    "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "pnpm -r --parallel run typecheck",
+    "test": "pnpm -r --parallel run test",
+    "clean": "pnpm -r --parallel run clean && rimraf node_modules",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f",
+    "docker:ps": "docker compose ps",
+    "docker:reset": "docker compose down -v",
+    "web:dev": "pnpm --filter @bigmax/web run dev",
+    "worker:dev": "pnpm --filter @bigmax/worker run dev",
+    "worker:start": "pnpm --filter @bigmax/worker run start",
+    "check:i18n": "tsx scripts/check-translation-keys.ts",
+    "diagnose:orphan-promo": "pnpm --filter @bigmax/web exec dotenv -e ../../.env -- tsx ../../scripts/diagnose-orphan-promo-orders.ts",
+    "ci": "pnpm run typecheck && pnpm run lint && pnpm run format:check && pnpm run check:i18n && pnpm run test && pnpm --filter @bigmax/web run build",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
+    "@types/node": "^20.16.10",
+    "@typescript-eslint/eslint-plugin": "^8.8.0",
+    "@typescript-eslint/parser": "^8.8.0",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-import-resolver-typescript": "^3.6.3",
+    "eslint-plugin-import": "^2.31.0",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3",
+    "rimraf": "^6.0.1",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2",
+    "vitest": "^2.1.4"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,cjs,mjs}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml,css}": [
+      "prettier --write"
+    ]
+  }
+}

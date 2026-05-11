@@ -1,0 +1,13 @@
+{
+  "name": "@bigmax/api",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Bigmax optional Fastify API (deferred — decide vs Next.js Route Handlers)",
+  "scripts": {
+    "build": "echo 'stub: decide in P1 whether to use Fastify or Next.js routes'",
+    "dev": "echo 'stub'",
+    "typecheck": "echo 'stub: no sources yet'",
+    "test": "echo 'stub: no tests yet'",
+    "clean": "rimraf dist .turbo"
+  }
+}

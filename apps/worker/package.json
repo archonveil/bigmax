@@ -1,0 +1,32 @@
+{
+  "name": "@bigmax/worker",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Bigmax BullMQ workers (payment polling, future: notifications, email/SMS, PDF).",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "dev": "dotenv -e ../../.env -- tsx watch src/index.ts",
+    "start": "dotenv -e ../../.env -- tsx src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "dotenv -e ../../.env -- vitest run",
+    "test:watch": "dotenv -e ../../.env -- vitest",
+    "clean": "rimraf dist .turbo"
+  },
+  "dependencies": {
+    "@bigmax/db": "workspace:*",
+    "@bigmax/notifications": "workspace:*",
+    "@bigmax/payments": "workspace:*",
+    "@bigmax/shared-types": "workspace:*",
+    "@sentry/node": "^8.36",
+    "bullmq": "^5.21.2",
+    "ioredis": "^5.4.1"
+  },
+  "devDependencies": {
+    "dotenv-cli": "^7.4.2",
+    "rimraf": "^6.0.1",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2",
+    "vitest": "^2.1.4"
+  }
+}

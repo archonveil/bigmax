@@ -1,0 +1,28 @@
+# =====================================================================
+# Uniteller mock-server (P4-T12 — полная логика: проверка Signature,
+# auto-callback на webhook, state machine, /admin/* endpoints).
+#
+# Запускает packages/payments/src/uniteller/mock-server.ts через `tsx`
+# (без build/tsc). `tsx` нужен потому что Node 22 ESM resolver требует
+# явных .ts-расширений в import'ах, а наши .ts-файлы их не используют.
+# =====================================================================
+FROM node:22-alpine
+
+# BusyBox wget есть в alpine — используется в healthcheck compose-сервиса.
+WORKDIR /app
+
+# mock-server.ts тащит mock-helpers.ts → signature.ts → node:crypto.
+# constants.ts/types.ts/zod в граф НЕ попадают, поэтому не копируем.
+COPY src/uniteller/mock-server.ts ./mock-server.ts
+COPY src/uniteller/mock-helpers.ts ./mock-helpers.ts
+COPY src/uniteller/signature.ts ./signature.ts
+
+# tsx ~ 3 MB: берёт extensionless TS-импорты из коробки. esbuild — peer dep.
+RUN npm install --no-package-lock --no-save --omit=dev --prefer-offline tsx@4.19.1
+
+EXPOSE 8787
+
+ENV MOCK_PORT=8787 \
+    NODE_ENV=development
+
+CMD ["node_modules/.bin/tsx", "mock-server.ts"]

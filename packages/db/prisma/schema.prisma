@@ -1,0 +1,772 @@
+// =====================================================================
+// Бигмах (bigmax.uz) — Prisma schema v1
+// =====================================================================
+// Деньги — BigInt в тийнах (UZS × 100), поле *_cents. BigInt (PG int8)
+// держит до 9.2e18 — хватит на любые суммы. Prisma client extension в
+// `packages/db/src/index.ts` коэрсит BigInt → number при чтении (значения
+// безопасно влезают в JS Number ≤ 2^53), так что app-уровень остаётся на
+// `number`. На write нужен явный `BigInt(value)`.
+// Мультиязычность — денормализованные колонки *_ru / *_uz / *_en.
+// ID — cuid() строки.
+// onDelete: Cascade для настоящих child-записей, SetNull для
+//           опциональных связей, которые должны пережить родителя.
+// =====================================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ----- Enums ---------------------------------------------------------
+
+enum UserRole {
+  customer
+  admin
+  manager
+}
+
+enum Locale {
+  ru
+  uz
+  en
+}
+
+enum Gender {
+  unisex
+  boy
+  girl
+}
+
+enum OrderStatus {
+  pending
+  confirmed
+  packing
+  shipped
+  delivered
+  cancelled
+  refunded
+}
+
+enum DeliveryMethod {
+  courier
+  pickup
+}
+
+enum PaymentProvider {
+  uniteller
+  cod
+}
+
+enum PaymentStatus {
+  pending
+  captured
+  failed
+  cancelled
+  refunded
+  partially_refunded
+}
+
+enum RefundStatus {
+  pending
+  completed
+  failed
+}
+
+enum CardBrand {
+  visa
+  mastercard
+  mir
+  other
+}
+
+enum PromoType {
+  percent
+  fixed
+  free_delivery
+}
+
+enum LoyaltyType {
+  earn
+  spend
+  // P7-T2 sub-task A: reversal-типы при cancel/refund заказа.
+  refund   // возврат списанных баллов на баланс (mirror of `spend`).
+  clawback // изъятие ранее начисленных баллов (mirror of `earn`).
+}
+
+enum FeatureType {
+  number
+  boolean
+  string
+}
+
+enum NotificationChannel {
+  telegram
+  sms
+  email
+}
+
+// ----- Users & addresses --------------------------------------------
+
+model User {
+  id            String   @id @default(cuid())
+  phone         String?  @unique
+  email         String?  @unique
+  passwordHash  String?  @map("password_hash")
+  name          String?
+  avatarUrl     String?  @map("avatar_url")
+  role          UserRole @default(customer)
+  loyaltyPoints Int      @default(0) @map("loyalty_points")
+  language      Locale   @default(ru)
+  // P6-T8 follow-up (a): admin-driven блокировка без удаления записи.
+  // Заблокированные не проходят NextAuth `signIn` callback. Сохраняем
+  // историю заказов / loyalty / адресов нетронутыми.
+  isBlocked     Boolean  @default(false) @map("is_blocked")
+  // Telegram Login Widget — провайдер OAuth-style авторизации. `telegramId`
+  // — числовой ID Telegram-юзера (хранится строкой т.к. может быть >2^53).
+  // Уникален → один Telegram-аккаунт = один наш User. Остальные поля
+  // обновляются при каждом логине и используются для display.
+  telegramId        String?   @unique @map("telegram_id")
+  telegramUsername  String?   @map("telegram_username")
+  telegramFirstName String?   @map("telegram_first_name")
+  telegramLastName  String?   @map("telegram_last_name")
+  telegramPhotoUrl  String?   @map("telegram_photo_url")
+  telegramAuthDate  DateTime? @map("telegram_auth_date")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt       @map("updated_at")
+
+  addresses        Address[]
+  carts            Cart[]
+  favorites        Favorite[]
+  orders           Order[]
+  reviews          Review[]
+  savedCards       SavedCard[]
+  refundsInitiated   Refund[]              @relation("RefundInitiator")
+  stockLogs          StockLog[]            @relation("StockLogAdmin")
+  loyaltyTxs         LoyaltyTransaction[]
+  notifications      Notification[]
+  passwordResetTokens PasswordResetToken[]
+
+  @@index([role])
+  @@map("users")
+}
+
+// Self-service password reset tokens (P6-T8 follow-up — closes (b)).
+// Хранится только bcrypt-hash от token'а, plain отправляется по email
+// один раз. TTL 30 минут; после `complete` — `usedAt` ставится (нельзя
+// reuse). Cleanup expired/used → cron-job в worker'е (отдельный slot).
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  userId    String    @map("user_id")
+  tokenHash String    @map("token_hash")
+  expiresAt DateTime  @map("expires_at")
+  usedAt    DateTime? @map("used_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@map("password_reset_tokens")
+}
+
+model Address {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  region    String
+  city      String
+  district  String?
+  street    String?
+  house     String?
+  apartment String?
+  landmark  String?
+  phone     String?
+  isDefault Boolean  @default(false) @map("is_default")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt       @map("updated_at")
+
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orders Order[]
+
+  @@index([userId])
+  @@map("addresses")
+}
+
+// ----- Catalog ------------------------------------------------------
+
+model Category {
+  id        String   @id @default(cuid())
+  parentId  String?  @map("parent_id")
+  nameRu    String   @map("name_ru")
+  nameUz    String   @map("name_uz")
+  nameEn    String   @map("name_en")
+  slug      String   @unique
+  iconUrl   String?  @map("icon_url")
+  order     Int      @default(0)
+  isActive  Boolean  @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt       @map("updated_at")
+
+  parent     Category?           @relation("CategoryTree", fields: [parentId], references: [id], onDelete: SetNull)
+  children   Category[]          @relation("CategoryTree")
+  products   Product[]
+  attributes CategoryAttribute[]
+
+  @@index([parentId])
+  @@index([slug])
+  @@map("categories")
+}
+
+// Schema-driven category-attribute configuration (P6-T3 follow-up — closes
+// "professional dynamic attributes"). Заменяет прежнюю hardcoded-карту в
+// `apps/web/src/catalog/category-attributes.ts`. Admin создает/редактирует
+// конфиги attribute-полей per-category через `/admin/categories/[id]/attributes`,
+// без code-deploy'а.
+//
+// Поля:
+//  - `key` уникален в рамках категории, рендерится в URL (`?attr.<key>=...`)
+//    и в `Product.attributes` JSON. Lower-case, [a-z0-9_], 1..32 char.
+//  - `kind`: enum | range | boolean | text | multiselect.
+//    * enum/multiselect → читаем `options` (JSON массив `{value, labelRu, labelUz, labelEn}`).
+//    * range            → читаем `min`/`max`/`step`/`unit*`.
+//    * boolean          → нет дополнительного config'а.
+//    * text             → свободный input (filter не поддерживает).
+//  - per-locale `label*` + `helpText*` — admin сам пишет переводы при
+//    создании/редактировании. customer-facing rendering всегда читает
+//    из этих столбцов (без i18n-сборки).
+//  - `isRequired` — backend блокирует save Product'а без этого поля.
+//  - `isFilterable` — true → попадает в customer-facing filter UI.
+//  - `order` — UI-order, drag-reorder через PATCH `?order=...`.
+model CategoryAttribute {
+  id           String   @id @default(cuid())
+  categoryId   String   @map("category_id")
+  key          String
+  // "enum" | "range" | "boolean" | "text" | "multiselect"
+  kind         String
+  labelRu      String   @map("label_ru")
+  labelUz      String   @map("label_uz")
+  labelEn      String   @map("label_en")
+  helpTextRu   String?  @map("help_text_ru")
+  helpTextUz   String?  @map("help_text_uz")
+  helpTextEn   String?  @map("help_text_en")
+  // For enum/multiselect: array of {value, labelRu, labelUz, labelEn}.
+  options      Json?
+  min          Float?
+  max          Float?
+  step         Float?
+  unitRu       String?  @map("unit_ru")
+  unitUz       String?  @map("unit_uz")
+  unitEn       String?  @map("unit_en")
+  isRequired   Boolean  @default(false) @map("is_required")
+  isFilterable Boolean  @default(true)  @map("is_filterable")
+  order        Int      @default(0)
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt       @map("updated_at")
+
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@unique([categoryId, key])
+  @@index([categoryId, order])
+  @@map("category_attributes")
+}
+
+model Brand {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  logoUrl     String?  @map("logo_url")
+  description String?
+  country     String?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt       @map("updated_at")
+
+  products Product[]
+
+  @@index([slug])
+  @@map("brands")
+}
+
+model Product {
+  id             String   @id @default(cuid())
+  categoryId     String   @map("category_id")
+  brandId        String?  @map("brand_id")
+  nameRu         String   @map("name_ru")
+  nameUz         String   @map("name_uz")
+  nameEn         String   @map("name_en")
+  slug           String   @unique
+  descriptionRu  String?  @map("description_ru")
+  descriptionUz  String?  @map("description_uz")
+  descriptionEn  String?  @map("description_en")
+  ageFromMonths  Int?     @map("age_from_months")
+  ageToMonths    Int?     @map("age_to_months")
+  gender         Gender   @default(unisex)
+  /// Категория-специфичные атрибуты: fabric/season/volumeMl/material и т.п.
+  /// Формат `Record<string, string | number | boolean>`. Схема per-category —
+  /// в apps/web/src/catalog/category-attributes.ts. Prisma фильтрует через
+  /// `path: ["key"], equals: value` / `gte/lte` для numeric.
+  attributes     Json?    @map("attributes")
+  isActive       Boolean  @default(true)  @map("is_active")
+  isFeatured     Boolean  @default(false) @map("is_featured")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt       @map("updated_at")
+
+  category  Category         @relation(fields: [categoryId], references: [id])
+  brand     Brand?           @relation(fields: [brandId], references: [id], onDelete: SetNull)
+  variants  ProductVariant[]
+  images    ProductImage[]
+  reviews   Review[]
+  favorites Favorite[]
+
+  @@index([categoryId])
+  @@index([brandId])
+  @@index([slug])
+  @@index([isActive, isFeatured])
+  @@map("products")
+}
+
+model ProductVariant {
+  id            String   @id @default(cuid())
+  productId     String   @map("product_id")
+  sku           String   @unique
+  color         String?
+  size          String?
+  priceCents    BigInt   @map("price_cents")
+  oldPriceCents BigInt?  @map("old_price_cents")
+  barcode       String?
+  weightGrams   Int?     @map("weight_grams")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt       @map("updated_at")
+
+  product    Product        @relation(fields: [productId], references: [id], onDelete: Cascade)
+  images     ProductImage[]
+  stock      Stock[]
+  stockLogs  StockLog[]
+  cartItems  CartItem[]
+  orderItems OrderItem[]
+
+  @@index([productId])
+  @@map("product_variants")
+}
+
+model ProductImage {
+  id        String  @id @default(cuid())
+  productId String  @map("product_id")
+  variantId String? @map("variant_id")
+  /// Tag для group'ы цвета (например, "red", "navy"). Если задан — картинка
+  /// принадлежит всем вариантам с этим color'ом (а не одному variantId).
+  /// `variantId` остаётся для редких per-variant override'ов; primary lookup
+  /// идёт через `colorTag`. Если оба null — product-level shared картинка.
+  colorTag  String? @map("color_tag")
+  url       String
+  alt       String?
+  order     Int     @default(0)
+  /// Pre-processed WebP multi-size variants для srcset-delivery (Phase 5):
+  /// `{ "w400": "/uploads/.../w400.webp", "w800": "...", ... }`. Заполняется
+  /// при upload'е. Закрывает OPT-021 — `<ProductImage>` рендерит `<img srcset>`
+  /// напрямую, минуя `/_next/image` CPU-cost. `null` для legacy / GIF.
+  sizes     Json?   @map("sizes")
+  /// AVIF multi-size variants для `<picture><source type="image/avif">`
+  /// (Phase 5b): тот же набор breakpoints что и `sizes`, но в AVIF-кодировании.
+  /// AVIF на ~20-25% меньше WebP при том же качестве; ~88% browser-support.
+  /// Browser-fallback chain: AVIF → WebP (`sizes` поле) → original src.
+  avifSizes Json?   @map("avif_sizes")
+
+  product Product         @relation(fields: [productId], references: [id], onDelete: Cascade)
+  variant ProductVariant? @relation(fields: [variantId], references: [id], onDelete: SetNull)
+
+  @@index([productId])
+  @@index([variantId])
+  // Для resolve'а по color-group'е: `where: { productId, colorTag }`.
+  @@index([productId, colorTag])
+  @@map("product_images")
+}
+
+// ----- Branches & stock --------------------------------------------
+
+model StoreBranch {
+  id           String   @id @default(cuid())
+  slug         String?  @unique
+  nameRu       String   @map("name_ru")
+  nameUz       String   @map("name_uz")
+  nameEn       String   @map("name_en")
+  addressRu    String   @map("address_ru")
+  addressUz    String   @map("address_uz")
+  addressEn    String   @map("address_en")
+  phone        String?
+  workingHours String?  @map("working_hours")
+  latitude     Float?
+  longitude    Float?
+  isActive     Boolean  @default(true) @map("is_active")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt       @map("updated_at")
+
+  stock     Stock[]
+  stockLogs StockLog[]
+  orders    Order[]
+
+  @@map("store_branches")
+}
+
+model Stock {
+  id        String   @id @default(cuid())
+  variantId String   @map("variant_id")
+  branchId  String   @map("branch_id")
+  quantity  Int      @default(0)
+  reserved  Int      @default(0)
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  variant ProductVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  branch  StoreBranch    @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  logs    StockLog[]
+
+  @@unique([variantId, branchId])
+  @@index([branchId])
+  @@map("stock")
+}
+
+// ----- Stock audit log (P6-T7) -------------------------------------
+//
+// Журнал любых ручных корректировок остатков из админ-панели. Не
+// заменяет бизнес-обновления (резервации/списания через checkout) —
+// фиксирует только admin-driven adjust'ы и CSV-импорты для traceability.
+//
+// На каждое изменение `Stock.quantity` через POST/PATCH /api/admin/stock
+// пишется одна строка с `oldQty/newQty/delta/reason/adminUserId`.
+// Записи never-deleted (audit-only); FK на User — SetNull (если admin'а
+// удалят, лог сохранится).
+
+model StockLog {
+  id            String   @id @default(cuid())
+  stockId       String?  @map("stock_id")
+  variantId     String   @map("variant_id")
+  branchId      String   @map("branch_id")
+  // P6-T7 actions: "set" | "inc" | "dec" | "import" | "create" | "delete" | "ship"
+  // P6-T7 follow-up actions: "reserve" | "release" (Stock.reserved-only changes,
+  // никогда не трогают quantity).
+  action        String
+  oldQty        Int      @map("old_qty")
+  newQty        Int      @map("new_qty")
+  delta         Int
+  // Reserved-движения (P6-T7 follow-up §d-полное). Default 0 чтобы старые
+  // лог-записи (quantity-only) backfill'ились без миграции данных.
+  oldReserved   Int      @default(0) @map("old_reserved")
+  newReserved   Int      @default(0) @map("new_reserved")
+  reservedDelta Int      @default(0) @map("reserved_delta")
+  reason        String?
+  adminUserId   String?  @map("admin_user_id")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  stock     Stock?         @relation(fields: [stockId], references: [id], onDelete: SetNull)
+  variant   ProductVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  branch    StoreBranch    @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  adminUser User?          @relation("StockLogAdmin", fields: [adminUserId], references: [id], onDelete: SetNull)
+
+  @@index([variantId, branchId])
+  @@index([stockId])
+  @@index([createdAt])
+  @@map("stock_logs")
+}
+
+// ----- Cart & favorites --------------------------------------------
+
+model Cart {
+  id        String   @id @default(cuid())
+  userId    String?  @map("user_id")
+  sessionId String?  @unique @map("session_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt       @map("updated_at")
+
+  user  User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items CartItem[]
+
+  @@index([userId])
+  @@map("carts")
+}
+
+model CartItem {
+  id        String @id @default(cuid())
+  cartId    String @map("cart_id")
+  variantId String @map("variant_id")
+  quantity  Int
+
+  cart    Cart           @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  variant ProductVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+
+  @@unique([cartId, variantId])
+  @@index([cartId])
+  @@map("cart_items")
+}
+
+model Favorite {
+  userId    String   @map("user_id")
+  productId String   @map("product_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@id([userId, productId])
+  @@index([productId])
+  @@map("favorites")
+}
+
+// ----- Orders -------------------------------------------------------
+
+model Order {
+  id                String         @id @default(cuid())
+  userId            String         @map("user_id")
+  number            String         @unique // BGX-YYYYMMDD-NNNN → Uniteller Order_IDP
+  status            OrderStatus    @default(pending)
+  subtotalCents     BigInt         @map("subtotal_cents")
+  deliveryCostCents BigInt         @default(0) @map("delivery_cost_cents")
+  discountCents     BigInt         @default(0) @map("discount_cents")
+  totalCents        BigInt         @map("total_cents")
+  currency          String         @default("UZS")
+  deliveryMethod    DeliveryMethod @map("delivery_method")
+  branchId          String?        @map("branch_id")
+  addressId         String?        @map("address_id")
+  deliveryDate      DateTime?      @map("delivery_date")
+  comment           String?
+  locale            Locale         @default(ru)
+  // P7-T1: snapshot применённого промокода (UPPER). Не FK на `promos.code` —
+  // промо могут удаляться, но след в заказе должен остаться. `Promo.usedCount`
+  // инкрементится один раз — при первом переходе `Payment.status → captured`.
+  promoCode         String?        @map("promo_code")
+  // P7-T2: snapshot потраченных баллов лояльности. Уже списано с
+  // User.loyaltyPoints на создании заказа + записано в LoyaltyTransaction(spend).
+  // Snapshot нужен для UI заказа и для reverse-сценариев (open question — будет
+  // в follow-up P7-T2).
+  loyaltyPointsSpent Int           @default(0) @map("loyalty_points_spent")
+  createdAt         DateTime       @default(now()) @map("created_at")
+  updatedAt         DateTime       @updatedAt      @map("updated_at")
+
+  user       User                 @relation(fields: [userId], references: [id])
+  branch     StoreBranch?         @relation(fields: [branchId], references: [id], onDelete: SetNull)
+  address    Address?             @relation(fields: [addressId], references: [id], onDelete: SetNull)
+  items      OrderItem[]
+  payments   Payment[]
+  reviews    Review[]
+  loyaltyTxs LoyaltyTransaction[]
+
+  @@index([userId])
+  @@index([status])
+  @@index([number])
+  @@index([createdAt])
+  // Composite — admin-dashboard `aggregateRevenue` фильтрует по `status IN (...) AND createdAt >= since`.
+  // Без composite планнер берёт один из single-индексов и потом отфильтровывает в памяти.
+  @@index([status, createdAt])
+  // P7-T1: лёгкий индекс для аналитики "orders by promoCode".
+  @@index([promoCode])
+  @@map("orders")
+}
+
+model OrderItem {
+  id              String @id @default(cuid())
+  orderId         String @map("order_id")
+  variantId       String @map("variant_id")
+  productSnapshot Json   @map("product_snapshot_json")
+  quantity        Int
+  priceCents      BigInt @map("price_cents")
+
+  order   Order          @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  variant ProductVariant @relation(fields: [variantId], references: [id])
+
+  @@index([orderId])
+  // Composite — admin-dashboard top-products groupBy variantId фильтрует по orderId.in.
+  @@index([variantId, orderId])
+  @@map("order_items")
+}
+
+// ----- Payments (Uniteller + COD) ----------------------------------
+
+model Payment {
+  id                    String          @id @default(cuid())
+  orderId               String          @map("order_id")
+  provider              PaymentProvider
+  status                PaymentStatus   @default(pending)
+  amountCents           BigInt          @map("amount_cents")
+  currency              String          @default("UZS")
+  unitellerOrderIdp     String?         @unique @map("uniteller_order_idp")
+  unitellerBillnumber   String?         @map("uniteller_billnumber")
+  unitellerResponseCode String?         @map("uniteller_response_code")
+  unitellerCardMask     String?         @map("uniteller_card_mask") // "4000 **** **** 2487"
+  createdAt             DateTime        @default(now()) @map("created_at")
+  capturedAt            DateTime?       @map("captured_at")
+  updatedAt             DateTime        @updatedAt      @map("updated_at")
+
+  order   Order        @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  refunds Refund[]
+  logs    PaymentLog[]
+
+  @@index([orderId])
+  @@index([status])
+  @@index([provider])
+  // Composite — `Order.payments: { take: 1, orderBy: { createdAt: desc } }` в admin-orders list.
+  @@index([orderId, createdAt(sort: Desc)])
+  @@map("payments")
+}
+
+model Refund {
+  id                String       @id @default(cuid())
+  paymentId         String       @map("payment_id")
+  amountCents       BigInt       @map("amount_cents")
+  reason            String
+  initiatedByUserId String?      @map("initiated_by_user_id")
+  status            RefundStatus @default(pending)
+  unitellerRefundId String?      @map("uniteller_refund_id")
+  createdAt         DateTime     @default(now()) @map("created_at")
+  updatedAt         DateTime     @updatedAt      @map("updated_at")
+
+  payment     Payment @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+  initiatedBy User?   @relation("RefundInitiator", fields: [initiatedByUserId], references: [id], onDelete: SetNull)
+
+  @@index([paymentId])
+  @@index([status])
+  @@map("refunds")
+}
+
+model WebhookEvent {
+  id         String   @id @default(cuid())
+  provider   String
+  eventType  String   @map("event_type")
+  externalId String   @map("external_id") // Order_IDP для Uniteller
+  signature  String
+  payload    Json     @map("payload_json")
+  processed  Boolean  @default(false)
+  receivedAt DateTime @default(now()) @map("received_at")
+
+  @@unique([provider, externalId, signature]) // идемпотентность callback'ов
+  @@index([provider, processed])
+  @@map("webhook_events")
+}
+
+model PaymentLog {
+  id           String   @id @default(cuid())
+  paymentId    String?  @map("payment_id")
+  action       String // "create", "status_pull", "webhook", "cancel", "refund"
+  request      Json?    @map("request_json")
+  response     Json?    @map("response_json")
+  statusCode   Int?     @map("status_code")
+  errorMessage String?  @map("error_message")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  payment Payment? @relation(fields: [paymentId], references: [id], onDelete: SetNull)
+
+  @@index([paymentId])
+  @@index([action])
+  @@index([createdAt])
+  @@map("payment_logs")
+}
+
+model SavedCard {
+  id                   String    @id @default(cuid())
+  userId               String    @map("user_id")
+  unitellerCustomerIdp String    @map("uniteller_customer_idp")
+  unitellerCardIdp     String    @unique @map("uniteller_card_idp")
+  mask                 String // "4000 **** **** 2487"
+  panLast4             String    @map("pan_last4")
+  brand                CardBrand @default(other)
+  isDefault            Boolean   @default(false) @map("is_default")
+  isBlocked            Boolean   @default(false) @map("is_blocked")
+  createdAt            DateTime  @default(now()) @map("created_at")
+  updatedAt            DateTime  @updatedAt      @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("saved_cards")
+}
+
+// ----- Reviews, promos, loyalty, notifications --------------------
+
+model Review {
+  id         String   @id @default(cuid())
+  productId  String   @map("product_id")
+  userId     String   @map("user_id")
+  orderId    String?  @map("order_id")
+  rating     Int // 1..5
+  text       String?
+  photos     Json?    @map("photos_json") // массив URL в S3
+  isApproved Boolean  @default(false) @map("is_approved")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt       @map("updated_at")
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  order   Order?  @relation(fields: [orderId], references: [id], onDelete: SetNull)
+
+  @@index([productId])
+  @@index([userId])
+  @@index([isApproved])
+  @@map("reviews")
+}
+
+model Promo {
+  id            String    @id @default(cuid())
+  code          String    @unique
+  type          PromoType
+  value         Int // для percent — 0..100; для fixed/free_delivery — тийны
+  minOrderCents BigInt    @default(0) @map("min_order_cents")
+  startsAt      DateTime? @map("starts_at")
+  endsAt        DateTime? @map("ends_at")
+  usageLimit    Int?      @map("usage_limit")
+  usedCount     Int       @default(0) @map("used_count")
+  isActive      Boolean   @default(true) @map("is_active")
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt      @map("updated_at")
+
+  @@index([code])
+  @@index([isActive])
+  @@map("promos")
+}
+
+model LoyaltyTransaction {
+  id        String      @id @default(cuid())
+  userId    String      @map("user_id")
+  orderId   String?     @map("order_id")
+  points    Int // положительные для earn, отрицательные для spend
+  type      LoyaltyType
+  createdAt DateTime    @default(now()) @map("created_at")
+
+  user  User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  order Order? @relation(fields: [orderId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([orderId])
+  @@map("loyalty_transactions")
+}
+
+// P7-T2 sub-task F: runtime-feature flags (СПЕЦИФИКАЦИЯ §6 правило 7).
+// Key — DNS-style (`loyalty.earn_percent`); value сериализуется как строка
+// + распарсится в runtime по `type`. Используется `getNumberFeature` /
+// `getBooleanFeature` (P7-T2-followup). Hot-reload через 60s Redis-cache.
+model Feature {
+  key         String      @id @db.VarChar(120)
+  value       String
+  type        FeatureType
+  description String?
+  updatedAt   DateTime    @updatedAt @map("updated_at")
+
+  @@map("features")
+}
+
+model Notification {
+  id        String              @id @default(cuid())
+  userId    String?             @map("user_id")
+  type      String // "order_placed", "payment_captured", "order_shipped", ...
+  channel   NotificationChannel
+  locale    Locale              @default(ru)
+  payload   Json                @map("payload_json")
+  sentAt    DateTime?           @map("sent_at")
+  createdAt DateTime            @default(now()) @map("created_at")
+
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([channel])
+  @@index([sentAt])
+  @@map("notifications")
+}

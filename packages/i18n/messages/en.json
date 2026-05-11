@@ -1,0 +1,2538 @@
+{
+  "common": {
+    "brandSlogan": "everything for babies and moms",
+    "comingSoon": "Coming soon",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "optional": "optional",
+    "copyFromRu": "Copy from RU",
+    "localeFallbackHint": "If left blank — RU text will be shown.",
+    "selectDate": "Select date",
+    "selectDateRange": "Select date range",
+    "clear": "Clear"
+  },
+  "nav": {
+    "catalog": "Catalog",
+    "login": "Sign in",
+    "home": "Home"
+  },
+  "home": {
+    "heroTitle": "Bigmax — everything for babies and moms",
+    "heroSubtitle": "Baby and mom goods delivered across Uzbekistan.",
+    "heroCta": "Browse the catalog",
+    "categoriesTitle": "Categories",
+    "brandsTitle": "Brands",
+    "featuredTitle": "Featured",
+    "fromPrice": "from {price}"
+  },
+  "errors": {
+    "notFound": {
+      "title": "Page not found",
+      "body": "This page doesn't exist or was removed. Go back to the home page or open the catalog.",
+      "backHome": "Back home",
+      "openCatalog": "Browse catalog"
+    }
+  },
+  "catalog": {
+    "indexTitle": "Catalog",
+    "indexSubtitle": "Choose a category",
+    "empty": "No products in this category yet",
+    "itemsCount": "{count, plural, one {# item} other {# items}}",
+    "subcategoriesCount": "{count, plural, one {# subcategory} other {# subcategories}}",
+    "pageSize": {
+      "label": "Per page"
+    },
+    "treeNav": {
+      "openCategory": "Open category page",
+      "toggleSubcategories": "Toggle subcategories",
+      "legend": "→ — open category, ⌄ — show subcategories",
+      "toggleSidebar": "Hide sidebar",
+      "showSidebar": "Show sidebar",
+      "treeSection": "Categories",
+      "filtersSection": "Filters"
+    },
+    "sort": {
+      "label": "Sort by",
+      "options": {
+        "featured": "Featured",
+        "newest": "Newest",
+        "price_asc": "Price: low to high",
+        "price_desc": "Price: high to low"
+      }
+    },
+    "pagination": {
+      "prev": "Previous",
+      "next": "Next",
+      "pageOf": "Page {page} of {total}"
+    },
+    "filters": {
+      "title": "Filters",
+      "reset": "Reset",
+      "resetCount": "Reset ({count})",
+      "activeTitle": "Active filters",
+      "remove": "Remove filter",
+      "expand": "Expand",
+      "collapse": "Collapse",
+      "price": "Price",
+      "priceShort": "UZS",
+      "priceFrom": "From",
+      "priceTo": "To",
+      "priceLabel": "{min} to {max}",
+      "priceLabelMin": "from {min}",
+      "priceLabelMax": "up to {max}",
+      "brand": "Brand",
+      "brandSearch": "Search brand…",
+      "brandShowMore": "Show more ({count})",
+      "brandShowLess": "Show less",
+      "brandNoMatches": "Nothing found",
+      "age": "Age",
+      "ages": {
+        "any": "Any age",
+        "0-6": "0–6 mo",
+        "6-12": "6–12 mo",
+        "12-24": "1–2 yr",
+        "24+": "2+ yr"
+      },
+      "gender": "Gender",
+      "genders": {
+        "any": "Any",
+        "unisex": "Unisex",
+        "boy": "Boy",
+        "girl": "Girl"
+      },
+      "inStock": "In stock only",
+      "inStockHint": "Hide out-of-stock items"
+    }
+  },
+  "footer": {
+    "contacts": "Contacts",
+    "address": "Tashkent, Uzbekistan",
+    "rights": "© 2026 Bigmax. All rights reserved.",
+    "legalTitle": "Legal",
+    "legalSupport": "Support",
+    "legalOffer": "Public offer",
+    "legalAgreement": "User agreement",
+    "legalPrivacy": "Privacy policy"
+  },
+  "legal": {
+    "updatedAt": "Last updated: 2026-05-09",
+    "support": {
+      "title": "Support",
+      "intro": "We're here every day to help with orders, delivery, payment and returns.",
+      "contactsTitle": "How to reach us",
+      "emailLabel": "Email",
+      "phoneLabel": "Phone",
+      "telegramLabel": "Telegram",
+      "hoursLabel": "Hours",
+      "hoursValue": "Mon–Sun, 9:00–21:00 (UTC+5)",
+      "faqTitle": "Frequently asked questions",
+      "faqDeliveryQ": "How long does delivery take?",
+      "faqDeliveryA": "1–2 business days within Tashkent and 3–7 days for other regions of Uzbekistan.",
+      "faqReturnQ": "Can I return an item?",
+      "faqReturnA": "Yes, within 14 days of receipt provided the item and packaging are intact.",
+      "faqPaymentQ": "Which payment methods are available?",
+      "faqPaymentA": "Online card payment, bank transfer or cash on delivery to the courier."
+    },
+    "offer": {
+      "title": "Public offer",
+      "intro": "This document is the official offer (public offer) of the Bigmax online store (bigmax.uz) and contains all material terms for the sale of goods.",
+      "s1Title": "1. General provisions",
+      "s1Body": "By placing an order on the site, the buyer fully accepts the terms of this offer. The seller reserves the right to make changes; the current version is always available on this page.",
+      "s2Title": "2. Subject of the contract",
+      "s2Body": "The seller transfers ownership of goods listed in the catalog to the buyer, who accepts and pays for them at the prices stated at the time of order.",
+      "s3Title": "3. Price and payment",
+      "s3Body": "All prices are listed in soum (UZS) and include VAT. Payment is made online by card, by bank transfer, or in cash to the courier on delivery.",
+      "s4Title": "4. Delivery",
+      "s4Body": "Delivery is available across Uzbekistan. Times and costs are calculated at checkout based on the region.",
+      "s5Title": "5. Returns and exchanges",
+      "s5Body": "The buyer may return goods of proper quality within 14 days of receipt. See the Support page for details."
+    },
+    "agreement": {
+      "title": "User agreement",
+      "intro": "This agreement governs the relationship between the Bigmax online store and the user of bigmax.uz.",
+      "s1Title": "1. Acceptance of terms",
+      "s1Body": "By registering or using the site, the user confirms acceptance of all terms of this agreement.",
+      "s2Title": "2. Account",
+      "s2Body": "The user is responsible for the accuracy of their data and the security of their account. Report unauthorized access to support immediately.",
+      "s3Title": "3. Rights and obligations",
+      "s3Body": "Bigmax undertakes to maintain the operation of the service. The user undertakes not to violate applicable law and not to use the site to harm third parties.",
+      "s4Title": "4. Intellectual property",
+      "s4Body": "All site materials, including texts, images and logos, are owned by Bigmax or used with permission of the rights holders.",
+      "s5Title": "5. Limitation of liability",
+      "s5Body": "The service is provided \"as is\". Bigmax is not liable for damage arising from improper use of the site."
+    },
+    "privacy": {
+      "title": "Privacy policy",
+      "intro": "Bigmax respects your privacy and processes personal data in strict accordance with the laws of the Republic of Uzbekistan.",
+      "s1Title": "1. What data we collect",
+      "s1Body": "Name, phone, email, delivery address, order history, technical browser and device data.",
+      "s2Title": "2. Purposes of processing",
+      "s2Body": "Order processing and delivery, customer support, promotional notifications, analytics and service improvement.",
+      "s3Title": "3. Sharing with third parties",
+      "s3Body": "We share data only with delivery and payment providers required to fulfill an order, or upon request from government authorities.",
+      "s4Title": "4. Storage and security",
+      "s4Body": "Data is stored on secure servers. We apply technical and organizational measures to protect it from unauthorized access.",
+      "s5Title": "5. Your rights",
+      "s5Body": "You can request access, modification or deletion of your data by writing to support@bigmax.uz."
+    }
+  },
+  "maintenance": {
+    "ariaLabel": "Service status notice"
+  },
+  "sms": {
+    "otpCode": "Bigmax verification code: {code}. Do not share."
+  },
+  "attributes": {
+    "any": "Any",
+    "fabric": {
+      "label": "Fabric",
+      "cotton": "Cotton",
+      "wool": "Wool",
+      "synthetic": "Synthetic",
+      "mixed": "Mixed"
+    },
+    "season": {
+      "label": "Season",
+      "summer": "Summer",
+      "winter": "Winter",
+      "demi": "Spring/Autumn",
+      "all": "All seasons"
+    },
+    "material": {
+      "label": "Material",
+      "plastic": "Plastic",
+      "wood": "Wood",
+      "fabric": "Fabric",
+      "silicone": "Silicone",
+      "metal": "Metal",
+      "mdf": "MDF"
+    },
+    "hasSound": {
+      "label": "With sound"
+    },
+    "isOrganic": {
+      "label": "Organic"
+    },
+    "volumeMl": {
+      "label": "Volume",
+      "unit": "ml",
+      "from": "From",
+      "to": "To"
+    },
+    "diaperSize": {
+      "label": "Diaper size",
+      "v1": "1 (Newborn)",
+      "v2": "2 (Mini)",
+      "v3": "3 (Midi)",
+      "v4": "4 (Maxi)",
+      "v5": "5 (Junior)",
+      "v6": "6 (XL)"
+    },
+    "piecesPerPack": {
+      "label": "Pieces per pack",
+      "from": "From",
+      "to": "To"
+    },
+    "strollerType": {
+      "label": "Stroller type",
+      "light": "Lightweight",
+      "full": "Full-featured",
+      "jogger": "Jogger"
+    },
+    "maxWeightKg": {
+      "label": "Max weight",
+      "unit": "kg",
+      "from": "From",
+      "to": "To"
+    }
+  },
+  "checkout": {
+    "pageTitle": "Checkout",
+    "steps": {
+      "contacts": "Contacts",
+      "address": "Address",
+      "delivery": "Delivery",
+      "payment": "Payment",
+      "review": "Review"
+    },
+    "contacts": {
+      "title": "Your contacts",
+      "name": "Name",
+      "namePlaceholder": "How should we address you",
+      "email": "Email",
+      "emailPlaceholder": "you@example.com",
+      "phone": "Phone",
+      "phonePlaceholder": "+998 90 123-45-67",
+      "agreementLabel": "I accept the <offer>public offer</offer>, <agreement>user agreement</agreement> and <privacy>privacy policy</privacy>"
+    },
+    "address": {
+      "title": "Delivery address",
+      "region": "Region",
+      "regionPlaceholder": "Select region",
+      "city": "City",
+      "cityPlaceholder": "Tashkent",
+      "district": "District",
+      "districtPlaceholder": "Optional",
+      "street": "Street",
+      "house": "House",
+      "apartment": "Apartment",
+      "landmark": "Landmark",
+      "landmarkPlaceholder": "e.g. near the metro",
+      "phone": "Phone (alternate)",
+      "phonePlaceholder": "+998 90 000-00-00",
+      "useSaved": "Use saved address",
+      "newAddress": "Enter new address"
+    },
+    "delivery": {
+      "title": "Delivery method",
+      "courier": "Courier",
+      "courierDescription": "Delivery to your address; cost depends on region and district.",
+      "pickup": "Store pickup",
+      "pickupDescription": "Free pickup from the nearest branch.",
+      "selectBranch": "Select branch",
+      "branchRequired": "Select a branch",
+      "comment": "Order comment",
+      "commentPlaceholder": "Call ahead, leave with concierge, etc.",
+      "cost": {
+        "label": "Delivery cost",
+        "free": "Free",
+        "freeHint": "Free above {amount}",
+        "needsRegion": "Choose a region in the «Address» step",
+        "needsDistrict": "Choose a Tashkent district",
+        "etaRange": "{min}–{max} days",
+        "etaSame": "{days} days",
+        "pickupReady": "Ready for pickup the same day",
+        "estimateNotice": "Estimated time: {eta}"
+      },
+      "branch": {
+        "selectHint": "Choose a pickup branch",
+        "noBranches": "Bigmax branches are temporarily unavailable. Please use courier delivery."
+      }
+    },
+    "payment": {
+      "title": "Payment method",
+      "card": "Bank card",
+      "cardDescription": "Payment via Uniteller. Supports Visa, Mastercard, Uzcard, Humo.",
+      "cod": "Cash on delivery",
+      "codDescription": "Pay the courier or at the branch when you receive your order."
+    },
+    "loyalty": {
+      "title": "Bigmax Bonus",
+      "balance": "Available: {points, plural, one {# point} other {# points}}",
+      "hint": "1 point = 1 soum. At least 1 tiyin of the order must remain to pay.",
+      "belowMinHint": "Points can be spent from {min}. Add more items to your cart.",
+      "inputLabel": "Spend points",
+      "applyMax": "Use all",
+      "clear": "Don't use",
+      "appliedRow": "Spent {points, plural, one {# point} other {# points}}"
+    },
+    "review": {
+      "title": "Review your order",
+      "editStep": "Edit",
+      "yourContacts": "Contacts",
+      "deliveryAddress": "Delivery address",
+      "deliveryMethod": "Delivery method",
+      "paymentMethod": "Payment method",
+      "orderItems": "Items",
+      "placeOrder": "Place order",
+      "placingOrder": "Creating order…",
+      "authRequiredTitle": "Sign in to place your order",
+      "authRequiredBody": "You'll need an account to check out — so you can see order history and track deliveries.",
+      "signIn": "Sign in",
+      "signUp": "Create account",
+      "backToCart": "Back to cart",
+      "errors": {
+        "generic": "Couldn't create the order. Please try again.",
+        "network": "Network problem. Check your connection and retry.",
+        "unauthorized": "Session expired. Please sign in again.",
+        "empty_cart": "Your cart is empty.",
+        "invalid_variant": "One of the items is no longer available.",
+        "invalid_delivery": "Please check your address or delivery method.",
+        "invalid_promo": "Promo code is no longer valid.",
+        "provider": "Payment service is temporarily unavailable."
+      }
+    },
+    "nav": {
+      "back": "Back",
+      "next": "Next"
+    },
+    "errors": {
+      "emptyCart": "Your cart is empty",
+      "emptyCartHint": "Add items to your cart to check out.",
+      "invalidRegion": "Select a region from the list",
+      "invalidPhone": "Phone must be in +998XXXXXXXXX format",
+      "invalidEmail": "Enter a valid email",
+      "required": "Required field",
+      "agreementRequired": "You must accept the terms"
+    }
+  },
+  "favorites": {
+    "addLabel": "Add to favorites",
+    "removeLabel": "Remove from favorites",
+    "addedToast": "Added to favorites",
+    "removedToast": "Removed from favorites",
+    "openLabel": "Open favorites",
+    "pageTitle": "Favorites",
+    "empty": "Your favorites are empty",
+    "emptyHint": "Tap the heart to save products for later.",
+    "continueShopping": "Go to catalog",
+    "itemsCount": "{count, plural, one {# item} other {# items}}"
+  },
+  "quickView": {
+    "open": "Quick view",
+    "title": "Quick view",
+    "viewFull": "Go to product page",
+    "loading": "Loading…",
+    "error": "Could not load product"
+  },
+  "cart": {
+    "openLabel": "Open cart",
+    "title": "Cart",
+    "empty": "Your cart is empty",
+    "emptyHint": "Pick items from the catalog and add them to your cart.",
+    "continueShopping": "Go to catalog",
+    "itemsCount": "{count, plural, one {# item} other {# items}}",
+    "qtyDecrease": "Decrease quantity",
+    "qtyIncrease": "Increase quantity",
+    "remove": "Remove",
+    "subtotal": "Subtotal",
+    "checkout": "Checkout",
+    "addedToCart": "Added to cart",
+    "addToCart": "Add to cart",
+    "page": {
+      "title": "Cart",
+      "emptyTitle": "Your cart is empty",
+      "emptyHint": "Pick items from the catalog and add them to your cart.",
+      "continueShopping": "Go to catalog",
+      "promoLabel": "Promo code",
+      "promoPlaceholder": "Enter code",
+      "promoApply": "Apply",
+      "promoApplied": "{code} applied",
+      "promoRemove": "Remove promo code",
+      "promoInvalid": "Invalid promo code",
+      "promoExpired": "Promo code has expired",
+      "promoUsageLimit": "Usage limit reached",
+      "promoMinOrder": "Minimum order amount {amount}",
+      "promoDeliveryHint": "Free delivery applies at checkout.",
+      "subtotal": "Subtotal",
+      "discount": "Discount",
+      "delivery": "Delivery",
+      "deliveryCalculated": "calculated at checkout",
+      "total": "Total",
+      "checkout": "Proceed to checkout",
+      "clearCart": "Clear cart",
+      "clearCartConfirm": "Remove all items from the cart?"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Bigmax — everything for babies and moms",
+      "description": "Bigmax online store: baby and mom goods delivered across Uzbekistan. Clothing, food, strollers, toys. Pay by card or on delivery."
+    },
+    "catalogIndex": {
+      "title": "Catalog",
+      "description": "Baby and mom goods catalog: clothing, diapers, food, strollers, hygiene, toys. Filter by age, gender, price and brand."
+    },
+    "category": {
+      "title": "{name}",
+      "description": "{name} at Bigmax — shop in Tashkent with delivery across Uzbekistan. Trusted brands, handy filters, pay by card or on delivery."
+    },
+    "product": {
+      "title": "{name}",
+      "descriptionWithBrand": "{name} by {brand} at Bigmax. From {price}. Delivery across Uzbekistan, pay by card or on delivery.",
+      "description": "{name} at Bigmax. From {price}. Delivery across Uzbekistan, pay by card or on delivery."
+    },
+    "search": {
+      "title": "Search results",
+      "titleWithQuery": "Search «{q}»"
+    },
+    "notFound": {
+      "title": "Page not found"
+    },
+    "support": {
+      "title": "Support",
+      "description": "Contact Bigmax customer support: contacts, working hours and answers to common questions about delivery, payment and returns."
+    },
+    "offer": {
+      "title": "Public offer",
+      "description": "Public offer terms of the Bigmax online store (bigmax.uz): order placement, payment, delivery and returns."
+    },
+    "agreement": {
+      "title": "User agreement",
+      "description": "Bigmax user agreement: rules of using the site, rights and obligations of the parties."
+    },
+    "privacy": {
+      "title": "Privacy policy",
+      "description": "How Bigmax collects, uses and protects your personal data. Privacy policy of bigmax.uz."
+    }
+  },
+  "search": {
+    "placeholder": "Search products…",
+    "hintMinChars": "Enter at least 2 characters",
+    "loading": "Searching…",
+    "noResults": "No results for «{q}»",
+    "showAll": "Show all results",
+    "resultsTitle": "Results for «{q}»",
+    "emptyQueryRedirect": "Enter a search query",
+    "itemsCount": "{count, plural, one {# item} other {# items}}"
+  },
+  "product": {
+    "gallery": {
+      "mainAria": "Image {current} of {total}",
+      "thumbAria": "Image {n}",
+      "prev": "Previous image",
+      "next": "Next image",
+      "zoom": "Zoom",
+      "close": "Close"
+    },
+    "variants": {
+      "title": "Variant",
+      "unnamed": "Standard"
+    },
+    "stock": {
+      "inStock": "In stock — {count}",
+      "outOfStock": "Out of stock"
+    },
+    "price": {
+      "current": "{price}",
+      "old": "{price}"
+    },
+    "cta": {
+      "addToCart": "Add to cart",
+      "comingSoon": "Cart functionality ships with P3-T2"
+    },
+    "description": "Description",
+    "attributes": {
+      "title": "Specifications",
+      "category": "Category",
+      "brand": "Brand",
+      "age": "Age",
+      "ageRange": "{from}–{to} mo",
+      "ageFrom": "from {from} mo",
+      "ageTo": "up to {to} mo",
+      "gender": "Gender",
+      "genderValues": {
+        "boy": "For boys",
+        "girl": "For girls",
+        "unisex": "Unisex"
+      },
+      "weight": "Weight",
+      "weightGrams": "{grams} g",
+      "color": "Color",
+      "size": "Size"
+    },
+    "reviews": {
+      "title": "Reviews",
+      "empty": "No reviews yet — be the first!",
+      "comingSoon": "Posting reviews with photos lands in P7-T3."
+    }
+  },
+  "notifications": {
+    "order": {
+      "created": {
+        "sms": "Bigmax: order {orderNumber} accepted. Total {total}. Status: {url}",
+        "telegramTitle": "Thanks for your order at Bigmax!",
+        "telegramBody": "Number: {orderNumber}\nTotal: {total}\nDetails: {url}",
+        "emailSubject": "Bigmax · order {orderNumber}",
+        "emailBody": "Thanks for your order at Bigmax! Order number: {orderNumber}. Total: {total}. Details and status: {url}"
+      }
+    }
+  },
+  "orders": {
+    "status": {
+      "orderNumber": "Order № {number}",
+      "success": {
+        "title": "Thanks for your order at Bigmax!"
+      },
+      "failure": {
+        "title": "Payment didn't go through"
+      },
+      "return": {
+        "title": "Returned from payment",
+        "body": "We'll check your order status. If the payment went through, you'll see confirmation here."
+      },
+      "polling": {
+        "title": "Confirming your payment",
+        "body": "This takes a few seconds. Please don't close the page."
+      },
+      "paid": {
+        "title": "Payment received",
+        "body": "We've sent a confirmation to your email. Your order is now being processed."
+      },
+      "cod": {
+        "title": "Order accepted",
+        "body": "Pay in cash or by card on delivery (or at the branch for pickup)."
+      },
+      "failed": {
+        "title": "Payment declined",
+        "body": "Try another card or choose cash on delivery."
+      },
+      "timeout": {
+        "title": "Payment is taking longer than usual",
+        "body": "Payment confirmation can take a couple of minutes. Refresh the page or check «My orders» later.",
+        "retry": "Check status"
+      },
+      "actions": {
+        "myOrders": "My orders",
+        "backToCart": "Back to cart",
+        "continueShopping": "Continue shopping"
+      }
+    }
+  },
+  "account": {
+    "nav": {
+      "profile": "Profile",
+      "password": "Password",
+      "addresses": "Addresses",
+      "orders": "Orders",
+      "loyalty": "Bigmax Bonus",
+      "signOut": "Sign out"
+    },
+    "loyalty": {
+      "title": "Bigmax Bonus",
+      "subtitle": "Loyalty program. We credit 1% of every paid order. Spend points as money at checkout.",
+      "balanceLabel": "Current balance",
+      "balanceValue": "{points, plural, one {# point} other {# points}}",
+      "rulesHint": "1% of the order total → 1 point = 1 soum. Points are credited after successful payment or COD delivery.",
+      "historyTitle": "History",
+      "historyCount": "{count, plural, one {# entry} other {# entries}}",
+      "empty": "No history yet — place your first order to start earning points.",
+      "typeEarn": "Earned",
+      "typeSpend": "Spent",
+      "typeRefund": "Refunded",
+      "typeClawback": "Clawed back",
+      "pageSizeHint": "Showing {size} entries per page.",
+      "pagination": {
+        "prev": "← Prev",
+        "next": "Next →",
+        "pageOf": "Page {page} of {total}"
+      }
+    },
+    "header": {
+      "greeting": "Hi, {name}"
+    },
+    "profile": {
+      "title": "My profile",
+      "subtitle": "Name and preferences for the shop and notifications",
+      "name": "Name",
+      "namePlaceholder": "How should we address you",
+      "language": "Language",
+      "languageHint": "Used for SMS and email notifications",
+      "phone": "Phone",
+      "phoneLocked": "Phone change will be available later",
+      "email": "Email",
+      "emailLocked": "Email already verified — changing requires re-verification",
+      "submit": "Save",
+      "success": "Profile updated"
+    },
+    "password": {
+      "title": "Password",
+      "subtitleChange": "Change password for email sign-in",
+      "subtitleSet": "Set a password to also sign in by email",
+      "currentPassword": "Current password",
+      "newPassword": "New password",
+      "newPasswordPlaceholder": "At least 6 characters",
+      "submitChange": "Change password",
+      "submitSet": "Set password",
+      "success": "Password updated",
+      "errorWrongCurrent": "Current password is incorrect"
+    },
+    "addresses": {
+      "title": "Delivery addresses",
+      "empty": "No addresses yet. Add one to place an order.",
+      "addNew": "Add address",
+      "edit": "Edit",
+      "delete": "Delete",
+      "deleteConfirm": "Delete this address?",
+      "setDefault": "Set as default",
+      "defaultBadge": "Default",
+      "form": {
+        "region": "Region",
+        "regionPlaceholder": "Select region",
+        "city": "City",
+        "cityPlaceholder": "e.g. Tashkent",
+        "district": "District",
+        "districtPlaceholder": "Optional",
+        "districtHintTashkent": "For Tashkent pick one of 11 districts",
+        "street": "Street",
+        "house": "House",
+        "apartment": "Apartment",
+        "landmark": "Landmark",
+        "landmarkPlaceholder": "e.g. near the metro",
+        "phone": "Phone (alternate, if different)",
+        "phonePlaceholder": "+998 90 000-00-00",
+        "isDefault": "Set as default address",
+        "submitCreate": "Add",
+        "submitEdit": "Save",
+        "cancel": "Cancel"
+      },
+      "errors": {
+        "limitReached": "Address limit reached ({limit}). Delete one to add another.",
+        "notFound": "Address not found",
+        "invalidRegion": "Select a region from the list",
+        "invalidPhone": "Phone must be in +998XXXXXXXXX format"
+      }
+    },
+    "orders": {
+      "title": "My orders",
+      "list": {
+        "summary": "{count, plural, one {# order} other {# orders}}",
+        "empty": {
+          "title": "No orders yet",
+          "body": "Once you place your first order, it'll appear here."
+        },
+        "emptyFiltered": "No orders match the selected status.",
+        "filters": {
+          "label": "Status",
+          "all": "All statuses"
+        },
+        "card": {
+          "itemsCount": "{count, plural, one {# item} other {# items}}",
+          "viewDetails": "View details",
+          "paymentCod": "Cash on delivery",
+          "paymentUniteller": "Card",
+          "createdAt": "Placed on {date}"
+        },
+        "pagination": {
+          "prev": "Previous",
+          "next": "Next",
+          "page": "Page {page} of {total}"
+        }
+      },
+      "statuses": {
+        "pending": "Awaiting payment",
+        "confirmed": "Confirmed",
+        "packing": "Packing",
+        "shipped": "Shipped",
+        "delivered": "Delivered",
+        "cancelled": "Cancelled",
+        "refunded": "Refunded"
+      },
+      "detail": {
+        "back": "← Back to orders",
+        "createdAt": "Placed on {date}",
+        "items": "Items",
+        "itemQty": "× {qty}",
+        "totals": {
+          "title": "Totals",
+          "subtotal": "Subtotal",
+          "delivery": "Delivery",
+          "discount": "Discount",
+          "total": "Total"
+        },
+        "delivery": {
+          "title": "Delivery",
+          "courier": "Courier",
+          "pickup": "Pickup",
+          "address": "Delivery address",
+          "branch": "Pickup point",
+          "phone": "Phone",
+          "comment": "Comment"
+        },
+        "payment": {
+          "title": "Payment",
+          "uniteller": "Card via Uniteller",
+          "cod": "Cash on delivery",
+          "card": "Card",
+          "billnumber": "Payment number"
+        },
+        "refunds": {
+          "title": "Refunds",
+          "amount": "Amount",
+          "createdAt": "Requested on {date}",
+          "statuses": {
+            "pending": "Under review",
+            "completed": "Refunded",
+            "failed": "Declined"
+          }
+        },
+        "actions": {
+          "reorder": "Re-order",
+          "reorderInProgress": "Adding to cart…",
+          "reorderSuccess": "{count, plural, one {# item} other {# items}} added to cart",
+          "reorderSkipped": "{count, plural, one {# item} other {# items}} no longer available",
+          "reorderFailed": "Could not re-order. Please try again later.",
+          "refund": "Request refund",
+          "refundIneligible": {
+            "no_captured_payment": "Refunds are only available for paid orders.",
+            "order_cancelled": "Order was cancelled — nothing to refund.",
+            "refund_already_requested": "A refund has already been requested and is under review.",
+            "refund_already_completed": "This order has already been refunded."
+          },
+          "cancel": "Cancel order",
+          "cancelIneligible": {
+            "order_too_late": "Order is already being prepared — only a manager can cancel it now.",
+            "order_already_cancelled": "Order is already cancelled.",
+            "refund_in_progress": "A refund is being processed — status will update after it completes."
+          }
+        },
+        "refundDialog": {
+          "title": "Refund request",
+          "body": "Please describe the reason for the refund. A manager will get back to you after review.",
+          "reasonLabel": "Reason",
+          "reasonPlaceholder": "E.g. item arrived damaged, wrong size…",
+          "errors": {
+            "reason_too_short": "Please describe the reason in more detail (at least 10 characters).",
+            "reason_too_long": "Too long — up to 1000 characters.",
+            "invalid_body": "Could not process the request.",
+            "generic": "Could not submit the request. Please try again later."
+          },
+          "cancel": "Cancel",
+          "submit": "Submit request",
+          "submitting": "Submitting…",
+          "successTitle": "Request submitted",
+          "successBody": "A manager will contact you within a business day."
+        },
+        "tracker": {
+          "title": "Order status",
+          "pendingCaption": "Awaiting payment confirmation",
+          "lastUpdated": "Updated on {date}",
+          "terminal": {
+            "cancelled": {
+              "title": "Order cancelled",
+              "body": "The order was cancelled. If you were charged, the funds will return to your card within a few business days."
+            },
+            "refunded": {
+              "title": "Refunded",
+              "body": "The order was refunded. The money is back on your card."
+            }
+          }
+        },
+        "cancelDialog": {
+          "title": "Cancel this order?",
+          "body": "The order will be cancelled. If you were charged, the funds will return to your card.",
+          "reasonLabel": "Reason (optional)",
+          "reasonPlaceholder": "Changed my mind, found a better price, ordering mistake…",
+          "errors": {
+            "reason_too_long": "Too long — up to 500 characters.",
+            "invalid_body": "Could not process the request.",
+            "order_too_late": "Order is already being prepared. Only a manager can cancel.",
+            "order_already_cancelled": "Order is already cancelled.",
+            "refund_in_progress": "A refund is being processed — please wait.",
+            "provider_misconfigured": "Payment service is temporarily unavailable.",
+            "provider_error": "Could not cancel the payment with the bank. Try again later or contact support.",
+            "generic": "Could not cancel the order. Please try again later."
+          },
+          "cancel": "Don't cancel",
+          "submit": "Yes, cancel",
+          "submitting": "Cancelling…",
+          "successTitle": "Order cancelled",
+          "successBody": "If you were charged, the funds will return to your card within a few business days."
+        }
+      }
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Sign in to Bigmax",
+      "subtitle": "Enter your email and password or get a code by phone",
+      "emailTab": "Email",
+      "phoneTab": "By phone",
+      "email": "Email",
+      "emailPlaceholder": "you@example.com",
+      "password": "Password",
+      "passwordPlaceholder": "At least 6 characters",
+      "phone": "Phone",
+      "phonePlaceholder": "+998 90 123-45-67",
+      "submitEmail": "Sign in",
+      "submitPhone": "Get code",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up",
+      "forgotPassword": "Forgot password?",
+      "orContinueWith": "or continue with"
+    },
+    "telegram": {
+      "buttonLabel": "Sign in with Telegram",
+      "signingIn": "Signing in with Telegram…"
+    },
+    "register": {
+      "title": "Create an account",
+      "subtitle": "Choose how you'd like to register",
+      "name": "Name",
+      "namePlaceholder": "How should we address you",
+      "submitEmail": "Create account",
+      "submitPhone": "Get code",
+      "haveAccount": "Already have an account?",
+      "signIn": "Sign in",
+      "agreementLabel": "I accept the <offer>public offer</offer>, <agreement>user agreement</agreement> and <privacy>privacy policy</privacy>"
+    },
+    "verify": {
+      "title": "Enter the code",
+      "subtitle": "We sent a 6-digit code to {phone}",
+      "code": "Code",
+      "codePlaceholder": "123456",
+      "submit": "Verify",
+      "resend": "Resend",
+      "resendIn": "Resend in {seconds}s",
+      "wrongNumber": "Change number"
+    },
+    "recovery": {
+      "title": "Password recovery",
+      "phoneNote": "Sign in with SMS code — phone accounts don't need a password.",
+      "emailNote": "Email-based password reset is coming soon."
+    },
+    "passwordReset": {
+      "request": {
+        "title": "Reset password",
+        "subtitle": "Enter your email — we'll send a reset link.",
+        "email": "Email",
+        "emailPlaceholder": "you@example.com",
+        "submit": "Send link",
+        "submitting": "Sending…",
+        "successTitle": "Email sent",
+        "successBody": "If an account with this email exists, we've sent a reset link. It's valid for 30 minutes.",
+        "backToLogin": "← Back to login",
+        "rateLimited": "Too many requests. Try again in a few minutes."
+      },
+      "complete": {
+        "title": "New password",
+        "subtitle": "Enter a new password for your account.",
+        "password": "New password",
+        "passwordPlaceholder": "At least 8 characters",
+        "passwordConfirm": "Confirm password",
+        "submit": "Save password",
+        "submitting": "Saving…",
+        "successTitle": "Password updated",
+        "successBody": "You can now sign in with your new password.",
+        "goToLogin": "Sign in →",
+        "errors": {
+          "passwordMismatch": "Passwords don't match.",
+          "passwordTooShort": "Password must be at least 8 characters.",
+          "passwordTooLong": "Password is too long.",
+          "tokenInvalid": "Link is invalid.",
+          "tokenExpired": "Link has expired. Request a new one.",
+          "tokenAlreadyUsed": "This link has already been used. Request a new one.",
+          "generic": "Could not save the password."
+        }
+      },
+      "email": {
+        "subject": "Password reset · Bigmax",
+        "greeting": "Hello!",
+        "intro": "You (or someone on your behalf) requested a password reset for the Bigmax account ({email}).",
+        "cta": "Reset password",
+        "expiry": "The link is valid for 30 minutes.",
+        "ignore": "If you didn't request a reset, simply ignore this email. Your password will not change.",
+        "footer": "Sincerely,\nBigmax team · bigmax.uz"
+      }
+    },
+    "errors": {
+      "invalidCredentials": "Wrong email or password",
+      "invalidOtp": "Invalid or expired code",
+      "rateLimited": "Too many attempts. Try again later.",
+      "emailExists": "A user with this email already exists",
+      "networkError": "Network error. Check your connection.",
+      "unknownError": "Something went wrong. Please try again.",
+      "invalidPhone": "Enter phone in +998XXXXXXXXX format",
+      "invalidForm": "Check form fields",
+      "telegramFailed": "Could not sign in with Telegram. Please try again.",
+      "agreementRequired": "You must accept the terms"
+    }
+  },
+  "admin": {
+    "title": "Admin panel",
+    "subtitle": "Bigmax · {role}",
+    "roles": {
+      "admin": "Administrator",
+      "manager": "Manager"
+    },
+    "nav": {
+      "dashboard": "Overview",
+      "orders": "Orders",
+      "payments": "Payments & refunds",
+      "products": "Products",
+      "categories": "Categories",
+      "brands": "Brands",
+      "branches": "Branches",
+      "stock": "Stock",
+      "promo": "Promo",
+      "customers": "Customers",
+      "audit": "Audit log",
+      "features": "Feature flags",
+      "imagesCleanup": "Image cleanup",
+      "backToShop": "← Back to shop"
+    },
+    "menuButton": "Menu",
+    "breadcrumbs": {
+      "home": "Admin"
+    },
+    "dashboard": {
+      "title": "Overview",
+      "subtitle": "Orders, revenue, and per-branch stock at a glance.",
+      "kpi": {
+        "ordersTotal": "Orders total",
+        "revenueToday": "Revenue today",
+        "revenueWeek": "Revenue 7 days",
+        "revenueMonth": "Revenue 30 days",
+        "ordersCount": "{count, plural, one {# order} other {# orders}}"
+      },
+      "ordersByStatus": {
+        "title": "Orders by status",
+        "empty": "No orders yet."
+      },
+      "topProducts": {
+        "title": "Top products (30 days)",
+        "empty": "No products sold in the period.",
+        "qty": "{count, plural, one {# pc} other {# pcs}}"
+      },
+      "lowStock": {
+        "title": "Low on stock",
+        "empty": "Everything is in stock.",
+        "atBranch": "At «{branch}»",
+        "remaining": "{count, plural, one {# pc} other {# pcs}}"
+      },
+      "pendingUniteller": {
+        "title": "Awaiting capture (Uniteller)",
+        "subtitle": "Payments pending longer than 2 minutes — picked up by the pull-job worker.",
+        "empty": "Queue is empty — all Uniteller payments captured/failed.",
+        "ageSec": "{sec, plural, one {# sec} other {# sec}}",
+        "ageMin": "{min, plural, one {# min} other {# min}}",
+        "openOrder": "Open"
+      },
+      "generatedAt": "Refreshed at {time}"
+    },
+    "products": {
+      "list": {
+        "title": "Products",
+        "subtitle": "Manage catalog products and variants.",
+        "create": "New product",
+        "import": "CSV import",
+        "searchPlaceholder": "Search by name (RU)…",
+        "filterAll": "All",
+        "filterActive": "Active",
+        "filterInactive": "Hidden",
+        "table": {
+          "name": "Name",
+          "category": "Category",
+          "brand": "Brand",
+          "variants": "Variants",
+          "status": "Status",
+          "active": "Active",
+          "inactive": "Hidden",
+          "featured": "Featured"
+        },
+        "empty": "No products match the filter.",
+        "summary": "{count, plural, one {# product} other {# products}}"
+      },
+      "form": {
+        "tabs": {
+          "ru": "RU",
+          "uz": "UZ",
+          "en": "EN"
+        },
+        "fields": {
+          "category": "Category",
+          "categoryCreate": "Create category",
+          "brand": "Brand",
+          "brandNone": "No brand",
+          "brandCreate": "Create brand",
+          "slug": "URL slug",
+          "slugHint": "lowercase letters, digits, hyphens",
+          "nameRu": "Name (Russian)",
+          "nameUz": "Name (Uzbek)",
+          "nameEn": "Name (English)",
+          "descriptionRu": "Description (Russian)",
+          "descriptionUz": "Description (Uzbek)",
+          "descriptionEn": "Description (English)",
+          "ageFrom": "Age from (months)",
+          "ageTo": "Age to (months)",
+          "gender": "Gender",
+          "genderUnisex": "Unisex",
+          "genderBoy": "Boy",
+          "genderGirl": "Girl",
+          "isActive": "Active (visible in catalog)",
+          "isFeatured": "Show in featured"
+        },
+        "attributes": {
+          "title": "Category-specific attributes",
+          "subtitle": "Category: {category}",
+          "empty": "Selected category has no extra attributes.",
+          "addOption": "Add value",
+          "addCtaTitle": "Add an attribute to “{category}”",
+          "addCtaSubtitle": "The new field will be available on every product of this category.",
+          "addCtaHint": "Click",
+          "colorDerivedHint": "Color is auto-derived from variant colors — edit it in the variant card below."
+        },
+        "images": {
+          "title": "Product photos",
+          "readOnlyHint": "{count, plural, one {# photo} other {# photos}}. Attached to variants — edit via the “Variants” section below.",
+          "readOnlyHintEmpty": "Photos are managed per variant — open a variant below to add them.",
+          "readOnlyEmptyState": "No photos yet — add them via a variant card.",
+          "readOnlyEditHint": "To add or edit photos, open a variant in the “Variants” section below.",
+          "commonBadge": "Shared",
+          "variantOverrideLabel": "Variant-specific",
+          "sharedByVariantsBadge": "shared across sizes",
+          "hint": "{count, plural, one {# photo} other {# photos}}. Drag a card to reorder. The first one is the primary.",
+          "hintEmpty": "Add at least one photo — it appears on the product card and in the gallery.",
+          "emptyState": "No photos yet — add the first one via the form below.",
+          "dropzoneTitle": "Drop photos here or click to select",
+          "dropzoneSubtitle": "JPEG, PNG, WebP or GIF · up to 10 MB · up to 6000×6000 px",
+          "dropzoneActive": "Release to upload",
+          "urlMode": "Add by URL",
+          "addTitle": "Add a photo",
+          "add": "Add",
+          "retry": "Retry",
+          "dismiss": "Dismiss",
+          "urlPlaceholder": "https://...",
+          "altPlaceholder": "Alt text — for SEO and accessibility",
+          "altAria": "Alt text for photo {n}",
+          "urlHint": "Paste a direct image URL (e.g. from a CDN). Both https:// and relative paths are supported.",
+          "primary": "Primary",
+          "remove": "Remove photo",
+          "removeConfirm": "Remove this photo?",
+          "dragHint": "Drag to reorder",
+          "moveUp": "Up",
+          "moveDown": "Down",
+          "uploadError": {
+            "file_too_large": "File is larger than 10 MB — compress or shrink it",
+            "unsupported_format": "Unsupported format — use JPEG, PNG, WebP or GIF",
+            "image_too_wide": "Image is too wide (max 6000 px)",
+            "image_too_tall": "Image is too tall (max 6000 px)",
+            "decode_failed": "Could not read the file — it may be corrupted",
+            "processing_failed": "Server processing failed",
+            "rate_limited": "Too many uploads — wait a minute",
+            "network_error": "Network error — check your connection",
+            "invalid_response": "Server returned an invalid response",
+            "generic": "Upload failed — try again"
+          }
+        },
+        "submit": "Save",
+        "submitting": "Saving…",
+        "submitCreate": "Create",
+        "cancel": "Cancel",
+        "deactivate": "Hide from catalog",
+        "deactivateConfirm": "Hide this product? Customers won't see it, but order history is preserved.",
+        "errors": {
+          "name_ru_too_short": "Name (RU) is too short (min 2 chars).",
+          "name_uz_too_short": "Name (UZ) is too short.",
+          "name_en_too_short": "Name (EN) is too short.",
+          "name_too_long": "Name is too long (max 200 chars).",
+          "slug_too_short": "Slug is too short.",
+          "slug_too_long": "Slug is too long.",
+          "slug_invalid": "Slug must contain only lowercase letters, digits, and hyphens.",
+          "slug_exists": "A product with this slug already exists.",
+          "category_required": "Pick a category.",
+          "age_range_invalid": "«Age from» must be ≤ «Age to».",
+          "invalid_relation": "Selected category or brand was not found.",
+          "invalid_body": "Could not process the form.",
+          "attribute_required_missing": "Fill in the required attribute.",
+          "attribute_range_below_min": "Value is below the allowed minimum.",
+          "attribute_range_above_max": "Value is above the allowed maximum.",
+          "attribute_type_mismatch": "Wrong value type for one of the attributes.",
+          "attribute_enum_value_invalid": "Invalid value in attribute list.",
+          "attribute_range_negative": "Numeric attribute cannot be negative.",
+          "generic": "Could not save. Please try again later."
+        },
+        "successCreate": "Product created.",
+        "successUpdate": "Changes saved.",
+        "successDeactivate": "Product hidden from catalog."
+      },
+      "detail": {
+        "back": "← Back to products",
+        "createdAt": "Created on {date}",
+        "updatedAt": "Updated on {date}"
+      },
+      "stock": {
+        "title": "Stock by branch",
+        "subtitle": "{variants} variants × {branches} branches",
+        "summary": "In stock: {total} · low: {low} · out: {out}",
+        "filterAll": "All",
+        "emptyVariants": "Create variants above first — stock will appear here.",
+        "totalReserved": "Total {qty} · reserved {reserved}",
+        "missing": "Row not yet created"
+      },
+      "stockHistory": {
+        "title": "Stock changes history",
+        "subtitle": "{count, plural, one {# entry} other {# entries}} across all variants of this product",
+        "empty": "No history yet — stock changes will show here.",
+        "showingLatest": "Showing latest {count} of {total}",
+        "showToggle": "History",
+        "hideToggle": "Hide history",
+        "actions": {
+          "set": "Set",
+          "inc": "Incremented",
+          "dec": "Decremented",
+          "import": "CSV import",
+          "create": "Created",
+          "delete": "Deleted",
+          "ship": "Shipped",
+          "reserve": "Reserved",
+          "release": "Reserve released"
+        }
+      },
+      "create": {
+        "title": "New product",
+        "subtitle": "Fill in fields for all three locales. Variants, prices and photos are added after creation."
+      },
+      "quickCreate": {
+        "category": {
+          "trigger": "+ Category",
+          "title": "New category",
+          "subtitle": "Just type the name — slug is auto-generated.",
+          "editSlug": "Edit slug",
+          "placeholders": {
+            "name": "e.g. Coats"
+          },
+          "disclosure": {
+            "translations": "Add translations (UZ, EN)",
+            "parent": "Advanced — parent category"
+          },
+          "fields": {
+            "name": "Name",
+            "slug": "Slug",
+            "parent": "Parent category",
+            "parentNone": "— no parent —"
+          },
+          "submit": "Create",
+          "submitting": "Creating…",
+          "cancel": "Cancel",
+          "success": "Category “{name}” created",
+          "errors": {
+            "generic": "Could not create category."
+          }
+        },
+        "brand": {
+          "trigger": "+ Brand",
+          "title": "New brand",
+          "subtitle": "Just type the name — slug is auto-generated.",
+          "editSlug": "Edit slug",
+          "placeholders": {
+            "name": "e.g. Tega"
+          },
+          "disclosure": {
+            "advanced": "Advanced — country"
+          },
+          "fields": {
+            "name": "Name",
+            "slug": "Slug",
+            "country": "Country"
+          },
+          "submit": "Create",
+          "submitting": "Creating…",
+          "cancel": "Cancel",
+          "success": "Brand “{name}” created",
+          "errors": {
+            "generic": "Could not create brand."
+          }
+        },
+        "option": {
+          "trigger": "+ Value",
+          "title": "New value for “{attribute}”",
+          "subtitle": "Type the label. Value is auto-generated.",
+          "editValue": "Edit value",
+          "placeholders": {
+            "label": "e.g. Light grey"
+          },
+          "disclosureTranslations": "Add translations (UZ, EN)",
+          "fields": {
+            "label": "Value label"
+          },
+          "submit": "Add",
+          "submitting": "Adding…",
+          "cancel": "Cancel",
+          "success": "“{label}” added to attribute",
+          "errors": {
+            "required": "Fill in label and value.",
+            "duplicate": "This value already exists.",
+            "generic": "Could not add value."
+          }
+        },
+        "attribute": {
+          "trigger": "+ Attribute",
+          "title": "Category attribute",
+          "subtitle": "Attach an existing one or create new.",
+          "tabExisting": "From existing",
+          "tabNew": "Create new",
+          "noTemplates": "No attributes from other categories — create a new one.",
+          "noMatches": "Nothing found.",
+          "searchPlaceholder": "Search by label or key…",
+          "usedIn": "Currently in: {list}",
+          "optionsCount": "{count, plural, one {# value} other {# values}}",
+          "attach": "Attach",
+          "attaching": "Attaching…",
+          "attachSuccess": "“{label}” attached to category",
+          "fields": {
+            "kind": "Kind",
+            "label": "Label",
+            "key": "Key (URL/JSON)",
+            "options": "Values",
+            "min": "Min",
+            "max": "Max",
+            "step": "Step",
+            "unit": "Unit",
+            "isRequired": "Required",
+            "isFilterable": "In filters"
+          },
+          "kinds": {
+            "enum": "List (single)",
+            "multiselect": "List (multi)",
+            "range": "Range",
+            "boolean": "Yes/No",
+            "text": "Text"
+          },
+          "addOption": "Add",
+          "removeOption": "Remove",
+          "optionLabelPlaceholder": "Label (e.g. Cotton)",
+          "optionValuePlaceholder": "value (auto)",
+          "optionHint": "Value — letters, digits, `_`, `-`. If empty — generated from label.",
+          "submit": "Create",
+          "submitting": "Creating…",
+          "cancel": "Cancel",
+          "success": "Attribute “{label}” added",
+          "errors": {
+            "optionsRequired": "Add at least one value.",
+            "generic": "Could not create attribute."
+          }
+        }
+      },
+      "import": {
+        "title": "Import products",
+        "subtitle": "Paste CSV or upload a file. Required columns: slug, name_ru, name_uz, name_en, category_slug.",
+        "submit": "Run import",
+        "submitting": "Importing…",
+        "summary": "Created: {created}, updated: {updated}, skipped: {skipped}",
+        "skippedTitle": "Skipped rows",
+        "skipReasons": {
+          "invalid_row": "Invalid row",
+          "unknown_category": "Unknown category",
+          "unknown_brand": "Unknown brand",
+          "slug_conflict": "Slug conflict",
+          "db_error": "DB error"
+        },
+        "errors": {
+          "empty_body": "File is empty.",
+          "missing_columns": "Missing columns: {missing}",
+          "too_many_rows": "Too many rows (max {max}).",
+          "generic": "Could not import."
+        }
+      },
+      "variants": {
+        "title": "Product variants",
+        "addNew": "Add variant",
+        "table": {
+          "sku": "SKU",
+          "color": "Color",
+          "size": "Size",
+          "price": "Price",
+          "oldPrice": "Old price",
+          "barcode": "Barcode",
+          "weight": "Weight (g)",
+          "actions": "Actions"
+        },
+        "form": {
+          "title": "Product variant",
+          "createTitle": "New variant",
+          "editTitle": "Edit variant",
+          "skuHint": "uppercase letters, digits, hyphen, underscore",
+          "skuGenerate": "Generate",
+          "save": "Save",
+          "saving": "Saving…",
+          "create": "Create",
+          "delete": "Delete",
+          "deleteConfirm": "Delete this variant? This action cannot be undone.",
+          "cancel": "Cancel",
+          "errors": {
+            "sku_too_short": "SKU is too short (min 2 chars).",
+            "sku_too_long": "SKU is too long (max 64 chars).",
+            "sku_invalid": "SKU must contain only uppercase letters, digits, hyphens, underscores.",
+            "sku_exists": "This SKU is already used by another variant.",
+            "color_too_long": "Color value is too long.",
+            "size_too_long": "Size value is too long.",
+            "barcode_too_long": "Barcode is too long.",
+            "price_must_be_integer": "Price must be an integer (tiyin).",
+            "price_negative": "Price cannot be negative.",
+            "price_too_high": "Price is too high.",
+            "old_price_must_be_integer": "Old price must be an integer.",
+            "old_price_negative": "Old price cannot be negative.",
+            "old_price_too_high": "Old price is too high.",
+            "old_price_must_exceed_price": "Old price must be greater than the current price.",
+            "weight_must_be_integer": "Weight must be an integer (grams).",
+            "weight_negative": "Weight cannot be negative.",
+            "weight_too_high": "Weight is too high.",
+            "variant_in_use": "This variant is used in {count, plural, one {# order} other {# orders}} — cannot delete.",
+            "invalid_body": "Could not process the form.",
+            "generic": "Could not save."
+          },
+          "successCreate": "Variant created.",
+          "successUpdate": "Changes saved.",
+          "successDelete": "Variant deleted.",
+          "sharedImagesHint": "These photos apply to all variants with color “{color}”. Changes propagate to all sizes of this color.",
+          "perVariantImagesHint": "No color set — photos will be attached to this variant only."
+        },
+        "empty": "No variants yet. Add the first one — products without variants are hidden from the catalog.",
+        "edit": "Edit",
+        "noColor": "—",
+        "noSize": "—"
+      }
+    },
+    "categories": {
+      "list": {
+        "title": "Categories",
+        "subtitle": "Catalog category tree.",
+        "create": "New category",
+        "table": {
+          "name": "Name",
+          "slug": "Slug",
+          "parent": "Parent",
+          "order": "Order",
+          "products": "Products",
+          "status": "Status"
+        },
+        "empty": "No categories yet.",
+        "noParent": "—",
+        "active": "Active",
+        "inactive": "Hidden"
+      },
+      "form": {
+        "createTitle": "New category",
+        "editTitle": "Edit category",
+        "fields": {
+          "nameRu": "Name (RU)",
+          "nameUz": "Name (UZ)",
+          "nameEn": "Name (EN)",
+          "slug": "URL slug",
+          "slugHint": "lowercase letters, digits, hyphens",
+          "parent": "Parent",
+          "parentNone": "— top level —",
+          "parentSearch": "Search category…",
+          "parentSearchClear": "Clear search",
+          "parentNoMatches": "Nothing found",
+          "iconUrl": "Icon URL",
+          "order": "Sort order",
+          "isActive": "Active (visible in catalog)"
+        },
+        "submit": "Save",
+        "submitting": "Saving…",
+        "create": "Create",
+        "delete": "Delete",
+        "deleteConfirm": "Delete this category? This action cannot be undone.",
+        "cancel": "Cancel"
+      },
+      "bulk": {
+        "selected": "{count, plural, one {# selected} other {# selected}}",
+        "selectAll": "Select all",
+        "clear": "Clear",
+        "bulkDeactivate": "Hide selected",
+        "bulkActivate": "Activate selected",
+        "bulkSuccess": "Done: {count, plural, one {# updated} other {# updated}}.",
+        "bulkConfirm": "Apply to all selected categories?",
+        "dragHint": "Drag the handle to reorder.",
+        "reorderSuccess": "Order saved.",
+        "reorderError": "Could not save order."
+      }
+    },
+    "categoryAttributes": {
+      "title": "Category attributes",
+      "subtitle": "Dynamic field set for \"{category}\". These fields appear when creating a product and in catalog filters.",
+      "manageCta": "Manage attributes",
+      "createCta": "Create attribute",
+      "create": "New attribute",
+      "created": "Attribute created.",
+      "updated": "Attribute updated.",
+      "deleted": "Attribute deleted.",
+      "deleteConfirm": "Delete the attribute? Existing product values will remain stored but become hidden.",
+      "empty": "This category has no custom attributes yet.",
+      "edit": "Edit",
+      "editInParent": "Edit in parent",
+      "inheritedFrom": "Inherited from: {category}",
+      "delete": "Delete",
+      "moveUp": "Move up",
+      "moveDown": "Move down",
+      "yes": "Yes",
+      "no": "No",
+      "columns": {
+        "label": "Label",
+        "key": "Key",
+        "kind": "Kind",
+        "required": "Required",
+        "filterable": "Filter",
+        "actions": "Actions"
+      },
+      "kinds": {
+        "enum": "List (single)",
+        "multiselect": "List (multi)",
+        "range": "Number range",
+        "boolean": "Yes / No",
+        "text": "Text"
+      },
+      "errors": {
+        "reorder": "Could not save order.",
+        "delete": "Could not delete attribute."
+      },
+      "form": {
+        "fields": {
+          "key": "Key (URL & DB)",
+          "keyHint": "lowercase letters, digits, underscore only; cannot be changed after creation",
+          "kind": "Field kind",
+          "kindLocked": "Kind cannot be changed after creation.",
+          "kindDesc": {
+            "enum": "Pick one option from a list. For example: color — red, blue, green.",
+            "multiselect": "Pick multiple values at once. For example: tags — new, sale.",
+            "range": "Numeric value in a given range, with min/max and a unit.",
+            "boolean": "Simple Yes / No toggle. For example: with sound, organic.",
+            "text": "Free-form text input. Not used in catalog filters."
+          },
+          "label": {
+            "ru": "Name (RU)",
+            "uz": "Name (UZ)",
+            "en": "Name (EN)"
+          },
+          "helpText": {
+            "ru": "Hint (RU)",
+            "uz": "Hint (UZ)",
+            "en": "Hint (EN)"
+          },
+          "isRequired": "Required",
+          "isFilterable": "Show in catalog filters",
+          "order": "Order"
+        },
+        "submit": "Save",
+        "submitCreate": "Create",
+        "submitting": "Saving…",
+        "options": {
+          "title": "Value options",
+          "subtitle": "{count, plural, =0 {No options yet} one {# option} other {# options}}",
+          "add": "Add option",
+          "emptyCta": "Add the first option",
+          "edit": "Edit",
+          "remove": "Remove",
+          "moveUp": "Move up",
+          "moveDown": "Move down",
+          "unnamed": "New option",
+          "value": "Identifier",
+          "valueHint": "lowercase a–z, digits, _ or - (auto-filled from RU)",
+          "labelRu": "Name",
+          "labelUz": "Name",
+          "labelEn": "Name",
+          "color": "Color",
+          "colorPicker": "Pick color",
+          "colorClear": "Clear",
+          "colorHint": "optional — set hex (#ff0000) to render as swatch in the filter",
+          "addTitle": "New option",
+          "editTitle": "Edit option",
+          "dialogSubtitle": "Fill in the name in three languages. Identifier auto-fills from RU.",
+          "save": "Add",
+          "apply": "Save",
+          "cancel": "Cancel",
+          "errors": {
+            "valueRequired": "Fill in the identifier.",
+            "valueInvalid": "Identifier must start with a letter and contain only lowercase letters, digits, _ or -.",
+            "valueDuplicate": "This identifier already exists in the list.",
+            "labelRuRequired": "Fill in the name (RU).",
+            "labelUzRequired": "Fill in the name (UZ).",
+            "labelEnRequired": "Fill in the name (EN).",
+            "colorInvalid": "Color must be a hex value, e.g. #ef4444."
+          }
+        },
+        "range": {
+          "title": "Range settings",
+          "min": "Min",
+          "max": "Max",
+          "step": "Step",
+          "unit": {
+            "ru": "Unit (RU)",
+            "uz": "Unit (UZ)",
+            "en": "Unit (EN)"
+          }
+        },
+        "errors": {
+          "generic": "Could not save.",
+          "key_required": "Fill in the key.",
+          "key_invalid": "Key must start with a letter and contain only lowercase letters, digits, _.",
+          "key_too_long": "Key is too long (max 32).",
+          "key_exists": "This key already exists in this category.",
+          "label_required": "Fill in the name in all languages.",
+          "options_required": "Add at least one option.",
+          "options_too_many": "Too many options (max 50).",
+          "option_value_required": "Each option needs a value.",
+          "option_value_invalid": "Value: lowercase letters, digits, dash, underscore only.",
+          "option_label_required": "Fill in the option name in all languages.",
+          "range_invalid": "Min must be less than max.",
+          "category_not_found": "Category not found.",
+          "not_found": "Record not found.",
+          "invalid_body": "Invalid data."
+        }
+      }
+    },
+    "brands": {
+      "list": {
+        "title": "Brands",
+        "subtitle": "Product manufacturers.",
+        "create": "New brand",
+        "table": {
+          "name": "Name",
+          "slug": "Slug",
+          "country": "Country",
+          "products": "Products"
+        },
+        "empty": "No brands yet.",
+        "noCountry": "—"
+      },
+      "form": {
+        "createTitle": "New brand",
+        "editTitle": "Edit brand",
+        "fields": {
+          "name": "Name",
+          "slug": "URL slug",
+          "slugHint": "lowercase letters, digits, hyphens",
+          "logoUrl": "Logo URL",
+          "description": "Description",
+          "country": "Country"
+        },
+        "submit": "Save",
+        "submitting": "Saving…",
+        "create": "Create",
+        "delete": "Delete",
+        "deleteConfirm": "Delete this brand? Products will remain but unassigned.",
+        "cancel": "Cancel"
+      }
+    },
+    "branches": {
+      "list": {
+        "title": "Branches",
+        "subtitle": "Pickup points and warehouses.",
+        "create": "New branch",
+        "table": {
+          "name": "Name",
+          "address": "Address",
+          "phone": "Phone",
+          "geo": "Geo",
+          "status": "Status"
+        },
+        "empty": "No branches yet.",
+        "geoYes": "✓",
+        "geoNo": "—",
+        "active": "Active",
+        "inactive": "Hidden"
+      },
+      "form": {
+        "createTitle": "New branch",
+        "editTitle": "Edit branch",
+        "fields": {
+          "nameRu": "Name (RU)",
+          "nameUz": "Name (UZ)",
+          "nameEn": "Name (EN)",
+          "slug": "Slug (for CSV import)",
+          "slugHint": "Latin, digits, hyphen; stable URL-id for external integrations. Can be left empty.",
+          "addressRu": "Address (RU)",
+          "addressUz": "Address (UZ)",
+          "addressEn": "Address (EN)",
+          "phone": "Phone",
+          "workingHours": "Working hours",
+          "latitude": "Latitude",
+          "longitude": "Longitude",
+          "locationSection": "Location on map",
+          "locationSet": "Set",
+          "locationNotSet": "Not set",
+          "isActive": "Active (visible to customers)"
+        },
+        "locationPicker": {
+          "searchPlaceholder": "Search address or place…",
+          "locateMe": "Use my location",
+          "locateError": "Could not get your location.",
+          "mapAria": "Map for picking branch coordinates",
+          "hint": "Click the map, drag the marker, or use search.",
+          "clear": "Clear",
+          "layers": {
+            "esriStreets": "Esri Streets (fresher CIS data)",
+            "detailed": "OSM Detailed (house numbers)",
+            "streets": "Carto Modern",
+            "satellite": "Satellite",
+            "hybrid": "Hybrid (satellite + labels)"
+          },
+          "yandexMissingKey": "Yandex Maps API key not configured",
+          "yandexMissingKeyHint": "Get a key from the Yandex developer console and add the env var below. Until configured, the Leaflet fallback is used.",
+          "yandexLayers": {
+            "scheme": "Scheme",
+            "hybrid": "Hybrid",
+            "satellite": "Satellite"
+          },
+          "quickCitiesLabel": "Quick jump",
+          "cities": {
+            "tashkent": "Tashkent",
+            "samarkand": "Samarkand",
+            "bukhara": "Bukhara",
+            "namangan": "Namangan",
+            "andijan": "Andijan",
+            "fergana": "Fergana"
+          },
+          "resolvedAddress": "Address",
+          "resolvingAddress": "Resolving address…",
+          "unresolvedAddress": "Address not found — coordinates will be saved as-is.",
+          "copyCoords": "Copy",
+          "copyCoordsDone": "Copied",
+          "copyCoordsError": "Could not copy."
+        },
+        "submit": "Save",
+        "submitting": "Saving…",
+        "create": "Create",
+        "delete": "Delete",
+        "deleteConfirm": "Delete this branch? Pickup orders will lose the branch link.",
+        "cancel": "Cancel"
+      }
+    },
+    "payments": {
+      "list": {
+        "title": "Payments & Refunds",
+        "subtitle": "Manage Uniteller payments, COD orders and refunds.",
+        "searchPlaceholder": "Order number or customer email…",
+        "filterStatus": "Status",
+        "filterAllStatus": "All statuses",
+        "filterProvider": "Provider",
+        "filterAllProvider": "All providers",
+        "table": {
+          "order": "Order #",
+          "createdAt": "Date",
+          "customer": "Customer",
+          "provider": "Provider",
+          "amount": "Amount",
+          "card": "Card",
+          "status": "Status"
+        },
+        "empty": "No payments match the selected filter."
+      },
+      "detail": {
+        "back": "← Back to payments",
+        "title": "Payment for order {number}",
+        "createdAt": "Created {date}",
+        "summary": {
+          "title": "Summary",
+          "order": "Order",
+          "provider": "Provider",
+          "amount": "Amount",
+          "refundable": "Refundable remaining",
+          "capturedAt": "Captured at",
+          "updatedAt": "Updated"
+        },
+        "uniteller": {
+          "title": "Uniteller / customer",
+          "customer": "Customer",
+          "orderIdp": "Order_IDP",
+          "billnumber": "Billnumber (RRN)",
+          "responseCode": "Response code",
+          "cardMask": "Card mask"
+        },
+        "refunds": {
+          "title": "Refunds",
+          "createdAt": "Date",
+          "amount": "Amount",
+          "reason": "Reason",
+          "status": "Status"
+        },
+        "logs": {
+          "title": "Operation log (PaymentLog)",
+          "empty": "No entries.",
+          "createdAt": "When",
+          "action": "Action",
+          "statusCode": "Code",
+          "errorMessage": "Error"
+        },
+        "webhooks": {
+          "title": "Uniteller webhook events",
+          "empty": "No callbacks for this Order_IDP yet.",
+          "receivedAt": "Received",
+          "eventType": "Event",
+          "externalId": "External ID",
+          "processed": "Processed",
+          "pending": "Pending"
+        }
+      },
+      "statuses": {
+        "pending": "Pending",
+        "captured": "Captured",
+        "failed": "Failed",
+        "cancelled": "Cancelled",
+        "refunded": "Refunded",
+        "partially_refunded": "Partially refunded"
+      },
+      "providers": {
+        "uniteller": "Uniteller",
+        "cod": "Cash on delivery"
+      },
+      "refundStatuses": {
+        "pending": "Pending",
+        "completed": "Completed",
+        "failed": "Failed"
+      },
+      "refund": {
+        "trigger": "Refund",
+        "title": "Refund payment",
+        "remaining": "Available to refund: {amount} {currency}",
+        "amount": "Amount ({currency})",
+        "reason": "Refund reason",
+        "reasonPlaceholder": "e.g. defective item, customer cancellation",
+        "submit": "Issue refund",
+        "submitting": "Refunding…",
+        "cancel": "Cancel",
+        "successTitle": "Refund issued",
+        "successBody": "Refunded {amount} {currency}."
+      },
+      "recheck": {
+        "trigger": "Recheck status",
+        "submitting": "Refreshing…",
+        "successChanged": "Status updated: {status}",
+        "successUnchanged": "Status unchanged: {status}",
+        "disabledCod": "Recheck not available for COD"
+      },
+      "errors": {
+        "invalid_body": "Could not process the request.",
+        "invalid_amount": "Amount must be a positive number.",
+        "amount_exceeds_remaining": "Amount exceeds the refundable remaining.",
+        "not_refundable": "This payment cannot be refunded in its current state.",
+        "payment_not_found": "Payment not found.",
+        "provider_error": "Uniteller returned an error. Try again later.",
+        "provider_misconfigured": "Uniteller keys (UNITELLER_*) are not configured. Contact admin.",
+        "cod_recheck_unsupported": "Recheck is not available for COD.",
+        "no_uniteller_idp": "Payment has no Order_IDP — it never reached Uniteller.",
+        "reason_too_short": "Reason is too short (minimum 3 characters).",
+        "reason_too_long": "Reason is too long (maximum 500 characters).",
+        "generic": "Could not complete the operation."
+      },
+      "bulkRefund": {
+        "selected": "{count, plural, one {# payment selected} other {# payments selected}}",
+        "selectAll": "Select all",
+        "selectRow": "Select payment",
+        "modeLegend": "Refund mode",
+        "modeFull": "Full remaining",
+        "modeFixed": "Fixed amount",
+        "amountLabel": "Amount per payment",
+        "reasonLabel": "Reason",
+        "reasonPlaceholder": "e.g. defective batch",
+        "reasonRequired": "Provide a reason (minimum 3 characters).",
+        "invalidAmount": "Amount must be a positive number.",
+        "apply": "Refund selected",
+        "applying": "Refunding…",
+        "clear": "Clear selection",
+        "confirm": "Refund {count, plural, one {# payment} other {# payments}}? Uniteller refunds are irreversible.",
+        "successAll": "Refunded {count, plural, one {# payment} other {# payments}}.",
+        "successPartial": "Refunded {processed} payments, skipped {skipped} (non-refundable or provider errors).",
+        "error": "Could not complete the bulk refund."
+      }
+    },
+    "stock": {
+      "list": {
+        "title": "Stock by branch",
+        "subtitle": "Manage product stock across warehouses. Quantity changes require a reason for audit.",
+        "branch": "Branch",
+        "searchPlaceholder": "SKU or product name…",
+        "lowStockOnly": "Low stock only (≤ 5)",
+        "import": "CSV import",
+        "summary": "{count, plural, one {# entry} other {# entries}}",
+        "empty": "No items match the selected filter.",
+        "noBranches": "No active branches. Create one in the Branches section.",
+        "table": {
+          "item": "Item",
+          "product": "Product",
+          "sku": "SKU",
+          "variant": "Variant",
+          "quantity": "Quantity",
+          "reserved": "Reserved",
+          "available": "Available",
+          "stock": "Stock",
+          "status": "Status",
+          "totalReserved": "Total {qty} · reserved {reserved}",
+          "updatedAt": "Updated",
+          "actions": "Actions",
+          "historyAction": "History"
+        },
+        "status": {
+          "ok": "In stock",
+          "low": "Running low",
+          "out": "Out of stock"
+        },
+        "statusLabel": "Status",
+        "sortLabel": "Sort",
+        "sortOptions": {
+          "available_asc": "Available: low → high",
+          "available_desc": "Available: high → low",
+          "updated_desc": "Updated: newest first",
+          "updated_asc": "Updated: oldest first",
+          "sku_asc": "SKU: A → Z"
+        },
+        "availableRange": "Available range",
+        "availableMinPlaceholder": "From",
+        "availableMaxPlaceholder": "To",
+        "resetAll": "Reset all",
+        "activeChip": {
+          "q": "Search: {value}",
+          "range": "Available {min}–{max}",
+          "rangeMin": "Available ≥ {min}",
+          "rangeMax": "Available ≤ {max}",
+          "sort": "Sort: {value}"
+        }
+      },
+      "history": {
+        "back": "← Back to stock list",
+        "title": "History · {sku}",
+        "summary": "{count, plural, one {# entry} other {# entries}}",
+        "empty": "Log is empty.",
+        "table": {
+          "when": "When",
+          "action": "Action",
+          "qty": "Quantity",
+          "reserved": "Reserved",
+          "admin": "Admin",
+          "reason": "Reason"
+        }
+      },
+      "adjust": {
+        "trigger": "Adjust",
+        "title": "Adjust stock · {sku} ({product})",
+        "current": "Current quantity: {qty}",
+        "previewCurrent": "Current",
+        "previewNew": "After",
+        "modeLegend": "Mode",
+        "mode": {
+          "set": "Set",
+          "inc": "Increment",
+          "dec": "Decrement"
+        },
+        "modeDesc": {
+          "set": "Replace with exact value",
+          "inc": "Add to current",
+          "dec": "Subtract from current"
+        },
+        "valueLabel": {
+          "set": "New quantity",
+          "inc": "Add quantity",
+          "dec": "Subtract quantity"
+        },
+        "presetWriteOffAll": "Write off all",
+        "reason": "Reason (for audit)",
+        "reasonPresets": {
+          "inventory_recount": "Inventory recount",
+          "shipment_received": "Shipment received",
+          "damaged": "Damaged / defective",
+          "offline_sale": "Offline sale",
+          "return": "Return",
+          "other": "Other (specify below)"
+        },
+        "reasonPlaceholder": "e.g. inventory recount, restock, defective",
+        "reasonNotePlaceholder": "Note (optional)",
+        "reasonNotePlaceholderRequired": "Describe the reason (min 3 characters)",
+        "submit": "Save",
+        "submitting": "Saving…",
+        "cancel": "Cancel",
+        "successTitle": "{sku} updated",
+        "successBody": "Stock: {old} → {new}"
+      },
+      "create": {
+        "trigger": "Add",
+        "triggerHint": "Create a stock record for this branch",
+        "title": "New stock record",
+        "subtitle": "{sku} · {branch}",
+        "missingHint": "No record yet — set an initial quantity and a reason.",
+        "previewLabel": "Will be created",
+        "quantityLabel": "Initial quantity",
+        "quantityHint": "0 — create an empty entry (you can top it up later).",
+        "presetsLabel": "Quick pick",
+        "reason": "Reason (for audit)",
+        "reasonPresets": {
+          "initial_stock": "Initial stock",
+          "shipment_received": "Shipment received",
+          "inventory_recount": "Inventory recount",
+          "transfer_in": "Transfer from warehouse",
+          "other": "Other (specify below)"
+        },
+        "reasonNotePlaceholder": "Note (optional)",
+        "reasonNotePlaceholderRequired": "Describe the reason (at least 3 characters)",
+        "submit": "Create record",
+        "submitting": "Creating…",
+        "cancel": "Cancel",
+        "successTitle": "Record created · {sku}",
+        "successBody": "{branch}: initial stock {qty}",
+        "errors": {
+          "alreadyExists": "A record for this pair already exists — refresh the page."
+        }
+      },
+      "bulkAdjust": {
+        "trigger": "Bulk adjust",
+        "title": "Bulk adjust stock · {branch}",
+        "patternLabel": "SKU pattern",
+        "patternPlaceholder": "NB-* or *-PK",
+        "patternHint": "Use `*` as a wildcard. Example: `NB-*` matches all SKUs starting with `NB-`.",
+        "modeLegend": "Mode",
+        "mode": {
+          "set": "Set",
+          "inc": "Increment",
+          "dec": "Decrement"
+        },
+        "valueLabel": {
+          "set": "New quantity",
+          "inc": "Add quantity",
+          "dec": "Subtract quantity"
+        },
+        "reason": "Reason (for audit)",
+        "reasonPlaceholder": "e.g. defective batch, inventory recount",
+        "submit": "Apply to all",
+        "submitting": "Applying…",
+        "cancel": "Cancel",
+        "patternRequired": "Provide an SKU pattern.",
+        "invalidValue": "Quantity must be a non-negative integer.",
+        "confirm": "Apply adjustment to all SKUs `{pattern}` in branch «{branch}»?",
+        "noMatch": "No items match pattern `{pattern}`.",
+        "successAll": "{count, plural, one {Updated # entry} other {Updated # entries}}.",
+        "successPartial": "Updated {processed}, skipped {skipped} (no-op or DB error).",
+        "error": "Bulk adjustment failed."
+      },
+      "import": {
+        "title": "Import stock",
+        "subtitle": "Upload a CSV with `sku`, `branch_id` (or `branch_slug`), `quantity` columns. Existing stock will be upserted.",
+        "hint": "Columns: `sku`, `branch_id` OR `branch_slug`, `quantity`. Max 1000 rows.",
+        "submit": "Import",
+        "submitting": "Importing…",
+        "result": "Imported: {processed}",
+        "skippedSummary": "Skipped rows: {count}",
+        "skippedRow": "Row {row} (SKU {sku})",
+        "errors": {
+          "empty": "File is empty.",
+          "missing_columns": "CSV is missing required columns: `sku`, `quantity` and `branch_id` or `branch_slug`.",
+          "too_many_rows": "Too many rows (max 1000).",
+          "generic": "Import failed."
+        }
+      },
+      "errors": {
+        "invalid_body": "Could not process the request.",
+        "invalid_value": "Quantity must be a non-negative integer.",
+        "not_found": "Entry not found.",
+        "has_reserved": "Cannot delete — reserved units exist.",
+        "invalid_relation": "Specified variant or branch not found.",
+        "reason_too_short": "Reason is too short (minimum 3 characters).",
+        "reason_too_long": "Reason is too long (maximum 500 characters).",
+        "generic": "Could not complete the operation."
+      }
+    },
+    "orders": {
+      "list": {
+        "title": "Orders",
+        "subtitle": "Search, filter and manage order statuses.",
+        "searchPlaceholder": "Order number or customer email…",
+        "search": "Search",
+        "filterAll": "All statuses",
+        "table": {
+          "number": "Order #",
+          "createdAt": "Date",
+          "customer": "Customer",
+          "items": "Items",
+          "total": "Total",
+          "payment": "Payment",
+          "status": "Status"
+        },
+        "empty": "No orders match the selected filter.",
+        "itemsCount": "{count, plural, one {# item} other {# items}}",
+        "open": "Open",
+        "fromDate": "From date",
+        "toDate": "To date",
+        "dateRange": "Date range",
+        "apply": "Apply",
+        "reset": "Reset"
+      },
+      "detail": {
+        "back": "← Back to orders",
+        "title": "Order {number}",
+        "createdAt": "Placed {date}",
+        "customer": {
+          "title": "Customer",
+          "name": "Name",
+          "email": "Email",
+          "phone": "Phone"
+        },
+        "delivery": {
+          "title": "Delivery",
+          "method": "Method",
+          "courier": "Courier",
+          "pickup": "Pickup",
+          "address": "Address",
+          "branch": "Branch",
+          "comment": "Comment"
+        },
+        "items": {
+          "title": "Order items",
+          "name": "Name",
+          "qty": "Qty",
+          "price": "Price",
+          "sum": "Sum"
+        },
+        "totals": {
+          "title": "Total",
+          "subtotal": "Subtotal",
+          "delivery": "Delivery",
+          "discount": "Discount",
+          "total": "Total"
+        },
+        "payments": {
+          "title": "Payments",
+          "provider": "Provider",
+          "status": "Status",
+          "amount": "Amount",
+          "billnumber": "Billnumber",
+          "card": "Card",
+          "capturedAt": "Captured",
+          "empty": "No payments yet."
+        },
+        "refunds": {
+          "title": "Refunds",
+          "empty": "No refunds."
+        },
+        "invoice": {
+          "title": "Invoice",
+          "download": "Download PDF"
+        }
+      },
+      "status": {
+        "title": "Order status",
+        "current": "Current: {status}",
+        "to": "Move to",
+        "reasonLabel": "Comment (optional)",
+        "reasonPlaceholder": "e.g. item out of stock",
+        "submit": "Change status",
+        "submitting": "Updating…",
+        "successTitle": "Status updated",
+        "successBody": "Order moved to «{status}».",
+        "noTransitions": "No transitions available from «{status}»."
+      },
+      "statuses": {
+        "pending": "Awaiting payment",
+        "confirmed": "Confirmed",
+        "packing": "Packing",
+        "shipped": "Shipped",
+        "delivered": "Delivered",
+        "cancelled": "Cancelled",
+        "refunded": "Refunded"
+      },
+      "errors": {
+        "invalid_body": "Could not process the request.",
+        "illegal_transition": "This status transition is not allowed.",
+        "status_unchanged": "Order is already in this status.",
+        "not_found": "Order not found.",
+        "generic": "Could not update status."
+      },
+      "bulk": {
+        "selected": "{count, plural, one {# order selected} other {# orders selected}}",
+        "selectAll": "Select all",
+        "selectRow": "Select order",
+        "reasonPlaceholder": "Comment for the status change",
+        "apply": "Change status",
+        "applying": "Updating…",
+        "clear": "Clear selection",
+        "confirm": "Change status for {count, plural, one {# order} other {# orders}}?",
+        "successAll": "{count, plural, one {Updated # order} other {Updated # orders}}.",
+        "successPartial": "Updated {updated}, skipped {skipped} (incompatible transitions).",
+        "error": "Could not update orders."
+      }
+    },
+    "promo": {
+      "list": {
+        "title": "Promo codes",
+        "subtitle": "Discounts for shoppers: percent, fixed amount, or free delivery. Validity window and usage limit are optional.",
+        "create": "Create promo code",
+        "empty": "No promo codes yet. Create the first one to engage customers.",
+        "table": {
+          "code": "Code",
+          "type": "Type",
+          "value": "Discount",
+          "minOrder": "Min. order",
+          "usage": "Used",
+          "status": "Status"
+        },
+        "usageUnlimited": "{used} · no limit",
+        "usageOfLimit": "{used} / {limit}"
+      },
+      "new": {
+        "title": "New promo code",
+        "subtitle": "Set discount parameters. The code will be uppercased automatically.",
+        "breadcrumb": "Create"
+      },
+      "edit": {
+        "title": "Promo code · {code}",
+        "subtitle": "Changes take effect immediately for new orders."
+      },
+      "types": {
+        "percent": "Percent",
+        "fixed": "Fixed amount",
+        "free_delivery": "Free delivery"
+      },
+      "status": {
+        "active": "Active",
+        "inactive": "Disabled"
+      },
+      "form": {
+        "fields": {
+          "code": "Code",
+          "codeHint": "Latin letters, digits, “_” or “-”. 3–64 characters. Stored UPPER.",
+          "type": "Discount type",
+          "minOrder": "Minimum order amount (tiyin)",
+          "minOrderHint": "0 = no minimum. 1 soum = 100 tiyin.",
+          "startsAt": "Starts at",
+          "endsAt": "Ends at",
+          "usageLimit": "Usage limit",
+          "usageLimitUnlimited": "Unlimited",
+          "usageLimitHint": "Empty = unlimited. The limit increments only when a payment is captured.",
+          "isActive": "Active"
+        },
+        "valueLabel": {
+          "percent": "Discount percent (0–100)",
+          "fixed": "Discount amount (tiyin)",
+          "free_delivery": "Value is not used"
+        },
+        "valueHint": {
+          "percent": "Integer from 0 to 100. For example, 10 = 10%.",
+          "fixed": "1 soum = 100 tiyin. The discount won't exceed the cart subtotal.",
+          "free_delivery": "Discount applies to delivery cost."
+        },
+        "usageUnlimited": "Used: {used} (no limit)",
+        "usageOfLimit": "Used: {used} of {limit}",
+        "create": "Create",
+        "submit": "Save",
+        "submitting": "Saving…",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "deleteConfirm": "Delete this promo code? The trace in existing orders stays.",
+        "created": "Promo code created.",
+        "updated": "Promo code updated.",
+        "deleted": "Promo code deleted."
+      },
+      "errors": {
+        "code_too_short": "Code is too short (minimum 3 characters).",
+        "code_too_long": "Code is too long (maximum 64 characters).",
+        "code_invalid": "Allowed: Latin letters, digits, “_” and “-”.",
+        "code_exists": "A promo code with this code already exists.",
+        "percent_out_of_range": "Percent must be between 0 and 100.",
+        "ends_before_starts": "End date must be after start date.",
+        "value_required_when_type_changes": "Specify a new value when changing the type.",
+        "value_invalid": "Value must be a non-negative integer.",
+        "invalid_body": "Could not process the request.",
+        "not_found": "Promo code not found.",
+        "generic": "Could not perform the operation."
+      }
+    },
+    "customers": {
+      "list": {
+        "title": "Customers",
+        "subtitle": "Search, filter by role, change roles and reset passwords.",
+        "searchPlaceholder": "Email, phone or name…",
+        "filterRole": "Role",
+        "filterAllRoles": "All roles",
+        "summary": "{count, plural, one {# customer} other {# customers}}",
+        "empty": "No customers match the selected filter.",
+        "table": {
+          "name": "Name",
+          "noName": "(no name)",
+          "contact": "Contacts",
+          "role": "Role",
+          "orders": "Orders",
+          "loyalty": "Bonuses",
+          "createdAt": "Joined",
+          "blocked": "Blocked"
+        }
+      },
+      "detail": {
+        "back": "← Back to customers",
+        "noName": "(no name)",
+        "blockedBadge": "Blocked",
+        "profile": {
+          "title": "Profile",
+          "language": "Language",
+          "loyaltyPoints": "Bonus balance",
+          "totalSpent": "Total spent",
+          "ordersCount": "Orders",
+          "createdAt": "Joined",
+          "updatedAt": "Updated"
+        },
+        "actions": {
+          "title": "Security"
+        },
+        "orders": {
+          "title": "Orders (total {count})",
+          "empty": "Customer has no orders.",
+          "number": "Order #",
+          "createdAt": "Date",
+          "total": "Total",
+          "status": "Status"
+        },
+        "addresses": {
+          "title": "Addresses (total {count})",
+          "empty": "Customer has no saved addresses.",
+          "default": "Default"
+        },
+        "loyalty": {
+          "title": "Bonus history",
+          "empty": "No bonus transactions.",
+          "when": "When",
+          "type": "Type",
+          "order": "Order",
+          "points": "Points"
+        },
+        "cards": {
+          "title": "Saved cards",
+          "default": "Default",
+          "blocked": "Blocked"
+        }
+      },
+      "roles": {
+        "customer": "Customer",
+        "manager": "Manager",
+        "admin": "Administrator"
+      },
+      "loyaltyTypes": {
+        "earn": "Earned",
+        "spend": "Spent"
+      },
+      "role": {
+        "title": "Change role",
+        "current": "Current role: {role}",
+        "selfBlocked": "You cannot demote your own role (lockout protection).",
+        "targetLabel": "New role",
+        "reason": "Reason (for audit)",
+        "reasonPlaceholder": "e.g. promotion to manager, hand-over of duties",
+        "submit": "Change role",
+        "submitting": "Changing…",
+        "successTitle": "Role updated",
+        "successBody": "Assigned role «{role}»."
+      },
+      "resetPassword": {
+        "trigger": "Reset password",
+        "title": "Reset customer password",
+        "reason": "Reset reason",
+        "reasonPlaceholder": "e.g. customer forgot password, identity verified by phone",
+        "submit": "Generate temporary password",
+        "submitting": "Generating…",
+        "cancel": "Cancel",
+        "close": "Close",
+        "successHelp": "Temporary password generated. Pass it to the customer via a secure channel — after closing the dialog the password cannot be shown again.",
+        "warning": "⚠️ This password is shown only now. Only its hash is stored in the DB.",
+        "copy": "Copy",
+        "copied": "Password copied to clipboard.",
+        "copyFailed": "Could not copy. Select manually.",
+        "otpUserWarning": "Note: the customer has no password (OTP login only). Reset unavailable — use OTP flow."
+      },
+      "errors": {
+        "invalid_body": "Could not process the request.",
+        "user_not_found": "Customer not found.",
+        "cannot_self_demote": "You cannot demote your own role.",
+        "cannot_self_block": "You cannot block yourself.",
+        "role_unchanged": "This role is already assigned.",
+        "already_blocked": "Customer is already blocked.",
+        "not_blocked": "Customer is not blocked.",
+        "forbidden": "Insufficient permissions for this operation.",
+        "user_has_no_password": "Customer has no password (OTP-only login). Reset is not possible.",
+        "reason_too_short": "Reason is too short (minimum 3 characters).",
+        "reason_too_long": "Reason is too long (maximum 500 characters).",
+        "generic": "Could not complete the operation."
+      },
+      "block": {
+        "blockTrigger": "Block",
+        "unblockTrigger": "Unblock",
+        "blockTitle": "Block customer",
+        "unblockTitle": "Unblock customer",
+        "blockHelp": "Blocked customers cannot sign in via email or OTP. Order and bonus history is preserved.",
+        "unblockHelp": "Lift the block — the customer can sign in again.",
+        "reason": "Reason (for audit)",
+        "reasonPlaceholder": "e.g. suspicious activity, policy violation",
+        "blockSubmit": "Block",
+        "unblockSubmit": "Unblock",
+        "submitting": "Applying…",
+        "cancel": "Cancel",
+        "blockSuccess": "Customer blocked.",
+        "unblockSuccess": "Customer unblocked."
+      },
+      "bulkRole": {
+        "selected": "{count, plural, one {# customer selected} other {# customers selected}}",
+        "selectAll": "Select all",
+        "selectRow": "Select customer",
+        "targetLabel": "New role",
+        "reasonLabel": "Reason (for audit)",
+        "reasonPlaceholder": "e.g. new manager team line-up",
+        "reasonRequired": "Provide a reason (minimum 3 characters).",
+        "apply": "Assign role",
+        "applying": "Applying…",
+        "clear": "Clear selection",
+        "confirm": "Assign role «{role}» to {count, plural, one {# customer} other {# customers}}?",
+        "successAll": "{count, plural, one {Updated # customer} other {Updated # customers}}.",
+        "successPartial": "Updated {processed}, skipped {skipped} (self-demote/forbidden/already-set).",
+        "error": "Could not complete the bulk role change."
+      }
+    },
+    "features": {
+      "list": {
+        "title": "Feature flags",
+        "subtitle": "Runtime app settings. Changes propagate within ≤ 60 seconds (Redis TTL).",
+        "empty": "No feature flags yet. They are added via DB migrations.",
+        "seedHint": "New feature flags are added via DB migrations (see `packages/db/prisma/migrations/`). The UI only allows changing `value`.",
+        "toggleAriaLabel": "Toggle {key}",
+        "toggleSuccess": "{key} updated",
+        "table": {
+          "key": "Key",
+          "type": "Type",
+          "value": "Value",
+          "updatedAt": "Updated"
+        }
+      },
+      "audit": {
+        "title": "Change history",
+        "limitHint": "Showing last {limit} entries. Full log at /admin/audit?group=feature.",
+        "empty": "No change history yet. Entries will appear after the first PATCH.",
+        "actions": {
+          "updated": "Value changed",
+          "invalidated": "Cache invalidated"
+        },
+        "arrow": "→",
+        "by": "admin: {email}",
+        "unknownAdmin": "unknown",
+        "revert": "Revert",
+        "revertAriaLabel": "Revert to this value",
+        "revertTitle": "Revert to this value",
+        "revertNoOpTitle": "This value is already current",
+        "revertConfirmTitle": "Revert change",
+        "revertConfirmBody": "Set `{key}` to the value it had before this change. This will be recorded as a new PATCH in the audit log.",
+        "revertProceed": "Yes, revert",
+        "revertCancel": "Cancel",
+        "revertSuccess": "{key} reverted to \"{value}\""
+      },
+      "confirm": {
+        "title": "Confirm change",
+        "body": "You are changing the high-risk flag `{key}`. This affects the production flow for all users. Are you sure?",
+        "proceed": "Yes, change it",
+        "cancel": "Cancel"
+      },
+      "gate": {
+        "title": "Admin role required",
+        "body": "This flag affects financial flows and can only be changed by administrators. Your role ({role}) can only view the value.",
+        "currentValueLabel": "Current value"
+      },
+      "edit": {
+        "title": "Feature · {key}",
+        "subtitle": "Type: {type}. Last updated: {updatedAt}."
+      },
+      "types": {
+        "number": "Number",
+        "boolean": "Boolean",
+        "string": "String"
+      },
+      "form": {
+        "valueLabel": {
+          "number": "New numeric value",
+          "boolean": "Value",
+          "string": "New string value"
+        },
+        "hint": {
+          "number": "Integer or decimal (use `.` as separator). Parsed as float.",
+          "boolean": "Exactly one of: `true` (yes) or `false` (no). Any other value is ignored.",
+          "string": "Arbitrary string. Up to 2000 chars."
+        },
+        "boolean": {
+          "true": "Yes (true)",
+          "false": "No (false)"
+        },
+        "submit": "Save",
+        "submitting": "Saving…",
+        "cancel": "Cancel",
+        "updated": "Feature updated. Cache invalidated.",
+        "invalidate": "Invalidate cache",
+        "invalidating": "Invalidating…",
+        "invalidated": "Cache cleared. New value will be picked up immediately."
+      },
+      "errors": {
+        "invalid_body": "Could not process the request.",
+        "invalid_number": "Value must be a number.",
+        "invalid_boolean": "Value must be `true` or `false`.",
+        "empty_string": "String cannot be empty.",
+        "not_found": "Feature not found.",
+        "generic": "Could not perform the operation."
+      }
+    },
+    "imagesCleanup": {
+      "breadcrumb": "Image cleanup",
+      "title": "Orphan image cleanup",
+      "subtitle": "Removes files from public/uploads/products/ that are no longer linked to any product variant.",
+      "intro": {
+        "title": "What is this",
+        "body": "When a variant's photos are replaced or removed, the old files stay on disk. This tool finds those orphan folders and deletes them. Run a dry-run first, then trigger the real cleanup."
+      },
+      "fields": {
+        "minAgeHours": "Minimum file age (hours)",
+        "minAgeHint": "Folders younger than this stay untouched (race-guard for in-flight uploads). Default is 24 hours."
+      },
+      "buttons": {
+        "preview": "Preview (dry-run)",
+        "run": "Delete orphan files"
+      },
+      "runConfirm": "Really delete orphan files? This action cannot be undone.",
+      "toastSuccess": "Deleted: {count} folders. Freed: {freed}.",
+      "result": {
+        "previewTitle": "Preview (nothing deleted)",
+        "realTitle": "Cleanup complete",
+        "minAgeBadge": "Age ≥ {hours}h",
+        "stat": {
+          "scanned": "Folders on disk",
+          "referenced": "Referenced in DB",
+          "orphans": "Orphan candidates",
+          "toDelete": "Will delete",
+          "deleted": "Deleted"
+        },
+        "bytesFreed": "Freed: {freed}.",
+        "sampleTitleDry": "Folders that will be deleted ({n})",
+        "sampleTitleReal": "Deleted folders ({n})",
+        "errorsTitle": "Deletion errors: {n}"
+      },
+      "error": {
+        "rate_limited": "Too many requests — wait a minute.",
+        "invalid_body": "Invalid parameters.",
+        "internal_error": "Internal server error.",
+        "network": "No server connection.",
+        "generic": "Cleanup failed."
+      }
+    },
+    "audit": {
+      "title": "Audit log",
+      "subtitle": "All admin operations (status change, refund, role change, block, …) in a single timeline.",
+      "filterGroup": "Event group",
+      "filterAllGroups": "All events",
+      "groups": {
+        "user": "Customers",
+        "order": "Orders",
+        "refund": "Refunds",
+        "recheck": "Recheck",
+        "cancel": "Cancellations",
+        "webhook": "Webhook",
+        "feature": "Feature flags"
+      },
+      "searchPlaceholder": "Search by action or error…",
+      "fromDate": "From date",
+      "toDate": "To date",
+      "dateRange": "Date range",
+      "apply": "Apply",
+      "reset": "Reset",
+      "summary": "{count, plural, one {# event} other {# events}}",
+      "empty": "No events found.",
+      "table": {
+        "when": "When",
+        "action": "Action",
+        "status": "Code",
+        "message": "Details",
+        "payment": "Payment ID"
+      }
+    },
+    "taxonomyErrors": {
+      "name_too_short": "Name is too short.",
+      "name_too_long": "Name is too long.",
+      "name_ru_too_short": "Name (RU) is too short.",
+      "name_uz_too_short": "Name (UZ) is too short.",
+      "name_en_too_short": "Name (EN) is too short.",
+      "address_ru_too_short": "Address (RU) is too short.",
+      "address_uz_too_short": "Address (UZ) is too short.",
+      "address_en_too_short": "Address (EN) is too short.",
+      "address_too_long": "Address is too long.",
+      "slug_too_short": "Slug is too short.",
+      "slug_too_long": "Slug is too long.",
+      "slug_invalid": "Slug must contain only lowercase letters, digits, and hyphens.",
+      "slug_exists": "A record with this slug already exists.",
+      "icon_url_invalid": "Invalid icon URL.",
+      "logo_url_invalid": "Invalid logo URL.",
+      "invalid_relation": "Linked entity not found.",
+      "invalid_body": "Could not process the form.",
+      "category_in_use": "Category is used in {count, plural, one {# product} other {# products}} — cannot delete.",
+      "parent_cycle": "Category cannot be its own parent.",
+      "generic": "Could not save."
+    }
+  }
+}

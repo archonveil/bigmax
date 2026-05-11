@@ -1,0 +1,166 @@
+# =====================================================================
+# Бигмах (bigmax.uz) — dev stack
+# Запуск:  pnpm run docker:up
+# Остановка: pnpm run docker:down
+# Сброс данных: pnpm run docker:reset  (удаляет volume'ы!)
+# =====================================================================
+
+name: bigmax
+
+services:
+  # ----- PostgreSQL 16 -----
+  postgres:
+    image: postgres:16-alpine
+    container_name: bigmax-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: bigmax
+      POSTGRES_PASSWORD: bigmax
+      POSTGRES_DB: bigmax
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bigmax -d bigmax"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # ----- Redis 7 (кеш + BullMQ) -----
+  redis:
+    image: redis:7-alpine
+    container_name: bigmax-redis
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # ----- MinIO (S3-совместимое хранилище) -----
+  minio:
+    image: minio/minio:latest
+    container_name: bigmax-minio
+    restart: unless-stopped
+    environment:
+      MINIO_ROOT_USER: bigmax
+      MINIO_ROOT_PASSWORD: bigmax-secret-change-me
+    command: ["server", "/data", "--console-address", ":9001"]
+    ports:
+      - "9000:9000" # S3 API
+      - "9001:9001" # Web console
+    volumes:
+      - minio-data:/data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # ----- MinIO init: создание бакета `bigmax-media` и публичный download ACL -----
+  minio-init:
+    image: minio/mc:latest
+    container_name: bigmax-minio-init
+    depends_on:
+      minio:
+        condition: service_healthy
+    restart: "no"
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        set -e
+        mc alias set local http://minio:9000 bigmax bigmax-secret-change-me
+        mc mb --ignore-existing local/bigmax-media
+        mc anonymous set download local/bigmax-media
+        echo "bucket bigmax-media ready"
+
+  # ----- Mailhog (SMTP + Web UI для dev-писем) -----
+  # NB: upstream архивирован; при переходе на prod рассмотреть axllent/mailpit.
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: bigmax-mailhog
+    restart: unless-stopped
+    ports:
+      - "1025:1025" # SMTP
+      - "8025:8025" # Web UI
+
+  # ----- Adminer (GUI для PostgreSQL) -----
+  adminer:
+    image: adminer:4-standalone
+    container_name: bigmax-adminer
+    restart: unless-stopped
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres
+      ADMINER_DESIGN: dracula
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # ----- Bigmax worker (BullMQ jobs; P4-T9 pull-проверка платежей) -----
+  # Запускается опционально через `docker compose --profile worker up`.
+  # Дефолтный `docker compose up` worker'а НЕ поднимает — в dev обычно
+  # удобнее `pnpm worker:dev` локально (hot-reload через tsx watch).
+  worker:
+    profiles: ["worker"]
+    build:
+      context: .
+      dockerfile: apps/worker/Dockerfile
+    container_name: bigmax-worker
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: "postgresql://bigmax:bigmax@postgres:5432/bigmax"
+      REDIS_URL: "redis://redis:6379"
+      NODE_ENV: ${NODE_ENV:-production}
+      UNITELLER_SHOP_ID: ${UNITELLER_SHOP_ID:-}
+      UNITELLER_AUTH_LOGIN: ${UNITELLER_AUTH_LOGIN:-}
+      UNITELLER_AUTH_PASSWORD: ${UNITELLER_AUTH_PASSWORD:-}
+      UNITELLER_PASSWORD: ${UNITELLER_PASSWORD:-}
+      SENTRY_DSN: ${SENTRY_DSN:-}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # ----- Uniteller mock-server (P4-T12 — полная логика для e2e) -----
+  # Проверяет Signature на /pay/, шлёт callback на webhook магазина,
+  # держит in-memory state для /results/. Test-modes управляются query-
+  # параметром `?test=success|fail|timeout|double`.
+  uniteller-mock:
+    build:
+      context: ./packages/payments
+      dockerfile: Dockerfile.mock
+    container_name: bigmax-uniteller-mock
+    restart: unless-stopped
+    environment:
+      MOCK_PORT: "8787"
+      # MOCK_PASSWORD ОБЯЗАН совпадать с UNITELLER_PASSWORD приложения,
+      # иначе валидация Signature на /pay/ упадёт.
+      MOCK_PASSWORD: ${UNITELLER_PASSWORD:-bigmax-dev-placeholder-change-in-prod}
+      # Куда mock шлёт callback. Из docker-сети — host.docker.internal,
+      # на host'е dev-web слушает 3030 (см. apps/web playwright.config).
+      MOCK_WEBHOOK_BASE: ${MOCK_WEBHOOK_BASE:-http://host.docker.internal:3030}
+    ports:
+      - "8787:8787"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8787/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres-data:
+  redis-data:
+  minio-data:

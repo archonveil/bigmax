@@ -1,0 +1,16 @@
+node_modules
+.pnpm-store
+dist
+.next
+build
+coverage
+.turbo
+.eslintcache
+.git
+.husky
+.vscode
+.idea
+*.log
+.env
+.env.local
+.env.*.local

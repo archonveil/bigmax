@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Бигмах design tokens (P0-T7).
+ * Палитра: коралл (primary CTA) / небесный (secondary) / мята (accent).
+ * Радиусы увеличены до 0.75rem для более "тёплого" child-friendly вида.
+ */
+
+@layer base {
+  :root {
+    /* Neutral */
+    --background: 0 0% 100%;
+    --foreground: 222 20% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 20% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 20% 12%;
+
+    --muted: 220 15% 96%;
+    --muted-foreground: 220 10% 45%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+
+    /* Brand: coral (primary / CTA) */
+    --primary: 0 85% 62%;
+    --primary-foreground: 0 0% 100%;
+    --ring: 0 85% 62%;
+
+    /* Brand: sky (secondary) — soft pastel background, dark sky text */
+    --secondary: 199 90% 92%;
+    --secondary-foreground: 199 60% 25%;
+
+    /* Brand: mint (accent) — soft pastel highlights */
+    --accent: 152 65% 92%;
+    --accent-foreground: 152 55% 22%;
+
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 222 30% 10%;
+    --foreground: 0 0% 98%;
+
+    --card: 222 30% 12%;
+    --card-foreground: 0 0% 98%;
+    --popover: 222 30% 12%;
+    --popover-foreground: 0 0% 98%;
+
+    --muted: 222 20% 18%;
+    --muted-foreground: 220 10% 70%;
+
+    --border: 222 20% 22%;
+    --input: 222 20% 22%;
+
+    /* Brand stays vivid in dark mode, with adjusted lightness */
+    --primary: 0 85% 68%;
+    --primary-foreground: 222 30% 10%;
+    --ring: 0 85% 68%;
+
+    --secondary: 199 40% 22%;
+    --secondary-foreground: 199 90% 92%;
+
+    --accent: 152 40% 22%;
+    --accent-foreground: 152 65% 92%;
+
+    --destructive: 0 75% 52%;
+    --destructive-foreground: 0 0% 98%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-heading;
+  }
+}

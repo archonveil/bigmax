@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "ES2022"],
+    "jsx": "preserve",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "noEmit": true,
+    "resolveJsonModule": true,
+    // Next.js типы ссылаются на внутренние пути .pnpm — .d.ts не генерируем,
+    // потребители всё равно импортируют .ts напрямую.
+    "declaration": false,
+    "declarationMap": false
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["node_modules", "dist"]
+}

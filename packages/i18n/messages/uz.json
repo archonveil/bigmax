@@ -1,0 +1,2538 @@
+{
+  "common": {
+    "brandSlogan": "chaqaloq va ona uchun hamma narsa",
+    "comingSoon": "Tez kunda",
+    "cancel": "Bekor qilish",
+    "confirm": "Tasdiqlash",
+    "optional": "majburiy emas",
+    "copyFromRu": "RU dan nusxa olish",
+    "localeFallbackHint": "Bo'sh qoldirsangiz — RU matni ko'rsatiladi.",
+    "selectDate": "Sanani tanlang",
+    "selectDateRange": "Diapazonni tanlang",
+    "clear": "Tozalash"
+  },
+  "nav": {
+    "catalog": "Katalog",
+    "login": "Kirish",
+    "home": "Bosh sahifa"
+  },
+  "home": {
+    "heroTitle": "Bigmax — chaqaloq va ona uchun hamma narsa",
+    "heroSubtitle": "Bolalar uchun tovarlar O'zbekiston bo'ylab yetkazib berish bilan.",
+    "heroCta": "Katalogga o'tish",
+    "categoriesTitle": "Kategoriyalar",
+    "brandsTitle": "Brendlar",
+    "featuredTitle": "Tavsiya etamiz",
+    "fromPrice": "{price} dan"
+  },
+  "errors": {
+    "notFound": {
+      "title": "Sahifa topilmadi",
+      "body": "Bunday sahifa yo'q yoki o'chirilgan. Bosh sahifaga qayting yoki katalogni oching.",
+      "backHome": "Bosh sahifa",
+      "openCatalog": "Katalogga"
+    }
+  },
+  "catalog": {
+    "indexTitle": "Katalog",
+    "indexSubtitle": "Kategoriyani tanlang",
+    "empty": "Bu kategoriyada hali tovarlar yo'q",
+    "itemsCount": "{count, plural, one {# ta tovar} other {# ta tovar}}",
+    "subcategoriesCount": "{count, plural, one {# ta subkategoriya} other {# ta subkategoriya}}",
+    "pageSize": {
+      "label": "Har sahifada"
+    },
+    "treeNav": {
+      "openCategory": "Kategoriya sahifasini ochish",
+      "toggleSubcategories": "Subkategoriyalarni yoyish/yopish",
+      "legend": "→ — kategoriyani ochish, ⌄ — subkategoriyalarni ko'rsatish",
+      "toggleSidebar": "Yon panelni yashirish",
+      "showSidebar": "Yon panelni ko'rsatish",
+      "treeSection": "Kategoriyalar",
+      "filtersSection": "Filtrlar"
+    },
+    "sort": {
+      "label": "Saralash",
+      "options": {
+        "featured": "Tavsiya etilgan",
+        "newest": "Yangi kelgan",
+        "price_asc": "Narx: arzonroq",
+        "price_desc": "Narx: qimmatroq"
+      }
+    },
+    "pagination": {
+      "prev": "Orqaga",
+      "next": "Oldinga",
+      "pageOf": "{page}-sahifa, jami {total} ta"
+    },
+    "filters": {
+      "title": "Filtrlar",
+      "reset": "Tozalash",
+      "resetCount": "Tozalash ({count})",
+      "activeTitle": "Faol filtrlar",
+      "remove": "Filtrni olib tashlash",
+      "expand": "Yoyish",
+      "collapse": "Yig'ish",
+      "price": "Narx",
+      "priceShort": "so'm",
+      "priceFrom": "Dan",
+      "priceTo": "Gacha",
+      "priceLabel": "{min} dan {max} gacha",
+      "priceLabelMin": "{min} dan",
+      "priceLabelMax": "{max} gacha",
+      "brand": "Brend",
+      "brandSearch": "Brend qidirish…",
+      "brandShowMore": "Yana ko'rsatish ({count})",
+      "brandShowLess": "Yig'ish",
+      "brandNoMatches": "Hech narsa topilmadi",
+      "age": "Yosh",
+      "ages": {
+        "any": "Har qanday yosh",
+        "0-6": "0–6 oy",
+        "6-12": "6–12 oy",
+        "12-24": "1–2 yosh",
+        "24+": "2+ yosh"
+      },
+      "gender": "Jins",
+      "genders": {
+        "any": "Har qanday",
+        "unisex": "Universal",
+        "boy": "O'g'il",
+        "girl": "Qiz"
+      },
+      "inStock": "Faqat mavjud",
+      "inStockHint": "Qoldig'i bo'lmagan tovarlarni yashirish"
+    }
+  },
+  "footer": {
+    "contacts": "Aloqa",
+    "address": "Toshkent sh., O'zbekiston",
+    "rights": "© 2026 Bigmax. Barcha huquqlar himoyalangan.",
+    "legalTitle": "Hujjatlar",
+    "legalSupport": "Yordam",
+    "legalOffer": "Ommaviy oferta",
+    "legalAgreement": "Foydalanuvchi shartnomasi",
+    "legalPrivacy": "Maxfiylik siyosati"
+  },
+  "legal": {
+    "updatedAt": "Yangilangan sana: 09.05.2026",
+    "support": {
+      "title": "Yordam",
+      "intro": "Biz har kuni bog'lanishdamiz va buyurtma, yetkazib berish, to'lov va qaytarish bo'yicha yordam beramiz.",
+      "contactsTitle": "Qanday bog'lanish",
+      "emailLabel": "Email",
+      "phoneLabel": "Telefon",
+      "telegramLabel": "Telegram",
+      "hoursLabel": "Ish vaqti",
+      "hoursValue": "Du–Yak, 9:00–21:00 (UTC+5)",
+      "faqTitle": "Tez-tez beriladigan savollar",
+      "faqDeliveryQ": "Yetkazib berish qancha vaqt oladi?",
+      "faqDeliveryA": "Toshkent bo'ylab — 1–2 ish kuni, viloyatlarga — 3–7 kun.",
+      "faqReturnQ": "Tovarni qaytarish mumkinmi?",
+      "faqReturnA": "Ha, qabul qilingan kundan boshlab 14 kun ichida, tovar va qadoq saqlangan holda.",
+      "faqPaymentQ": "Qaysi to'lov usullari mavjud?",
+      "faqPaymentA": "Onlayn karta, bank o'tkazmasi yoki kuryerga naqd pul orqali to'lov."
+    },
+    "offer": {
+      "title": "Ommaviy oferta",
+      "intro": "Mazkur hujjat Bigmax onlayn do'koni (bigmax.uz) tomonidan rasmiy taklif (ommaviy oferta) hisoblanadi va tovarlarni sotib olish-sotishning barcha muhim shartlarini o'z ichiga oladi.",
+      "s1Title": "1. Umumiy qoidalar",
+      "s1Body": "Saytda buyurtma berib, xaridor mazkur ofertaning barcha shartlarini to'liq qabul qiladi. Sotuvchi shartlarga o'zgartirish kiritish huquqini saqlab qoladi; joriy versiya ushbu sahifada doimo mavjud.",
+      "s2Title": "2. Shartnoma predmeti",
+      "s2Body": "Sotuvchi katalogda taqdim etilgan tovarlarni xaridor mulkiga o'tkazadi, xaridor esa buyurtma paytida ko'rsatilgan narxlar bo'yicha ularni qabul qilib to'laydi.",
+      "s3Title": "3. Narx va to'lov",
+      "s3Body": "Barcha narxlar so'mda (UZS) ko'rsatilgan va QQS bilan birga. To'lov onlayn karta, bank o'tkazmasi yoki yetkazib berishda kuryerga naqd pul orqali amalga oshiriladi.",
+      "s4Title": "4. Yetkazib berish",
+      "s4Body": "Yetkazib berish O'zbekistonning butun hududi bo'ylab amalga oshiriladi. Muddat va narx buyurtmani rasmiylashtirish bosqichida hududga qarab hisoblanadi.",
+      "s5Title": "5. Qaytarish va almashtirish",
+      "s5Body": "Xaridor sifatli tovardan qabul qilingan kundan boshlab 14 kun ichida voz kechish huquqiga ega. Tafsilotlar — \"Yordam\" bo'limida."
+    },
+    "agreement": {
+      "title": "Foydalanuvchi shartnomasi",
+      "intro": "Mazkur shartnoma Bigmax onlayn do'koni va bigmax.uz sayti foydalanuvchisi o'rtasidagi munosabatlarni tartibga soladi.",
+      "s1Title": "1. Shartlarni qabul qilish",
+      "s1Body": "Saytda ro'yxatdan o'tib yoki undan foydalanib, foydalanuvchi ushbu shartnoma shartlariga roziligini tasdiqlaydi.",
+      "s2Title": "2. Hisob qaydnomasi",
+      "s2Body": "Foydalanuvchi ma'lumotlarning to'g'riligi va hisob qaydnomasi xavfsizligi uchun javobgardir. Ruxsatsiz kirish haqida darhol yordam xizmatiga xabar berish kerak.",
+      "s3Title": "3. Tomonlarning huquq va majburiyatlari",
+      "s3Body": "Bigmax xizmat ishlashini ta'minlash majburiyatini oladi. Foydalanuvchi qonunchilikni buzmaslik va saytdan uchinchi shaxslarga zarar yetkazish maqsadida foydalanmaslik majburiyatini oladi.",
+      "s4Title": "4. Intellektual mulk",
+      "s4Body": "Sayt materiallari, jumladan matnlar, tasvirlar va logotiplar, Bigmax ga tegishli yoki huquq egalarining ruxsati bilan ishlatiladi.",
+      "s5Title": "5. Javobgarlikni cheklash",
+      "s5Body": "Xizmat \"qanday bo'lsa, shunday\" taqdim etiladi. Bigmax saytdan noto'g'ri foydalanish natijasida yuzaga kelgan zarar uchun javobgar emas."
+    },
+    "privacy": {
+      "title": "Maxfiylik siyosati",
+      "intro": "Bigmax sizning maxfiyligingizni hurmat qiladi va shaxsiy ma'lumotlarni O'zbekiston Respublikasi qonunchiligiga qat'iy muvofiq qayta ishlaydi.",
+      "s1Title": "1. Qanday ma'lumotlarni yig'amiz",
+      "s1Body": "Ism, telefon, email, yetkazib berish manzili, buyurtmalar tarixi, brauzer va qurilma texnik ma'lumotlari.",
+      "s2Title": "2. Qayta ishlash maqsadlari",
+      "s2Body": "Buyurtmalarni rasmiylashtirish va yetkazib berish, mijozlarni qo'llab-quvvatlash, aksiyalar haqida xabar berish, analitika va xizmatni yaxshilash.",
+      "s3Title": "3. Ma'lumotlarni uchinchi shaxslarga uzatish",
+      "s3Body": "Biz ma'lumotlarni faqat buyurtmani bajarish uchun zarur bo'lgan kuryer va to'lov xizmatlariga, shuningdek davlat organlari talabiga binoan uzatamiz.",
+      "s4Title": "4. Saqlash va himoya",
+      "s4Body": "Ma'lumotlar himoyalangan serverlarda saqlanadi. Biz ruxsatsiz kirishdan himoya qilish uchun texnik va tashkiliy choralarni qo'llaymiz.",
+      "s5Title": "5. Sizning huquqlaringiz",
+      "s5Body": "Siz support@bigmax.uz manziliga yozib, ma'lumotlaringizga kirish, ularni o'zgartirish yoki o'chirishni so'rashingiz mumkin."
+    }
+  },
+  "maintenance": {
+    "ariaLabel": "Xizmat holati haqida xabar"
+  },
+  "sms": {
+    "otpCode": "Bigmax: tasdiqlash kodi {code}. Hech kimga aytmang."
+  },
+  "attributes": {
+    "any": "Har qanday",
+    "fabric": {
+      "label": "Mato",
+      "cotton": "Paxta",
+      "wool": "Jun",
+      "synthetic": "Sintetika",
+      "mixed": "Aralash"
+    },
+    "season": {
+      "label": "Mavsum",
+      "summer": "Yoz",
+      "winter": "Qish",
+      "demi": "Demizon",
+      "all": "Har qanday mavsum"
+    },
+    "material": {
+      "label": "Material",
+      "plastic": "Plastik",
+      "wood": "Yog'och",
+      "fabric": "Mato",
+      "silicone": "Silikon",
+      "metal": "Metall",
+      "mdf": "MDF"
+    },
+    "hasSound": {
+      "label": "Ovozli"
+    },
+    "isOrganic": {
+      "label": "Organik"
+    },
+    "volumeMl": {
+      "label": "Hajmi",
+      "unit": "ml",
+      "from": "Dan",
+      "to": "Gacha"
+    },
+    "diaperSize": {
+      "label": "Taglik o'lchami",
+      "v1": "1 (Newborn)",
+      "v2": "2 (Mini)",
+      "v3": "3 (Midi)",
+      "v4": "4 (Maxi)",
+      "v5": "5 (Junior)",
+      "v6": "6 (XL)"
+    },
+    "piecesPerPack": {
+      "label": "Qadoqdagi dona",
+      "from": "Dan",
+      "to": "Gacha"
+    },
+    "strollerType": {
+      "label": "Aravacha turi",
+      "light": "Prog'ulka",
+      "full": "Universal",
+      "jogger": "Jogger"
+    },
+    "maxWeightKg": {
+      "label": "Maks. yuklama",
+      "unit": "kg",
+      "from": "Dan",
+      "to": "Gacha"
+    }
+  },
+  "checkout": {
+    "pageTitle": "Buyurtmani rasmiylashtirish",
+    "steps": {
+      "contacts": "Kontaktlar",
+      "address": "Manzil",
+      "delivery": "Yetkazib berish",
+      "payment": "To'lov",
+      "review": "Tasdiqlash"
+    },
+    "contacts": {
+      "title": "Kontakt ma'lumotlari",
+      "name": "Ism",
+      "namePlaceholder": "Sizga qanday murojaat qilaylik",
+      "email": "Email",
+      "emailPlaceholder": "you@example.com",
+      "phone": "Telefon",
+      "phonePlaceholder": "+998 90 123-45-67",
+      "agreementLabel": "Men <offer>ommaviy ofertani</offer>, <agreement>foydalanuvchi shartnomasini</agreement> va <privacy>maxfiylik siyosatini</privacy> qabul qilaman"
+    },
+    "address": {
+      "title": "Yetkazib berish manzili",
+      "region": "Hudud",
+      "regionPlaceholder": "Hududni tanlang",
+      "city": "Shahar",
+      "cityPlaceholder": "Toshkent",
+      "district": "Tuman",
+      "districtPlaceholder": "Ixtiyoriy",
+      "street": "Ko'cha",
+      "house": "Uy",
+      "apartment": "Xonadon",
+      "landmark": "Mo'ljal",
+      "landmarkPlaceholder": "Masalan, metro yonida",
+      "phone": "Telefon (boshqa)",
+      "phonePlaceholder": "+998 90 000-00-00",
+      "useSaved": "Saqlangan manzildan foydalanish",
+      "newAddress": "Yangi manzil kiritish"
+    },
+    "delivery": {
+      "title": "Yetkazib berish usuli",
+      "courier": "Kuryer",
+      "courierDescription": "Manzilga yetkazib berish, narxi viloyat va tumanga bog'liq.",
+      "pickup": "Filialdan olib ketish",
+      "pickupDescription": "Yaqin filialdan bepul olib keting.",
+      "selectBranch": "Filialni tanlang",
+      "branchRequired": "Filialni tanlang",
+      "comment": "Buyurtmaga izoh",
+      "commentPlaceholder": "Oldindan qo'ng'iroq qiling, konsyerjga qoldiring va h.k.",
+      "cost": {
+        "label": "Yetkazib berish narxi",
+        "free": "Bepul",
+        "freeHint": "{amount} dan bepul",
+        "needsRegion": "«Manzil» qadamida viloyatni tanlang",
+        "needsDistrict": "Toshkent tumanini tanlang",
+        "etaRange": "{min}–{max} kun",
+        "etaSame": "{days} kun",
+        "pickupReady": "O'sha kuni olib ketish mumkin",
+        "estimateNotice": "Taxminiy muddat: {eta}"
+      },
+      "branch": {
+        "selectHint": "Olib ketish uchun filialni tanlang",
+        "noBranches": "Bigmax filiallari vaqtincha mavjud emas. Kuryer yetkazib berishni tanlang."
+      }
+    },
+    "payment": {
+      "title": "To'lov usuli",
+      "card": "Bank kartasi",
+      "cardDescription": "Uniteller orqali to'lov. Visa, Mastercard, Uzcard, Humo qo'llab-quvvatlanadi.",
+      "cod": "Yetkazib berganda",
+      "codDescription": "Naqd to'lov: kuryer yoki filialda qabul qilganda to'laysiz."
+    },
+    "loyalty": {
+      "title": "Bigmax Bonus",
+      "balance": "Mavjud: {points, plural, one {# ball} other {# ball}}",
+      "hint": "1 ball = 1 so'm. Buyurtmaga to'lov uchun kamida 1 tiyin qolishi kerak.",
+      "belowMinHint": "Ballarni ishlatish {min} dan boshlab mumkin. Savatga ko'proq tovar qo'shing.",
+      "inputLabel": "Ball ishlatish",
+      "applyMax": "Hammasini",
+      "clear": "Ishlatmaslik",
+      "appliedRow": "{points, plural, one {# ball} other {# ball}} ishlatildi"
+    },
+    "review": {
+      "title": "Buyurtmani tekshiring",
+      "editStep": "O'zgartirish",
+      "yourContacts": "Kontaktlar",
+      "deliveryAddress": "Yetkazib berish manzili",
+      "deliveryMethod": "Yetkazib berish usuli",
+      "paymentMethod": "To'lov usuli",
+      "orderItems": "Tovarlar",
+      "placeOrder": "Buyurtma berish",
+      "placingOrder": "Buyurtma yaratilmoqda…",
+      "authRequiredTitle": "Buyurtma berish uchun tizimga kiring",
+      "authRequiredBody": "Rasmiylashtirish uchun hisob kerak: buyurtmalar tarixini ko'rasiz va yetkazib berishni kuzatasiz.",
+      "signIn": "Kirish",
+      "signUp": "Hisob yaratish",
+      "backToCart": "Savatga qaytish",
+      "errors": {
+        "generic": "Buyurtma yaratilmadi. Qaytadan urining.",
+        "network": "Tarmoq muammolari. Ulanishni tekshiring va qayta urining.",
+        "unauthorized": "Sessiya tugadi. Qayta kiring.",
+        "empty_cart": "Savat bo'sh.",
+        "invalid_variant": "Tovarlardan biri endi mavjud emas.",
+        "invalid_delivery": "Yetkazib berish manzili yoki usulini aniqlang.",
+        "invalid_promo": "Promo-kod endi amal qilmaydi.",
+        "provider": "To'lov xizmati vaqtincha mavjud emas."
+      }
+    },
+    "nav": {
+      "back": "Orqaga",
+      "next": "Keyingi"
+    },
+    "errors": {
+      "emptyCart": "Savat bo'sh",
+      "emptyCartHint": "Buyurtma berish uchun savatga tovar qo'shing.",
+      "invalidRegion": "Ro'yxatdan hududni tanlang",
+      "invalidPhone": "Telefon +998XXXXXXXXX formatida",
+      "invalidEmail": "To'g'ri email kiriting",
+      "required": "Majburiy maydon",
+      "agreementRequired": "Shartlarni qabul qilish shart"
+    }
+  },
+  "favorites": {
+    "addLabel": "Sevimlilarga",
+    "removeLabel": "Sevimlilardan olib tashlash",
+    "addedToast": "Sevimlilarga qo'shildi",
+    "removedToast": "Sevimlilardan olib tashlandi",
+    "openLabel": "Sevimlilarni ochish",
+    "pageTitle": "Sevimlilar",
+    "empty": "Sevimlilar bo'sh",
+    "emptyHint": "Yurakcha bilan belgilang — biz saqlab qo'yamiz.",
+    "continueShopping": "Katalogga o'tish",
+    "itemsCount": "{count, plural, one {# ta tovar} other {# ta tovar}}"
+  },
+  "quickView": {
+    "open": "Tez ko'rish",
+    "title": "Tez ko'rish",
+    "viewFull": "Tovar sahifasiga o'tish",
+    "loading": "Yuklanmoqda…",
+    "error": "Tovarni yuklab bo'lmadi"
+  },
+  "cart": {
+    "openLabel": "Savatni ochish",
+    "title": "Savat",
+    "empty": "Savat bo'sh",
+    "emptyHint": "Katalogdan tovar tanlang va savatga qo'shing.",
+    "continueShopping": "Katalogga o'tish",
+    "itemsCount": "{count, plural, one {# ta tovar} other {# ta tovar}}",
+    "qtyDecrease": "Miqdorni kamaytirish",
+    "qtyIncrease": "Miqdorni oshirish",
+    "remove": "O'chirish",
+    "subtotal": "Jami",
+    "checkout": "Buyurtma berish",
+    "addedToCart": "Savatga qo'shildi",
+    "addToCart": "Savatga",
+    "page": {
+      "title": "Savat",
+      "emptyTitle": "Savat bo'sh",
+      "emptyHint": "Katalogdan tovar tanlang va savatga qo'shing.",
+      "continueShopping": "Katalogga o'tish",
+      "promoLabel": "Promokod",
+      "promoPlaceholder": "Kodni kiriting",
+      "promoApply": "Qo'llash",
+      "promoApplied": "{code} qo'llandi",
+      "promoRemove": "Promokodni o'chirish",
+      "promoInvalid": "Noto'g'ri promokod",
+      "promoExpired": "Promokod muddati tugagan",
+      "promoUsageLimit": "Foydalanish limiti tugagan",
+      "promoMinOrder": "Buyurtmaning minimal summasi {amount}",
+      "promoDeliveryHint": "Bepul yetkazib berish to'lov bosqichida qo'llanadi.",
+      "subtotal": "Tovarlar summasi",
+      "discount": "Chegirma",
+      "delivery": "Yetkazib berish",
+      "deliveryCalculated": "rasmiylashtirishda hisoblanadi",
+      "total": "Jami",
+      "checkout": "Rasmiylashtirishga o'tish",
+      "clearCart": "Savatni tozalash",
+      "clearCartConfirm": "Savatdagi barcha tovarlarni o'chirasizmi?"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Bigmax — chaqaloq va ona uchun hamma narsa",
+      "description": "Bigmax onlayn do'koni: bolalar va onalar uchun mahsulotlar O'zbekiston bo'ylab yetkazib berish bilan. Kiyim, oziq-ovqat, aravachalar, o'yinchoqlar. Karta orqali yoki yetkazib berganda to'lov."
+    },
+    "catalogIndex": {
+      "title": "Katalog",
+      "description": "Chaqaloq va onalar uchun mahsulotlar katalogi: kiyim, tagliklar, oziq-ovqat, aravachalar, gigiena, o'yinchoqlar. Yosh, jins, narx va brend bo'yicha filtrlar."
+    },
+    "category": {
+      "title": "{name}",
+      "description": "{name} — Bigmax'da Toshkentdan O'zbekiston bo'ylab yetkazib berish bilan sotib oling. Ishonchli brendlar, qulay filtrlar, karta yoki yetkazib berganda to'lov."
+    },
+    "product": {
+      "title": "{name}",
+      "descriptionWithBrand": "{brand} — {name}, Bigmax'da. Narxi {price} dan. O'zbekiston bo'ylab yetkazib berish, karta orqali yoki yetkazib berganda to'lov.",
+      "description": "{name} Bigmax'da. Narxi {price} dan. O'zbekiston bo'ylab yetkazib berish, karta orqali yoki yetkazib berganda to'lov."
+    },
+    "search": {
+      "title": "Qidiruv natijalari",
+      "titleWithQuery": "«{q}» bo'yicha qidiruv"
+    },
+    "notFound": {
+      "title": "Sahifa topilmadi"
+    },
+    "support": {
+      "title": "Yordam",
+      "description": "Bigmax mijozlarni qo'llab-quvvatlash xizmatiga murojaat qiling: aloqalar, ish vaqti va yetkazib berish, to'lov va qaytarish bo'yicha tez-tez beriladigan savollarga javoblar."
+    },
+    "offer": {
+      "title": "Ommaviy oferta",
+      "description": "Bigmax onlayn do'koni (bigmax.uz) ommaviy ofertasi shartlari: buyurtma berish, to'lov, yetkazib berish va qaytarish tartibi."
+    },
+    "agreement": {
+      "title": "Foydalanuvchi shartnomasi",
+      "description": "Bigmax foydalanuvchi shartnomasi: saytdan foydalanish qoidalari, tomonlarning huquq va majburiyatlari."
+    },
+    "privacy": {
+      "title": "Maxfiylik siyosati",
+      "description": "Bigmax sizning shaxsiy ma'lumotlaringizni qanday yig'adi, ishlatadi va himoya qiladi. bigmax.uz maxfiylik siyosati."
+    }
+  },
+  "search": {
+    "placeholder": "Tovarlarni qidirish…",
+    "hintMinChars": "Kamida 2 ta belgi kiriting",
+    "loading": "Qidiryapmiz…",
+    "noResults": "«{q}» bo'yicha hech narsa topilmadi",
+    "showAll": "Barcha natijalarni ko'rsatish",
+    "resultsTitle": "«{q}» bo'yicha natijalar",
+    "emptyQueryRedirect": "Qidiruv so'rovini kiriting",
+    "itemsCount": "{count, plural, one {# ta tovar} other {# ta tovar}}"
+  },
+  "product": {
+    "gallery": {
+      "mainAria": "{total} dan {current} rasm",
+      "thumbAria": "Rasm {n}",
+      "prev": "Oldingi rasm",
+      "next": "Keyingi rasm",
+      "zoom": "Kattalashtirish",
+      "close": "Yopish"
+    },
+    "variants": {
+      "title": "Variant",
+      "unnamed": "Standart"
+    },
+    "stock": {
+      "inStock": "Mavjud — {count} ta",
+      "outOfStock": "Mavjud emas"
+    },
+    "price": {
+      "current": "{price}",
+      "old": "{price}"
+    },
+    "cta": {
+      "addToCart": "Savatga",
+      "comingSoon": "Savatga qo'shish P3-T2 da qo'shiladi"
+    },
+    "description": "Tavsif",
+    "attributes": {
+      "title": "Xarakteristikalar",
+      "category": "Kategoriya",
+      "brand": "Brend",
+      "age": "Yosh",
+      "ageRange": "{from}–{to} oy",
+      "ageFrom": "{from} oydan",
+      "ageTo": "{to} oygacha",
+      "gender": "Jins",
+      "genderValues": {
+        "boy": "O'g'il bolalar uchun",
+        "girl": "Qizlar uchun",
+        "unisex": "Universal"
+      },
+      "weight": "Og'irlik",
+      "weightGrams": "{grams} g",
+      "color": "Rang",
+      "size": "O'lcham"
+    },
+    "reviews": {
+      "title": "Sharhlar",
+      "empty": "Hali sharhlar yo'q — birinchi bo'ling!",
+      "comingSoon": "Fotoli sharhlarni joylash P7-T3 da qo'shiladi."
+    }
+  },
+  "notifications": {
+    "order": {
+      "created": {
+        "sms": "Bigmax: {orderNumber} buyurtma qabul qilindi. Summa {total}. Holat: {url}",
+        "telegramTitle": "Bigmax'dagi buyurtmangiz uchun rahmat!",
+        "telegramBody": "Raqam: {orderNumber}\nSumma: {total}\nTafsilotlar: {url}",
+        "emailSubject": "Bigmax · {orderNumber} buyurtma",
+        "emailBody": "Bigmax'dagi buyurtmangiz uchun rahmat! Buyurtma raqami: {orderNumber}. Summa: {total}. Tafsilotlar va holat: {url}"
+      }
+    }
+  },
+  "orders": {
+    "status": {
+      "orderNumber": "Buyurtma № {number}",
+      "success": {
+        "title": "Bigmax'dagi buyurtmangiz uchun rahmat!"
+      },
+      "failure": {
+        "title": "To'lov amalga oshmadi"
+      },
+      "return": {
+        "title": "To'lovdan qaytish",
+        "body": "Buyurtmangiz holatini tekshiramiz. To'lov muvaffaqiyatli bo'lsa, bu yerda tasdiqni ko'rasiz."
+      },
+      "polling": {
+        "title": "To'lovni tasdiqlayapmiz",
+        "body": "Bu bir necha soniya oladi. Sahifani yopmang."
+      },
+      "paid": {
+        "title": "To'lov muvaffaqiyatli",
+        "body": "Tasdiqni email manzilingizga yubordik. Buyurtma qayta ishlashga o'tkazildi."
+      },
+      "cod": {
+        "title": "Buyurtma qabul qilindi",
+        "body": "Yetkazib berganda kuryerga (yoki olib ketishda filialda) naqd yoki karta orqali to'lash."
+      },
+      "failed": {
+        "title": "To'lov rad etildi",
+        "body": "Boshqa karta bilan to'lashga urining yoki qabul qilganda to'lashni tanlang."
+      },
+      "timeout": {
+        "title": "To'lov tasdiqlash odatdagidan uzoqroq",
+        "body": "To'lov bir necha daqiqa olishi mumkin. Sahifani yangilang yoki keyinroq «Mening buyurtmalarim»ga kiring.",
+        "retry": "Holatni tekshirish"
+      },
+      "actions": {
+        "myOrders": "Mening buyurtmalarim",
+        "backToCart": "Savatga qaytish",
+        "continueShopping": "Xaridni davom ettirish"
+      }
+    }
+  },
+  "account": {
+    "nav": {
+      "profile": "Profil",
+      "password": "Parol",
+      "addresses": "Manzillar",
+      "orders": "Buyurtmalar",
+      "loyalty": "Bigmax Bonus",
+      "signOut": "Chiqish"
+    },
+    "loyalty": {
+      "title": "Bigmax Bonus",
+      "subtitle": "Sadoqat dasturi. Har bir to'langan buyurtmadan 1% beraman. To'lov paytida ballarni pul sifatida ishlatish mumkin.",
+      "balanceLabel": "Joriy balans",
+      "balanceValue": "{points, plural, one {# ball} other {# ball}}",
+      "rulesHint": "Buyurtma summasidan 1% → 1 ball = 1 so'm. Ballar muvaffaqiyatli to'lovdan yoki COD yetkazib berishdan keyin hisoblanadi.",
+      "historyTitle": "Tarix",
+      "historyCount": "{count, plural, one {# yozuv} other {# yozuv}}",
+      "empty": "Hozircha tarix yo'q — ball yig'ish uchun birinchi buyurtmani bering.",
+      "typeEarn": "Hisoblandi",
+      "typeSpend": "Ishlatildi",
+      "typeRefund": "Qaytarildi",
+      "typeClawback": "Qaytarib olindi",
+      "pageSizeHint": "Sahifada {size} ta yozuv ko'rsatiladi.",
+      "pagination": {
+        "prev": "← Orqaga",
+        "next": "Oldinga →",
+        "pageOf": "{total} dan {page} sahifa"
+      }
+    },
+    "header": {
+      "greeting": "Salom, {name}"
+    },
+    "profile": {
+      "title": "Profilim",
+      "subtitle": "Ism va do'kon hamda bildirishnomalar uchun sozlamalar",
+      "name": "Ism",
+      "namePlaceholder": "Sizga qanday murojaat qilaylik",
+      "language": "Til",
+      "languageHint": "SMS va email bildirishnomalar uchun",
+      "phone": "Telefon",
+      "phoneLocked": "Telefon almashtirish keyinroq qo'shiladi",
+      "email": "Email",
+      "emailLocked": "Email tasdiqlangan — o'zgartirish uchun tekshiruv kerak",
+      "submit": "Saqlash",
+      "success": "Profil yangilandi"
+    },
+    "password": {
+      "title": "Parol",
+      "subtitleChange": "Email orqali kirish uchun parolni o'zgartirish",
+      "subtitleSet": "Email orqali kirish uchun parol o'rnating",
+      "currentPassword": "Joriy parol",
+      "newPassword": "Yangi parol",
+      "newPasswordPlaceholder": "Kamida 6 ta belgi",
+      "submitChange": "Parolni o'zgartirish",
+      "submitSet": "Parolni o'rnatish",
+      "success": "Parol yangilandi",
+      "errorWrongCurrent": "Joriy parol noto'g'ri"
+    },
+    "addresses": {
+      "title": "Yetkazib berish manzillari",
+      "empty": "Hali manzillar yo'q. Buyurtma berish uchun birinchisini qo'shing.",
+      "addNew": "Manzil qo'shish",
+      "edit": "Tahrirlash",
+      "delete": "O'chirish",
+      "deleteConfirm": "Ushbu manzil o'chirilsinmi?",
+      "setDefault": "Asosiy qilib qo'yish",
+      "defaultBadge": "Asosiy",
+      "form": {
+        "region": "Hudud",
+        "regionPlaceholder": "Hududni tanlang",
+        "city": "Shahar",
+        "cityPlaceholder": "Masalan, Toshkent",
+        "district": "Tuman",
+        "districtPlaceholder": "Ixtiyoriy",
+        "districtHintTashkent": "Toshkent uchun 11 tumandan birini tanlang",
+        "street": "Ko'cha",
+        "house": "Uy",
+        "apartment": "Xonadon",
+        "landmark": "Mo'ljal",
+        "landmarkPlaceholder": "Masalan, metro yonida",
+        "phone": "Telefon (boshqa bo'lsa)",
+        "phonePlaceholder": "+998 90 000-00-00",
+        "isDefault": "Asosiy manzil qilib belgilash",
+        "submitCreate": "Qo'shish",
+        "submitEdit": "Saqlash",
+        "cancel": "Bekor qilish"
+      },
+      "errors": {
+        "limitReached": "Manzillar limiti ({limit}). Yangisini qo'shish uchun keraksizini o'chiring.",
+        "notFound": "Manzil topilmadi",
+        "invalidRegion": "Ro'yxatdan hududni tanlang",
+        "invalidPhone": "Telefon +998XXXXXXXXX formatida bo'lishi kerak"
+      }
+    },
+    "orders": {
+      "title": "Buyurtmalarim",
+      "list": {
+        "summary": "{count, plural, one {# buyurtma} other {# ta buyurtma}}",
+        "empty": {
+          "title": "Hozircha buyurtmalar yo'q",
+          "body": "Birinchi buyurtmangizni rasmiylashtirgach, u shu yerda paydo bo'ladi."
+        },
+        "emptyFiltered": "Tanlangan holat bo'yicha buyurtmalar yo'q.",
+        "filters": {
+          "label": "Holat",
+          "all": "Barcha holatlar"
+        },
+        "card": {
+          "itemsCount": "{count, plural, one {# mahsulot} other {# ta mahsulot}}",
+          "viewDetails": "Batafsil",
+          "paymentCod": "Olganda to'lash",
+          "paymentUniteller": "Karta orqali",
+          "createdAt": "{date} sanasida rasmiylashtirilgan"
+        },
+        "pagination": {
+          "prev": "Orqaga",
+          "next": "Oldinga",
+          "page": "{total} dan {page}-sahifa"
+        }
+      },
+      "statuses": {
+        "pending": "To'lov kutilmoqda",
+        "confirmed": "Tasdiqlandi",
+        "packing": "Tayyorlanmoqda",
+        "shipped": "Yuborildi",
+        "delivered": "Yetkazildi",
+        "cancelled": "Bekor qilindi",
+        "refunded": "Qaytarildi"
+      },
+      "detail": {
+        "back": "← Buyurtmalar ro'yxatiga",
+        "createdAt": "{date} sanasida rasmiylashtirilgan",
+        "items": "Buyurtma tarkibi",
+        "itemQty": "× {qty}",
+        "totals": {
+          "title": "Jami",
+          "subtotal": "Mahsulotlar summasi",
+          "delivery": "Yetkazib berish",
+          "discount": "Chegirma",
+          "total": "To'lashga"
+        },
+        "delivery": {
+          "title": "Yetkazib berish",
+          "courier": "Kuryer orqali",
+          "pickup": "O'zi olib ketish",
+          "address": "Yetkazib berish manzili",
+          "branch": "O'zini olib ketish nuqtasi",
+          "phone": "Telefon",
+          "comment": "Izoh"
+        },
+        "payment": {
+          "title": "To'lov",
+          "uniteller": "Uniteller orqali karta",
+          "cod": "Olganda (naqd)",
+          "card": "Karta",
+          "billnumber": "To'lov raqami"
+        },
+        "refunds": {
+          "title": "Qaytarishlar",
+          "amount": "Summa",
+          "createdAt": "{date} sanasida so'ralgan",
+          "statuses": {
+            "pending": "Ko'rib chiqilmoqda",
+            "completed": "Pul qaytarildi",
+            "failed": "Rad etildi"
+          }
+        },
+        "actions": {
+          "reorder": "Buyurtmani takrorlash",
+          "reorderInProgress": "Savatga qo'shilmoqda…",
+          "reorderSuccess": "{count, plural, one {# ta mahsulot} other {# ta mahsulot}} savatga qo'shildi",
+          "reorderSkipped": "{count, plural, one {# ta mahsulot} other {# ta mahsulot}} endi mavjud emas",
+          "reorderFailed": "Buyurtmani savatga qo'shib bo'lmadi. Keyinroq urinib ko'ring.",
+          "refund": "Qaytarish so'rash",
+          "refundIneligible": {
+            "no_captured_payment": "Qaytarish faqat to'langan buyurtmalar uchun.",
+            "order_cancelled": "Buyurtma bekor qilindi — qaytarish mumkin emas.",
+            "refund_already_requested": "Qaytarish so'ralgan va ko'rib chiqilmoqda.",
+            "refund_already_completed": "Bu buyurtma bo'yicha pul allaqachon qaytarilgan."
+          },
+          "cancel": "Buyurtmani bekor qilish",
+          "cancelIneligible": {
+            "order_too_late": "Buyurtma allaqachon tayyorlanmoqda — uni menejer bekor qiladi.",
+            "order_already_cancelled": "Buyurtma allaqachon bekor qilingan.",
+            "refund_in_progress": "Qaytarish ko'rib chiqilmoqda — yakunlanganidan keyin holat yangilanadi."
+          }
+        },
+        "refundDialog": {
+          "title": "Qaytarish so'rovi",
+          "body": "Qaytarish sababini batafsil yozing. Menejer ko'rib chiqib siz bilan bog'lanadi.",
+          "reasonLabel": "Qaytarish sababi",
+          "reasonPlaceholder": "Masalan: mahsulot shikastlangan, o'lcham mos kelmadi…",
+          "errors": {
+            "reason_too_short": "Sababni batafsilroq yozing (kamida 10 belgi).",
+            "reason_too_long": "Juda uzun — 1000 belgigacha.",
+            "invalid_body": "So'rovni qayta ishlab bo'lmadi.",
+            "generic": "So'rovni yuborib bo'lmadi. Keyinroq urinib ko'ring."
+          },
+          "cancel": "Bekor qilish",
+          "submit": "So'rovni yuborish",
+          "submitting": "Yuborilmoqda…",
+          "successTitle": "So'rov yuborildi",
+          "successBody": "Menejer ish kuni davomida siz bilan bog'lanadi."
+        },
+        "tracker": {
+          "title": "Buyurtma holati",
+          "pendingCaption": "To'lov tasdiqlanishini kutmoqdamiz",
+          "lastUpdated": "{date} sanasida yangilangan",
+          "terminal": {
+            "cancelled": {
+              "title": "Buyurtma bekor qilindi",
+              "body": "Buyurtma bekor qilindi. Agar pul yechilgan bo'lsa — bir necha ish kuni ichida qaytaramiz."
+            },
+            "refunded": {
+              "title": "Pul qaytarildi",
+              "body": "Buyurtma bo'yicha pul qaytarildi. Mablag'lar kartangizda."
+            }
+          }
+        },
+        "cancelDialog": {
+          "title": "Buyurtmani bekor qilasizmi?",
+          "body": "Buyurtma bekor qilinadi, agar pul yechilgan bo'lsa — kartaga qaytariladi.",
+          "reasonLabel": "Sabab (ixtiyoriy)",
+          "reasonPlaceholder": "Fikr o'zgardi, arzonroq topdim, buyurtmada xato…",
+          "errors": {
+            "reason_too_long": "Juda uzun — 500 belgigacha.",
+            "invalid_body": "So'rovni qayta ishlab bo'lmadi.",
+            "order_too_late": "Buyurtma tayyorlanmoqda. Uni menejer bekor qiladi.",
+            "order_already_cancelled": "Buyurtma allaqachon bekor qilingan.",
+            "refund_in_progress": "Qaytarish ko'rib chiqilmoqda — kutib turing.",
+            "provider_misconfigured": "To'lov xizmati vaqtincha mavjud emas.",
+            "provider_error": "Bankda to'lovni bekor qilib bo'lmadi. Keyinroq urinib ko'ring yoki qo'llab-quvvatlashga murojaat qiling.",
+            "generic": "Buyurtmani bekor qilib bo'lmadi. Keyinroq urinib ko'ring."
+          },
+          "cancel": "Bekor qilmaslik",
+          "submit": "Ha, bekor qilish",
+          "submitting": "Bekor qilinmoqda…",
+          "successTitle": "Buyurtma bekor qilindi",
+          "successBody": "Agar to'lov o'tgan bo'lsa, mablag'ni kartangizga bir necha ish kuni ichida qaytaramiz."
+        }
+      }
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Bigmax'ga kirish",
+      "subtitle": "Email va parolni kiriting yoki telefon orqali kod oling",
+      "emailTab": "Email",
+      "phoneTab": "Telefon orqali",
+      "email": "Email",
+      "emailPlaceholder": "you@example.com",
+      "password": "Parol",
+      "passwordPlaceholder": "Kamida 6 ta belgi",
+      "phone": "Telefon",
+      "phonePlaceholder": "+998 90 123-45-67",
+      "submitEmail": "Kirish",
+      "submitPhone": "Kod olish",
+      "noAccount": "Hisobingiz yo'qmi?",
+      "signUp": "Ro'yxatdan o'tish",
+      "forgotPassword": "Parolni unutdingizmi?",
+      "orContinueWith": "yoki orqali kiring"
+    },
+    "telegram": {
+      "buttonLabel": "Telegram orqali kirish",
+      "signingIn": "Telegram orqali kirilmoqda…"
+    },
+    "register": {
+      "title": "Hisob yaratish",
+      "subtitle": "Ro'yxatdan o'tish usulini tanlang",
+      "name": "Ism",
+      "namePlaceholder": "Sizga qanday murojaat qilaylik",
+      "submitEmail": "Hisob yaratish",
+      "submitPhone": "Kod olish",
+      "haveAccount": "Allaqachon hisob bormi?",
+      "signIn": "Kirish",
+      "agreementLabel": "Men <offer>ommaviy ofertani</offer>, <agreement>foydalanuvchi shartnomasini</agreement> va <privacy>maxfiylik siyosatini</privacy> qabul qilaman"
+    },
+    "verify": {
+      "title": "Kodni kiriting",
+      "subtitle": "{phone} raqamiga 6 xonali kod yubordik",
+      "code": "Kod",
+      "codePlaceholder": "123456",
+      "submit": "Tasdiqlash",
+      "resend": "Qayta yuborish",
+      "resendIn": "Qayta yuborishgacha {seconds} soniya",
+      "wrongNumber": "Raqamni o'zgartirish"
+    },
+    "recovery": {
+      "title": "Parolni tiklash",
+      "phoneNote": "SMS-kod orqali kiring — telefon hisoblari uchun parol kerak emas.",
+      "emailNote": "Email orqali parolni tiklash tez orada."
+    },
+    "passwordReset": {
+      "request": {
+        "title": "Parolni tiklash",
+        "subtitle": "Email kiriting — biz parolni tiklash uchun havola yuboramiz.",
+        "email": "Email",
+        "emailPlaceholder": "you@example.com",
+        "submit": "Havola yuborish",
+        "submitting": "Yuborilyapti…",
+        "successTitle": "Xat yuborildi",
+        "successBody": "Agar shu emailga tegishli akkaunt mavjud bo'lsa, biz parolni tiklash havolasini yubordik. Amal qilish muddati — 30 daqiqa.",
+        "backToLogin": "← Kirishga",
+        "rateLimited": "Juda ko'p so'rov. Bir necha daqiqadan keyin qayta urinib ko'ring."
+      },
+      "complete": {
+        "title": "Yangi parol",
+        "subtitle": "Akkauntingiz uchun yangi parol kiriting.",
+        "password": "Yangi parol",
+        "passwordPlaceholder": "Kamida 8 ta belgi",
+        "passwordConfirm": "Parolni qayta kiriting",
+        "submit": "Parolni saqlash",
+        "submitting": "Saqlanmoqda…",
+        "successTitle": "Parol yangilandi",
+        "successBody": "Endi yangi parol bilan kirishingiz mumkin.",
+        "goToLogin": "Kirish →",
+        "errors": {
+          "passwordMismatch": "Parollar mos kelmadi.",
+          "passwordTooShort": "Parol kamida 8 ta belgidan iborat bo'lishi kerak.",
+          "passwordTooLong": "Parol juda uzun.",
+          "tokenInvalid": "Havola yaroqsiz.",
+          "tokenExpired": "Havola muddati o'tdi. Yangisini so'rang.",
+          "tokenAlreadyUsed": "Bu havola allaqachon ishlatilgan. Yangisini so'rang.",
+          "generic": "Parolni saqlab bo'lmadi."
+        }
+      },
+      "email": {
+        "subject": "Parolni tiklash · Bigmax",
+        "greeting": "Salom!",
+        "intro": "Siz (yoki kimdir sizning nomingizdan) Bigmax akkaunti uchun parolni tiklashni so'radi ({email}).",
+        "cta": "Parolni tiklash",
+        "expiry": "Havola 30 daqiqa amal qiladi.",
+        "ignore": "Agar tiklashni so'ramagan bo'lsangiz — bu xatni e'tiborsiz qoldiring. Parolingiz o'zgarmaydi.",
+        "footer": "Hurmat bilan,\nBigmax jamoasi · bigmax.uz"
+      }
+    },
+    "errors": {
+      "invalidCredentials": "Email yoki parol noto'g'ri",
+      "invalidOtp": "Kod noto'g'ri yoki eskirgan",
+      "rateLimited": "Juda ko'p urinish. Keyinroq qayta urinib ko'ring.",
+      "emailExists": "Bu email bilan foydalanuvchi allaqachon mavjud",
+      "networkError": "Tarmoq xatosi. Internetni tekshiring.",
+      "unknownError": "Nimadir noto'g'ri bo'ldi. Qayta urinib ko'ring.",
+      "invalidPhone": "Raqamni +998XXXXXXXXX formatida kiriting",
+      "invalidForm": "Maydonlarni tekshiring",
+      "telegramFailed": "Telegram orqali kirish amalga oshmadi. Yana urinib ko'ring.",
+      "agreementRequired": "Shartlarni qabul qilish shart"
+    }
+  },
+  "admin": {
+    "title": "Admin-panel",
+    "subtitle": "Bigmax · {role}",
+    "roles": {
+      "admin": "Administrator",
+      "manager": "Menejer"
+    },
+    "nav": {
+      "dashboard": "Umumiy ko'rinish",
+      "orders": "Buyurtmalar",
+      "payments": "To'lovlar va qaytarishlar",
+      "products": "Mahsulotlar",
+      "categories": "Kategoriyalar",
+      "brands": "Brendlar",
+      "branches": "Filiallar",
+      "stock": "Qoldiqlar",
+      "promo": "Promo",
+      "customers": "Mijozlar",
+      "audit": "Jurnal",
+      "features": "Feature-flaglar",
+      "imagesCleanup": "Rasm tozalash",
+      "backToShop": "← Do'konga"
+    },
+    "menuButton": "Menyu",
+    "breadcrumbs": {
+      "home": "Admin-panel"
+    },
+    "dashboard": {
+      "title": "Umumiy ko'rinish",
+      "subtitle": "Buyurtmalar, daromad va filial qoldiqlari sharhi.",
+      "kpi": {
+        "ordersTotal": "Jami buyurtmalar",
+        "revenueToday": "Bugungi daromad",
+        "revenueWeek": "Hafta daromadi",
+        "revenueMonth": "30 kunlik daromad",
+        "ordersCount": "{count, plural, one {# ta buyurtma} other {# ta buyurtma}}"
+      },
+      "ordersByStatus": {
+        "title": "Buyurtmalar holati bo'yicha",
+        "empty": "Hozircha buyurtmalar yo'q."
+      },
+      "topProducts": {
+        "title": "30 kunlik top mahsulotlar",
+        "empty": "Davr uchun sotilgan mahsulot yo'q.",
+        "qty": "{count, plural, one {# dona} other {# dona}}"
+      },
+      "lowStock": {
+        "title": "Omborda tugayapti",
+        "empty": "Barcha mahsulotlar yetarli.",
+        "atBranch": "«{branch}» filialida",
+        "remaining": "{count, plural, one {# dona} other {# dona}}"
+      },
+      "pendingUniteller": {
+        "title": "Olishni kutmoqda (Uniteller)",
+        "subtitle": "2 daqiqadan ortiq pending'da turgan to'lovlar — worker pull-job orqali tekshiriladi.",
+        "empty": "Navbat bo'sh — barcha Uniteller to'lovlari captured/failed.",
+        "ageSec": "{sec, plural, one {# soniya} other {# soniya}}",
+        "ageMin": "{min, plural, one {# daqiqa} other {# daqiqa}}",
+        "openOrder": "Ochish"
+      },
+      "generatedAt": "{time} da yangilangan"
+    },
+    "products": {
+      "list": {
+        "title": "Mahsulotlar",
+        "subtitle": "Katalog va variantlarni boshqarish.",
+        "create": "Yaratish",
+        "import": "CSV import",
+        "searchPlaceholder": "Nom bo'yicha qidirish (RU)…",
+        "filterAll": "Barchasi",
+        "filterActive": "Faol",
+        "filterInactive": "Yashirilgan",
+        "table": {
+          "name": "Nomi",
+          "category": "Kategoriya",
+          "brand": "Brend",
+          "variants": "Variantlar",
+          "status": "Holat",
+          "active": "Faol",
+          "inactive": "Yashirilgan",
+          "featured": "Tanlovda"
+        },
+        "empty": "Tanlangan filtr uchun mahsulot yo'q.",
+        "summary": "{count, plural, one {# mahsulot} other {# ta mahsulot}}"
+      },
+      "form": {
+        "tabs": {
+          "ru": "RU",
+          "uz": "UZ",
+          "en": "EN"
+        },
+        "fields": {
+          "category": "Kategoriya",
+          "categoryCreate": "Kategoriya yaratish",
+          "brand": "Brend",
+          "brandNone": "Brendsiz",
+          "brandCreate": "Brend yaratish",
+          "slug": "URL slug",
+          "slugHint": "faqat lotin, raqam, defis",
+          "nameRu": "Nomi (rus)",
+          "nameUz": "Nomi (o'zbek)",
+          "nameEn": "Name (English)",
+          "descriptionRu": "Tavsif (rus)",
+          "descriptionUz": "Tavsif (o'zbek)",
+          "descriptionEn": "Description (English)",
+          "ageFrom": "Yoshdan (oy)",
+          "ageTo": "Yoshgacha (oy)",
+          "gender": "Jins",
+          "genderUnisex": "Uniseks",
+          "genderBoy": "O'g'il bola",
+          "genderGirl": "Qiz bola",
+          "isActive": "Faol (katalogda ko'rinadi)",
+          "isFeatured": "Tanlovda ko'rsatish"
+        },
+        "attributes": {
+          "title": "Kategoriyaga oid atributlar",
+          "subtitle": "Kategoriya: {category}",
+          "empty": "Tanlangan kategoriyada qo'shimcha atributlar yo'q.",
+          "addOption": "Qiymat qo'shish",
+          "addCtaTitle": "«{category}» ga xarakteristika qo'shish",
+          "addCtaSubtitle": "Yangi maydon shu kategoriyadagi barcha mahsulotlarda mavjud bo'ladi.",
+          "addCtaHint": "Bosing",
+          "colorDerivedHint": "Rang variantlar ranglaridan avtomatik hisoblanadi — pastdagi variant kartasida tahrirlanadi."
+        },
+        "images": {
+          "title": "Mahsulot rasmlari",
+          "readOnlyHint": "{count, plural, one {# rasm} other {# rasm}}. Variantlarga biriktirilgan — pastdagi «Variantlar» bo'limidan tahrirlang.",
+          "readOnlyHintEmpty": "Rasmlar variant darajasida boshqariladi — pastdagi variantni oching va qo'shing.",
+          "readOnlyEmptyState": "Hozircha rasmlar yo'q — variant kartasi orqali qo'shing.",
+          "readOnlyEditHint": "Rasmni qo'shish yoki o'zgartirish uchun pastdagi «Variantlar» bo'limida variantni oching.",
+          "commonBadge": "Umumiy",
+          "variantOverrideLabel": "Maxsus",
+          "sharedByVariantsBadge": "o'lchamlar uchun umumiy",
+          "hint": "{count, plural, one {# rasm} other {# rasm}}. Tartibni o'zgartirish uchun kartani sudrang. Birinchisi — asosiy.",
+          "hintEmpty": "Kamida bitta rasm qo'shing — u mahsulot kartasida va galereyada ko'rsatiladi.",
+          "emptyState": "Rasm yo'q — pastdagi shakl orqali birinchisini qo'shing.",
+          "dropzoneTitle": "Rasmlarni shu yerga sudrang yoki tanlash uchun bosing",
+          "dropzoneSubtitle": "JPEG, PNG, WebP yoki GIF · 10 MB gacha · 6000×6000 px gacha",
+          "dropzoneActive": "Yuklash uchun qo'yib yuboring",
+          "urlMode": "URL bo'yicha qo'shish",
+          "addTitle": "Rasm qo'shish",
+          "add": "Qo'shish",
+          "retry": "Qaytadan",
+          "dismiss": "Olib tashlash",
+          "urlPlaceholder": "https://...",
+          "altPlaceholder": "Tavsif (alt) — SEO va foydalanish uchun",
+          "altAria": "{n}-rasm uchun tavsif",
+          "urlHint": "To'g'ridan-to'g'ri rasm URL (masalan, CDN dan) ni qo'ying. https:// va nisbiy yo'llar qo'llab-quvvatlanadi.",
+          "primary": "Asosiy",
+          "remove": "Rasmni o'chirish",
+          "removeConfirm": "Bu rasmni o'chirasizmi?",
+          "dragHint": "Tartibni o'zgartirish uchun sudrang",
+          "moveUp": "Yuqoriga",
+          "moveDown": "Pastga",
+          "uploadError": {
+            "file_too_large": "Fayl 10 MB dan katta — siqing yoki kichraytiring",
+            "unsupported_format": "Qo'llab-quvvatlanmaydigan format — JPEG, PNG, WebP yoki GIF kerak",
+            "image_too_wide": "Rasm juda keng (maks. 6000 px)",
+            "image_too_tall": "Rasm juda baland (maks. 6000 px)",
+            "decode_failed": "Faylni o'qib bo'lmadi — buzilgan bo'lishi mumkin",
+            "processing_failed": "Server ishlovida xatolik",
+            "rate_limited": "Juda ko'p yuklash — bir daqiqa kuting",
+            "network_error": "Tarmoq xatosi — ulanishni tekshiring",
+            "invalid_response": "Server noto'g'ri javob qaytardi",
+            "generic": "Yuklab bo'lmadi — qayta urinib ko'ring"
+          }
+        },
+        "submit": "Saqlash",
+        "submitting": "Saqlanmoqda…",
+        "submitCreate": "Yaratish",
+        "cancel": "Bekor qilish",
+        "deactivate": "Katalogdan yashirish",
+        "deactivateConfirm": "Mahsulotni yashirasizmi? U xaridorlarga ko'rinmaydi, lekin tarixda qoladi.",
+        "errors": {
+          "name_ru_too_short": "Nom (RU) juda qisqa (kamida 2 belgi).",
+          "name_uz_too_short": "Nom (UZ) juda qisqa.",
+          "name_en_too_short": "Nom (EN) juda qisqa.",
+          "name_too_long": "Nom juda uzun (200 belgigacha).",
+          "slug_too_short": "Slug juda qisqa.",
+          "slug_too_long": "Slug juda uzun.",
+          "slug_invalid": "Slug faqat lotin, raqam va defisni o'z ichiga oladi.",
+          "slug_exists": "Bu slug bilan mahsulot mavjud.",
+          "category_required": "Kategoriyani tanlang.",
+          "age_range_invalid": "«Yoshdan» «Yoshgacha»dan kichik bo'lishi kerak.",
+          "invalid_relation": "Kategoriya yoki brend topilmadi.",
+          "invalid_body": "Formani qayta ishlab bo'lmadi.",
+          "attribute_required_missing": "Majburiy xarakteristikani to'ldiring.",
+          "attribute_range_below_min": "Qiymat ruxsat etilgan minimumdan kichik.",
+          "attribute_range_above_max": "Qiymat ruxsat etilgan maksimumdan katta.",
+          "attribute_type_mismatch": "Atributlardan biri uchun qiymat turi noto'g'ri.",
+          "attribute_enum_value_invalid": "Atribut ro'yxatida noto'g'ri qiymat.",
+          "attribute_range_negative": "Sonli atribut manfiy bo'la olmaydi.",
+          "generic": "Saqlab bo'lmadi. Keyinroq urinib ko'ring."
+        },
+        "successCreate": "Mahsulot yaratildi.",
+        "successUpdate": "O'zgarishlar saqlandi.",
+        "successDeactivate": "Mahsulot katalogdan yashirildi."
+      },
+      "detail": {
+        "back": "← Mahsulotlar ro'yxatiga",
+        "createdAt": "{date} sanasida yaratilgan",
+        "updatedAt": "{date} sanasida yangilangan"
+      },
+      "stock": {
+        "title": "Filiallar bo'yicha qoldiqlar",
+        "subtitle": "{variants} variant × {branches} filial",
+        "summary": "Mavjud: {total} · kam: {low} · yo'q: {out}",
+        "filterAll": "Hammasi",
+        "emptyVariants": "Avval yuqorida variantlar yarating — keyin shu yerda qoldiqlar paydo bo'ladi.",
+        "totalReserved": "Jami {qty} · rezerv {reserved}",
+        "missing": "Yozuv yaratilmagan"
+      },
+      "stockHistory": {
+        "title": "Qoldiqlar tarixi",
+        "subtitle": "Mahsulotning barcha variantlari bo'yicha {count, plural, one {# yozuv} other {# yozuv}}",
+        "empty": "Tarix hali yo'q — qoldiqlar o'zgargach shu yerda chiqadi.",
+        "showingLatest": "Oxirgi {count} / {total} ko'rsatilmoqda",
+        "showToggle": "Tarix",
+        "hideToggle": "Tarixni yashirish",
+        "actions": {
+          "set": "O'rnatilgan",
+          "inc": "Qo'shilgan",
+          "dec": "Hisobdan chiqarilgan",
+          "import": "CSV import",
+          "create": "Yaratish",
+          "delete": "O'chirish",
+          "ship": "Yuborish",
+          "reserve": "Rezerv",
+          "release": "Rezerv olinishi"
+        }
+      },
+      "create": {
+        "title": "Yangi mahsulot",
+        "subtitle": "Uchta lokalda maydonlarni to'ldiring. Variantlar, narxlar va rasmlar yaratilgandan keyin qo'shiladi."
+      },
+      "quickCreate": {
+        "category": {
+          "trigger": "+ Kategoriya",
+          "title": "Yangi kategoriya",
+          "subtitle": "Faqat nomi yetarli. Slug avtomatik yaratiladi.",
+          "editSlug": "Slug ni o'zgartirish",
+          "placeholders": {
+            "name": "Masalan, Kurtkalar"
+          },
+          "disclosure": {
+            "translations": "Tarjimalar qo'shish (UZ, EN)",
+            "parent": "Qo'shimcha — ota kategoriya"
+          },
+          "fields": {
+            "name": "Nomi",
+            "slug": "Slug",
+            "parent": "Ota kategoriya",
+            "parentNone": "— otasiz —"
+          },
+          "submit": "Yaratish",
+          "submitting": "Yaratilmoqda…",
+          "cancel": "Bekor qilish",
+          "success": "«{name}» kategoriyasi yaratildi",
+          "errors": {
+            "generic": "Kategoriya yaratilmadi."
+          }
+        },
+        "brand": {
+          "trigger": "+ Brend",
+          "title": "Yangi brend",
+          "subtitle": "Faqat nomi yetarli. Slug avtomatik yaratiladi.",
+          "editSlug": "Slug ni o'zgartirish",
+          "placeholders": {
+            "name": "Masalan, Tega"
+          },
+          "disclosure": {
+            "advanced": "Qo'shimcha — davlat"
+          },
+          "fields": {
+            "name": "Nomi",
+            "slug": "Slug",
+            "country": "Davlat"
+          },
+          "submit": "Yaratish",
+          "submitting": "Yaratilmoqda…",
+          "cancel": "Bekor qilish",
+          "success": "«{name}» brendi yaratildi",
+          "errors": {
+            "generic": "Brend yaratilmadi."
+          }
+        },
+        "option": {
+          "trigger": "+ Qiymat",
+          "title": "«{attribute}» uchun yangi qiymat",
+          "subtitle": "Nomini kiriting. Value avtomatik yaratiladi.",
+          "editValue": "Value ni o'zgartirish",
+          "placeholders": {
+            "label": "Masalan, Och kulrang"
+          },
+          "disclosureTranslations": "Tarjimalar qo'shish (UZ, EN)",
+          "fields": {
+            "label": "Qiymat nomi"
+          },
+          "submit": "Qo'shish",
+          "submitting": "Qo'shilmoqda…",
+          "cancel": "Bekor qilish",
+          "success": "«{label}» xarakteristikaga qo'shildi",
+          "errors": {
+            "required": "Nomi va value ni to'ldiring.",
+            "duplicate": "Bunday qiymat allaqachon mavjud.",
+            "generic": "Qiymat qo'shilmadi."
+          }
+        },
+        "attribute": {
+          "trigger": "+ Xarakteristika",
+          "title": "Kategoriyaning xarakteristikasi",
+          "subtitle": "Mavjudini ulang yoki yangisini yarating.",
+          "tabExisting": "Mavjudlardan",
+          "tabNew": "Yangisini yaratish",
+          "noTemplates": "Boshqa kategoriyalardan ulashga ega emas — yangisini yarating.",
+          "noMatches": "Hech narsa topilmadi.",
+          "searchPlaceholder": "Nom yoki kalit bo'yicha qidirish…",
+          "usedIn": "Hozir: {list}",
+          "optionsCount": "{count, plural, one {# qiymat} other {# qiymat}}",
+          "attach": "Ulash",
+          "attaching": "Ulanmoqda…",
+          "attachSuccess": "«{label}» kategoriyaga ulandi",
+          "fields": {
+            "kind": "Turi",
+            "label": "Nomi",
+            "key": "Kalit (URL/JSON)",
+            "options": "Qiymatlar",
+            "min": "Min",
+            "max": "Max",
+            "step": "Qadam",
+            "unit": "O'lchov",
+            "isRequired": "Majburiy",
+            "isFilterable": "Filtrda"
+          },
+          "kinds": {
+            "enum": "Ro'yxat (bitta)",
+            "multiselect": "Ro'yxat (bir nechta)",
+            "range": "Diapazon",
+            "boolean": "Ha/Yo'q",
+            "text": "Matn"
+          },
+          "addOption": "Qo'shish",
+          "removeOption": "O'chirish",
+          "optionLabelPlaceholder": "Nomi (masalan, Paxta)",
+          "optionValuePlaceholder": "value (auto)",
+          "optionHint": "Value — lotin, raqam, `_`, `-`. Bo'sh bo'lsa — nomidan generatsiya qilinadi.",
+          "submit": "Yaratish",
+          "submitting": "Yaratilmoqda…",
+          "cancel": "Bekor qilish",
+          "success": "«{label}» xarakteristikasi qo'shildi",
+          "errors": {
+            "optionsRequired": "Kamida bitta qiymat qo'shing.",
+            "generic": "Xarakteristika yaratilmadi."
+          }
+        }
+      },
+      "import": {
+        "title": "Mahsulotlar import",
+        "subtitle": "CSV yopishtiring yoki fayl yuklang. Sarlavhalar: slug, name_ru, name_uz, name_en, category_slug.",
+        "submit": "Importni boshlash",
+        "submitting": "Import qilinmoqda…",
+        "summary": "Yaratildi: {created}, yangilandi: {updated}, o'tkazib yuborildi: {skipped}",
+        "skippedTitle": "O'tkazib yuborilgan qatorlar",
+        "skipReasons": {
+          "invalid_row": "Noto'g'ri qator",
+          "unknown_category": "Noma'lum kategoriya",
+          "unknown_brand": "Noma'lum brend",
+          "slug_conflict": "Slug bo'yicha to'qnashuv",
+          "db_error": "BD xatosi"
+        },
+        "errors": {
+          "empty_body": "Fayl bo'sh.",
+          "missing_columns": "Yetishmayotgan ustunlar: {missing}",
+          "too_many_rows": "Juda ko'p qator (maksimal {max}).",
+          "generic": "Import qilib bo'lmadi."
+        }
+      },
+      "variants": {
+        "title": "Mahsulot variantlari",
+        "addNew": "Variant qo'shish",
+        "table": {
+          "sku": "SKU",
+          "color": "Rang",
+          "size": "O'lcham",
+          "price": "Narx",
+          "oldPrice": "Eski narx",
+          "barcode": "Shtrix-kod",
+          "weight": "Vazn (g)",
+          "actions": "Amallar"
+        },
+        "form": {
+          "title": "Mahsulot varianti",
+          "createTitle": "Yangi variant",
+          "editTitle": "Variantni tahrirlash",
+          "skuHint": "lotin (UPPERCASE), raqam, defis, tagchiziq",
+          "skuGenerate": "Generatsiya",
+          "save": "Saqlash",
+          "saving": "Saqlanmoqda…",
+          "create": "Yaratish",
+          "delete": "O'chirish",
+          "deleteConfirm": "Variantni o'chirishni xohlaysizmi? Bu amal qaytarib bo'lmaydi.",
+          "cancel": "Bekor qilish",
+          "errors": {
+            "sku_too_short": "SKU juda qisqa (kamida 2 belgi).",
+            "sku_too_long": "SKU juda uzun (64 belgigacha).",
+            "sku_invalid": "SKU: faqat UPPERCASE lotin, raqam, defis, tagchiziq.",
+            "sku_exists": "Bu SKU boshqa variantda mavjud.",
+            "color_too_long": "Rang juda uzun.",
+            "size_too_long": "O'lcham juda uzun.",
+            "barcode_too_long": "Shtrix-kod juda uzun.",
+            "price_must_be_integer": "Narx butun tiyin raqami bo'lishi kerak.",
+            "price_negative": "Narx manfiy bo'lishi mumkin emas.",
+            "price_too_high": "Narx juda yuqori.",
+            "old_price_must_be_integer": "Eski narx butun raqam bo'lishi kerak.",
+            "old_price_negative": "Eski narx manfiy bo'lishi mumkin emas.",
+            "old_price_too_high": "Eski narx juda yuqori.",
+            "old_price_must_exceed_price": "Eski narx joriy narxdan yuqori bo'lishi kerak.",
+            "weight_must_be_integer": "Vazn butun grammda bo'lishi kerak.",
+            "weight_negative": "Vazn manfiy bo'lishi mumkin emas.",
+            "weight_too_high": "Vazn juda katta.",
+            "variant_in_use": "Variant {count, plural, one {# buyurtmada} other {# ta buyurtmada}} ishlatilgan — o'chirib bo'lmaydi.",
+            "invalid_body": "Formani qayta ishlab bo'lmadi.",
+            "generic": "Saqlab bo'lmadi."
+          },
+          "successCreate": "Variant yaratildi.",
+          "successUpdate": "O'zgarishlar saqlandi.",
+          "successDelete": "Variant o'chirildi.",
+          "sharedImagesHint": "Bu rasmlar «{color}» rangining barcha variantlariga tegishli. O'zgartirishlar shu rangning boshqa o'lchamlariga ham tegadi.",
+          "perVariantImagesHint": "Rang belgilanmagan — rasmlar faqat shu variantga biriktiriladi."
+        },
+        "empty": "Hozircha variantlar yo'q. Birinchisini qo'shing — variantsiz mahsulot katalogda ko'rinmaydi.",
+        "edit": "Tahrirlash",
+        "noColor": "—",
+        "noSize": "—"
+      }
+    },
+    "categories": {
+      "list": {
+        "title": "Kategoriyalar",
+        "subtitle": "Katalog kategoriyalari daraxti.",
+        "create": "Kategoriya yaratish",
+        "table": {
+          "name": "Nomi",
+          "slug": "Slug",
+          "parent": "Ota-kategoriya",
+          "order": "Tartib",
+          "products": "Mahsulot",
+          "status": "Holat"
+        },
+        "empty": "Hozircha kategoriyalar yo'q.",
+        "noParent": "—",
+        "active": "Faol",
+        "inactive": "Yashirilgan"
+      },
+      "form": {
+        "createTitle": "Yangi kategoriya",
+        "editTitle": "Kategoriyani tahrirlash",
+        "fields": {
+          "nameRu": "Nomi (RU)",
+          "nameUz": "Nomi (UZ)",
+          "nameEn": "Name (EN)",
+          "slug": "URL slug",
+          "slugHint": "faqat lotin, raqam, defis",
+          "parent": "Ota-kategoriya",
+          "parentNone": "— yuqori daraja —",
+          "parentSearch": "Kategoriya qidirish…",
+          "parentSearchClear": "Qidiruvni tozalash",
+          "parentNoMatches": "Topilmadi",
+          "iconUrl": "Ikonka URL",
+          "order": "Saralash tartibi",
+          "isActive": "Faol (katalogda ko'rinadi)"
+        },
+        "submit": "Saqlash",
+        "submitting": "Saqlanmoqda…",
+        "create": "Yaratish",
+        "delete": "O'chirish",
+        "deleteConfirm": "Kategoriyani o'chirasizmi? Bu amal qaytarilmaydi.",
+        "cancel": "Bekor qilish"
+      },
+      "bulk": {
+        "selected": "{count, plural, one {# tanlangan} other {# tanlangan}}",
+        "selectAll": "Barchasini tanlash",
+        "clear": "Tozalash",
+        "bulkDeactivate": "Tanlanganlarni yashirish",
+        "bulkActivate": "Tanlanganlarni faollashtirish",
+        "bulkSuccess": "Tayyor: {count, plural, one {# o'zgartirildi} other {# ta o'zgartirildi}}.",
+        "bulkConfirm": "Tanlangan kategoriyalarning hammasiga qo'llanilsinmi?",
+        "dragHint": "Tartibni o'zgartirish uchun ikonkani sudrab boring.",
+        "reorderSuccess": "Tartib saqlandi.",
+        "reorderError": "Tartibni saqlab bo'lmadi."
+      }
+    },
+    "categoryAttributes": {
+      "title": "Kategoriya xarakteristikalari",
+      "subtitle": "«{category}» uchun dinamik maydonlar to'plami. Bu maydonlar mahsulot yaratishda va katalog filtrlarida ko'rinadi.",
+      "manageCta": "Xarakteristikalarni boshqarish",
+      "createCta": "Xarakteristika yaratish",
+      "create": "Yangi xarakteristika",
+      "created": "Xarakteristika yaratildi.",
+      "updated": "Xarakteristika yangilandi.",
+      "deleted": "Xarakteristika o'chirildi.",
+      "deleteConfirm": "Xarakteristikani o'chirasizmi? Mahsulotlardagi qiymatlar saqlanib qoladi, lekin yashirinadi.",
+      "empty": "Bu kategoriyaning hali xarakteristikalari yo'q.",
+      "edit": "Tahrirlash",
+      "editInParent": "Ota kategoriyada tahrirlash",
+      "inheritedFrom": "Meros: {category}",
+      "delete": "O'chirish",
+      "moveUp": "Yuqoriga",
+      "moveDown": "Pastga",
+      "yes": "Ha",
+      "no": "Yo'q",
+      "columns": {
+        "label": "Nomi",
+        "key": "Kalit",
+        "kind": "Turi",
+        "required": "Majburiy",
+        "filterable": "Filtrlarda",
+        "actions": "Amallar"
+      },
+      "kinds": {
+        "enum": "Ro'yxat (bitta)",
+        "multiselect": "Ro'yxat (bir nechta)",
+        "range": "Sonlar oralig'i",
+        "boolean": "Ha/Yo'q",
+        "text": "Matn"
+      },
+      "errors": {
+        "reorder": "Tartibni saqlab bo'lmadi.",
+        "delete": "Xarakteristikani o'chira olmadik."
+      },
+      "form": {
+        "fields": {
+          "key": "Kalit (URL va DB uchun)",
+          "keyHint": "faqat lotin harflari, raqamlar va _; yaratilgandan keyin o'zgartirib bo'lmaydi",
+          "kind": "Maydon turi",
+          "kindLocked": "Yaratilgandan keyin turini o'zgartirib bo'lmaydi.",
+          "kindDesc": {
+            "enum": "Ro'yxatdan bitta variantni tanlash. Masalan: rang — qizil, ko'k, yashil.",
+            "multiselect": "Bir nechta qiymatlarni birga tanlash. Masalan: teglar — yangi, aksiya.",
+            "range": "Belgilangan oraliqdagi raqamli qiymat, min/max va o'lchov birligi bilan.",
+            "boolean": "Oddiy «Ha / Yo'q» pereklyuchatel. Masalan: ovozli, organik.",
+            "text": "Erkin matn kiritish. Katalog filtrlarida ishtirok etmaydi."
+          },
+          "label": {
+            "ru": "Nomi (RU)",
+            "uz": "Nomi (UZ)",
+            "en": "Name (EN)"
+          },
+          "helpText": {
+            "ru": "Yordam (RU)",
+            "uz": "Yordam (UZ)",
+            "en": "Help text (EN)"
+          },
+          "isRequired": "To'ldirish majburiy",
+          "isFilterable": "Katalog filtrlarida ko'rsatish",
+          "order": "Tartib"
+        },
+        "submit": "Saqlash",
+        "submitCreate": "Yaratish",
+        "submitting": "Saqlanmoqda…",
+        "options": {
+          "title": "Qiymatlar varianti",
+          "subtitle": "{count, plural, =0 {Variantlar yo'q} other {# ta variant}}",
+          "add": "Variant qo'shish",
+          "emptyCta": "Birinchi variantni qo'shish",
+          "edit": "Tahrirlash",
+          "remove": "O'chirish",
+          "moveUp": "Yuqoriga",
+          "moveDown": "Pastga",
+          "unnamed": "Yangi variant",
+          "value": "Identifikator",
+          "valueHint": "lotin harflari, raqam, _ yoki - (RU dan avtomatik to'ldiriladi)",
+          "labelRu": "Nomi",
+          "labelUz": "Nomi",
+          "labelEn": "Name",
+          "color": "Rang",
+          "colorPicker": "Rangni tanlash",
+          "colorClear": "Tozalash",
+          "colorHint": "majburiy emas — hex (#ff0000) belgilang, filtrda swatch chiqadi",
+          "addTitle": "Yangi variant",
+          "editTitle": "Variantni tahrirlash",
+          "dialogSubtitle": "Uchta tilda nomini to'ldiring. Identifikator RU dan avtomatik to'ldiriladi.",
+          "save": "Qo'shish",
+          "apply": "Saqlash",
+          "cancel": "Bekor qilish",
+          "errors": {
+            "valueRequired": "Identifikatorni to'ldiring.",
+            "valueInvalid": "Identifikator harfdan boshlanishi va faqat lotin harflari, raqam, _ yoki - bo'lishi kerak.",
+            "valueDuplicate": "Bunday identifikator ro'yxatda allaqachon bor.",
+            "labelRuRequired": "Nomini (RU) to'ldiring.",
+            "labelUzRequired": "Nomini (UZ) to'ldiring.",
+            "labelEnRequired": "Nomini (EN) to'ldiring.",
+            "colorInvalid": "Rang hex formatida bo'lishi kerak, masalan #ef4444."
+          }
+        },
+        "range": {
+          "title": "Qiymatlar oralig'i",
+          "min": "Minimum",
+          "max": "Maksimum",
+          "step": "Qadam",
+          "unit": {
+            "ru": "Birlik (RU)",
+            "uz": "Birlik (UZ)",
+            "en": "Unit (EN)"
+          }
+        },
+        "errors": {
+          "generic": "Saqlab bo'lmadi.",
+          "key_required": "Kalitni to'ldiring.",
+          "key_invalid": "Kalit harfdan boshlanishi va faqat lotin harflari, raqam, _ bo'lishi kerak.",
+          "key_too_long": "Kalit juda uzun (maksimum 32).",
+          "key_exists": "Bunday kalit bu kategoriyada allaqachon bor.",
+          "label_required": "Nomini barcha tillarda to'ldiring.",
+          "options_required": "Kamida bitta variant qo'shing.",
+          "options_too_many": "Variantlar juda ko'p (maksimum 50).",
+          "option_value_required": "Variantning value'si bo'lishi kerak.",
+          "option_value_invalid": "Value: faqat lotin harflari, raqam, defis va _.",
+          "option_label_required": "Variant nomini barcha tillarda to'ldiring.",
+          "range_invalid": "Minimum maksimumdan kichik bo'lishi kerak.",
+          "category_not_found": "Kategoriya topilmadi.",
+          "not_found": "Yozuv topilmadi.",
+          "invalid_body": "Ma'lumotlar noto'g'ri."
+        }
+      }
+    },
+    "brands": {
+      "list": {
+        "title": "Brendlar",
+        "subtitle": "Mahsulot ishlab chiqaruvchilari.",
+        "create": "Brend yaratish",
+        "table": {
+          "name": "Nomi",
+          "slug": "Slug",
+          "country": "Davlat",
+          "products": "Mahsulot"
+        },
+        "empty": "Hozircha brendlar yo'q.",
+        "noCountry": "—"
+      },
+      "form": {
+        "createTitle": "Yangi brend",
+        "editTitle": "Brendni tahrirlash",
+        "fields": {
+          "name": "Nomi",
+          "slug": "URL slug",
+          "slugHint": "faqat lotin, raqam, defis",
+          "logoUrl": "Logotip URL",
+          "description": "Tavsif",
+          "country": "Davlat"
+        },
+        "submit": "Saqlash",
+        "submitting": "Saqlanmoqda…",
+        "create": "Yaratish",
+        "delete": "O'chirish",
+        "deleteConfirm": "Brendni o'chirasizmi? Mahsulotlar qoladi, lekin brendsiz.",
+        "cancel": "Bekor qilish"
+      }
+    },
+    "branches": {
+      "list": {
+        "title": "Filiallar",
+        "subtitle": "O'zini olib ketish nuqtalari va omborlar.",
+        "create": "Filial yaratish",
+        "table": {
+          "name": "Nomi",
+          "address": "Manzil",
+          "phone": "Telefon",
+          "geo": "Geo-pozitsiya",
+          "status": "Holat"
+        },
+        "empty": "Hozircha filiallar yo'q.",
+        "geoYes": "✓",
+        "geoNo": "—",
+        "active": "Faol",
+        "inactive": "Yashirilgan"
+      },
+      "form": {
+        "createTitle": "Yangi filial",
+        "editTitle": "Filialni tahrirlash",
+        "fields": {
+          "nameRu": "Nomi (RU)",
+          "nameUz": "Nomi (UZ)",
+          "nameEn": "Name (EN)",
+          "slug": "Slug (CSV import uchun)",
+          "slugHint": "Lotin, raqam, defis; tashqi integratsiyalar uchun barqaror URL-id. Bo'sh qoldirish mumkin.",
+          "addressRu": "Manzil (RU)",
+          "addressUz": "Manzil (UZ)",
+          "addressEn": "Address (EN)",
+          "phone": "Telefon",
+          "workingHours": "Ish soatlari",
+          "latitude": "Kenglik",
+          "longitude": "Uzunlik",
+          "locationSection": "Xaritada joylashuv",
+          "locationSet": "Belgilangan",
+          "locationNotSet": "Belgilanmagan",
+          "isActive": "Faol (xaridorlar ko'radi)"
+        },
+        "locationPicker": {
+          "searchPlaceholder": "Manzil yoki joy izlash…",
+          "locateMe": "Mening joylashuvimni ishlatish",
+          "locateError": "Joylashuv aniqlanmadi.",
+          "mapAria": "Filial koordinatalari uchun xarita",
+          "hint": "Xaritani bosing, markerni torting yoki qidiruvdan foydalaning.",
+          "clear": "Tozalash",
+          "layers": {
+            "esriStreets": "Esri Streets (CIS uchun yangilangan)",
+            "detailed": "OSM Batafsil (uy raqamlari)",
+            "streets": "Carto Zamonaviy",
+            "satellite": "Sun'iy yo'ldosh",
+            "hybrid": "Gibrid (sun'iy yo'ldosh + nomlar)"
+          },
+          "yandexMissingKey": "Yandex Maps API kaliti sozlanmagan",
+          "yandexMissingKeyHint": "Yandex ishlab chiquvchi kabinetidan kalit oling va quyidagi .env o'zgaruvchini qo'shing. Sozlanmaguncha Leaflet-fallback ishlatiladi.",
+          "yandexLayers": {
+            "scheme": "Sxema",
+            "hybrid": "Gibrid",
+            "satellite": "Sun'iy yo'ldosh"
+          },
+          "quickCitiesLabel": "Tezkor o'tish",
+          "cities": {
+            "tashkent": "Toshkent",
+            "samarkand": "Samarqand",
+            "bukhara": "Buxoro",
+            "namangan": "Namangan",
+            "andijan": "Andijon",
+            "fergana": "Farg'ona"
+          },
+          "resolvedAddress": "Manzil",
+          "resolvingAddress": "Manzil aniqlanmoqda…",
+          "unresolvedAddress": "Manzil topilmadi — koordinatalar saqlanadi.",
+          "copyCoords": "Nusxalash",
+          "copyCoordsDone": "Nusxalandi",
+          "copyCoordsError": "Nusxalash amalga oshmadi."
+        },
+        "submit": "Saqlash",
+        "submitting": "Saqlanmoqda…",
+        "create": "Yaratish",
+        "delete": "O'chirish",
+        "deleteConfirm": "Filialni o'chirasizmi? O'zini olib ketish buyurtmalari bog'liqliksiz qoladi.",
+        "cancel": "Bekor qilish"
+      }
+    },
+    "payments": {
+      "list": {
+        "title": "To'lovlar va qaytarishlar",
+        "subtitle": "Uniteller to'lovlari, COD buyurtmalari va qaytarishlar boshqaruvi.",
+        "searchPlaceholder": "Buyurtma raqami yoki mijoz emaili…",
+        "filterStatus": "Status",
+        "filterAllStatus": "Barcha statuslar",
+        "filterProvider": "Provayder",
+        "filterAllProvider": "Barcha provayderlar",
+        "table": {
+          "order": "№ buyurtma",
+          "createdAt": "Sana",
+          "customer": "Mijoz",
+          "provider": "Provayder",
+          "amount": "Summa",
+          "card": "Karta",
+          "status": "Status"
+        },
+        "empty": "Tanlangan filtr bo'yicha to'lov topilmadi."
+      },
+      "detail": {
+        "back": "← To'lovlar ro'yxatiga",
+        "title": "{number} buyurtma to'lovi",
+        "createdAt": "Yaratilgan {date}",
+        "summary": {
+          "title": "Sarlavha",
+          "order": "Buyurtma",
+          "provider": "Provayder",
+          "amount": "Summa",
+          "refundable": "Qaytarish mumkin",
+          "capturedAt": "Hisobdan chiqdi",
+          "updatedAt": "Yangilandi"
+        },
+        "uniteller": {
+          "title": "Uniteller / mijoz",
+          "customer": "Mijoz",
+          "orderIdp": "Order_IDP",
+          "billnumber": "Billnumber (RRN)",
+          "responseCode": "Response code",
+          "cardMask": "Karta maskasi"
+        },
+        "refunds": {
+          "title": "Qaytarishlar",
+          "createdAt": "Sana",
+          "amount": "Summa",
+          "reason": "Sabab",
+          "status": "Status"
+        },
+        "logs": {
+          "title": "Operatsiyalar jurnali (PaymentLog)",
+          "empty": "Yozuvlar yo'q.",
+          "createdAt": "Qachon",
+          "action": "Harakat",
+          "statusCode": "Kod",
+          "errorMessage": "Xato"
+        },
+        "webhooks": {
+          "title": "Uniteller webhook hodisalari",
+          "empty": "Bu Order_IDP uchun callback'lar yo'q.",
+          "receivedAt": "Qabul qilindi",
+          "eventType": "Hodisa",
+          "externalId": "External ID",
+          "processed": "Qayta ishlandi",
+          "pending": "Qayta ishlanmoqda"
+        }
+      },
+      "statuses": {
+        "pending": "Kutmoqda",
+        "captured": "Hisobdan chiqdi",
+        "failed": "Xato",
+        "cancelled": "Bekor qilindi",
+        "refunded": "Qaytarish",
+        "partially_refunded": "Qisman qaytarish"
+      },
+      "providers": {
+        "uniteller": "Uniteller",
+        "cod": "Naqd to'lov"
+      },
+      "refundStatuses": {
+        "pending": "Qayta ishlanmoqda",
+        "completed": "Bajarildi",
+        "failed": "Xato"
+      },
+      "refund": {
+        "trigger": "Pulni qaytarish",
+        "title": "Pulni qaytarish",
+        "remaining": "Qaytarish mumkin: {amount} {currency}",
+        "amount": "Summa ({currency})",
+        "reason": "Qaytarish sababi",
+        "reasonPlaceholder": "Masalan: yaroqsiz mahsulot, mijoz bekor qildi",
+        "submit": "Qaytarishni amalga oshirish",
+        "submitting": "Qaytarilyapti…",
+        "cancel": "Bekor qilish",
+        "successTitle": "Qaytarish bajarildi",
+        "successBody": "{amount} {currency} qaytarildi."
+      },
+      "recheck": {
+        "trigger": "Statusni yangilash",
+        "submitting": "Yangilanmoqda…",
+        "successChanged": "Status yangilandi: {status}",
+        "successUnchanged": "Status o'zgarmadi: {status}",
+        "disabledCod": "COD uchun recheck mavjud emas"
+      },
+      "errors": {
+        "invalid_body": "So'rovni qayta ishlab bo'lmadi.",
+        "invalid_amount": "Summa musbat son bo'lishi kerak.",
+        "amount_exceeds_remaining": "Summa qaytarish uchun mavjud qoldiqdan oshib ketdi.",
+        "not_refundable": "Bu to'lovni hozirgi statusda qaytarib bo'lmaydi.",
+        "payment_not_found": "To'lov topilmadi.",
+        "provider_error": "Uniteller xato qaytardi. Keyinroq urinib ko'ring.",
+        "provider_misconfigured": "Uniteller kalitlari sozlanmagan (UNITELLER_*). Adminga murojaat qiling.",
+        "cod_recheck_unsupported": "Naqd to'lov uchun recheck mavjud emas.",
+        "no_uniteller_idp": "To'lovda Order_IDP yo'q — u Uniteller'ga yetib bormagan.",
+        "reason_too_short": "Sabab juda qisqa (minimum 3 belgi).",
+        "reason_too_long": "Sabab juda uzun (maksimum 500 belgi).",
+        "generic": "Operatsiyani bajarib bo'lmadi."
+      },
+      "bulkRefund": {
+        "selected": "{count, plural, one {# to'lov tanlandi} other {# to'lov tanlandi}}",
+        "selectAll": "Hammasini tanlash",
+        "selectRow": "To'lovni tanlash",
+        "modeLegend": "Qaytarish rejimi",
+        "modeFull": "To'liq qoldiq",
+        "modeFixed": "Belgilangan summa",
+        "amountLabel": "Har to'lov uchun summa",
+        "reasonLabel": "Sabab",
+        "reasonPlaceholder": "Masalan: partiya nuqsonli",
+        "reasonRequired": "Sababni ko'rsating (minimum 3 belgi).",
+        "invalidAmount": "Summa musbat son bo'lishi kerak.",
+        "apply": "Tanlanganlarni qaytarish",
+        "applying": "Qaytarilyapti…",
+        "clear": "Tanlovni bekor qilish",
+        "confirm": "{count, plural, one {# to'lov} other {# to'lov}} bo'yicha pul qaytarilsinmi? Uniteller qaytarishlari — qaytarib bo'lmaydi.",
+        "successAll": "{count, plural, one {# to'lov} other {# to'lov}} bo'yicha qaytarildi.",
+        "successPartial": "{processed} ta to'lov bo'yicha qaytarildi, {skipped} ta o'tkazib yuborildi (qaytarib bo'lmaydi yoki provayder xatosi).",
+        "error": "Bulk-qaytarishni bajarib bo'lmadi."
+      }
+    },
+    "stock": {
+      "list": {
+        "title": "Filiallar bo'yicha qoldiqlar",
+        "subtitle": "Omborlarda mahsulot qoldiqlarini boshqarish. Miqdorni o'zgartirish — audit uchun majburiy izoh bilan.",
+        "branch": "Filial",
+        "searchPlaceholder": "SKU yoki mahsulot nomi…",
+        "lowStockOnly": "Faqat tugayotgan (≤ 5)",
+        "import": "CSV import",
+        "summary": "{count, plural, one {# pozitsiya} other {# pozitsiya}}",
+        "empty": "Tanlangan filtr bo'yicha hech narsa topilmadi.",
+        "noBranches": "Faol filial yo'q. «Filiallar» bo'limida filial yarating.",
+        "table": {
+          "item": "Mahsulot",
+          "product": "Mahsulot",
+          "sku": "SKU",
+          "variant": "Variant",
+          "quantity": "Miqdori",
+          "reserved": "Rezerv",
+          "available": "Mavjud",
+          "stock": "Qoldiq",
+          "status": "Holati",
+          "totalReserved": "Jami {qty} · rezerv {reserved}",
+          "updatedAt": "Yangilangan",
+          "actions": "Amallar",
+          "historyAction": "Tarix"
+        },
+        "status": {
+          "ok": "Mavjud",
+          "low": "Tugayapti",
+          "out": "Qolmagan"
+        },
+        "statusLabel": "Holati",
+        "sortLabel": "Saralash",
+        "sortOptions": {
+          "available_asc": "Mavjud: kam → ko'p",
+          "available_desc": "Mavjud: ko'p → kam",
+          "updated_desc": "Yangilangan: yangi yuqorida",
+          "updated_asc": "Yangilangan: eski yuqorida",
+          "sku_asc": "SKU: A → Z"
+        },
+        "availableRange": "Mavjud diapazoni",
+        "availableMinPlaceholder": "Dan",
+        "availableMaxPlaceholder": "Gacha",
+        "resetAll": "Hammasini tozalash",
+        "activeChip": {
+          "q": "Qidiruv: {value}",
+          "range": "Mavjud {min}–{max}",
+          "rangeMin": "Mavjud ≥ {min}",
+          "rangeMax": "Mavjud ≤ {max}",
+          "sort": "Saralash: {value}"
+        }
+      },
+      "history": {
+        "back": "← Qoldiqlar ro'yxatiga",
+        "title": "Tarix · {sku}",
+        "summary": "{count, plural, one {# yozuv} other {# yozuv}}",
+        "empty": "Jurnal bo'sh.",
+        "table": {
+          "when": "Qachon",
+          "action": "Amal",
+          "qty": "Miqdori",
+          "reserved": "Rezerv",
+          "admin": "Admin",
+          "reason": "Sabab"
+        }
+      },
+      "adjust": {
+        "trigger": "O'zgartirish",
+        "title": "Qoldiqni tuzatish · {sku} ({product})",
+        "current": "Hozirgi miqdor: {qty}",
+        "previewCurrent": "Hozir",
+        "previewNew": "Keyin",
+        "modeLegend": "Rejim",
+        "mode": {
+          "set": "O'rnatish",
+          "inc": "Qo'shish",
+          "dec": "Hisobdan chiqarish"
+        },
+        "modeDesc": {
+          "set": "Aniq miqdorga almashtirish",
+          "inc": "Hozirgiga qo'shish",
+          "dec": "Hozirgidan ayirish"
+        },
+        "valueLabel": {
+          "set": "Yangi miqdor",
+          "inc": "Qancha qo'shish",
+          "dec": "Qancha hisobdan chiqarish"
+        },
+        "presetWriteOffAll": "Hammasini hisobdan chiqarish",
+        "reason": "Sabab (audit uchun)",
+        "reasonPresets": {
+          "inventory_recount": "Inventarizatsiya",
+          "shipment_received": "Tovar kelib tushdi",
+          "damaged": "Yaroqsiz / shikast",
+          "offline_sale": "Offline sotuv",
+          "return": "Qaytarish",
+          "other": "Boshqa (pastda yozing)"
+        },
+        "reasonPlaceholder": "Masalan: inventarizatsiya, kelib tushdi, yaroqsiz",
+        "reasonNotePlaceholder": "Tafsilot (ixtiyoriy)",
+        "reasonNotePlaceholderRequired": "Sababni yozing (kamida 3 belgi)",
+        "submit": "Saqlash",
+        "submitting": "Saqlanyapti…",
+        "cancel": "Bekor qilish",
+        "successTitle": "{sku} yangilandi",
+        "successBody": "Qoldiq: {old} → {new}"
+      },
+      "create": {
+        "trigger": "Qo'shish",
+        "triggerHint": "Ushbu filial uchun qoldiq yozuvini yaratish",
+        "title": "Yangi qoldiq yozuvi",
+        "subtitle": "{sku} · {branch}",
+        "missingHint": "Yozuv hali yo'q — boshlang'ich miqdor va sababni kiriting.",
+        "previewLabel": "Yaratiladi",
+        "quantityLabel": "Boshlang'ich miqdor",
+        "quantityHint": "0 — bo'sh yozuv yaratish (keyinroq to'ldirish mumkin).",
+        "presetsLabel": "Tez tanlov",
+        "reason": "Sabab (audit uchun)",
+        "reasonPresets": {
+          "initial_stock": "Boshlang'ich qoldiq",
+          "shipment_received": "Tovar kelishi",
+          "inventory_recount": "Inventarizatsiya",
+          "transfer_in": "Omborni ko'chirish",
+          "other": "Boshqa (quyida ko'rsating)"
+        },
+        "reasonNotePlaceholder": "Izoh (ixtiyoriy)",
+        "reasonNotePlaceholderRequired": "Sababni tasvirlab bering (kamida 3 ta belgi)",
+        "submit": "Yozuv yaratish",
+        "submitting": "Yaratilmoqda…",
+        "cancel": "Bekor qilish",
+        "successTitle": "Yozuv yaratildi · {sku}",
+        "successBody": "{branch}: boshlang'ich qoldiq {qty}",
+        "errors": {
+          "alreadyExists": "Bu juftlik uchun yozuv allaqachon mavjud — sahifani yangilang."
+        }
+      },
+      "bulkAdjust": {
+        "trigger": "Bulk-tuzatish",
+        "title": "Bulk qoldiqlarni tuzatish · {branch}",
+        "patternLabel": "SKU-pattern",
+        "patternPlaceholder": "NB-* yoki *-PK",
+        "patternHint": "`*` wildcard sifatida ishlating. Misol: `NB-*` `NB-` bilan boshlanadigan barcha SKU'larni topadi.",
+        "modeLegend": "Rejim",
+        "mode": {
+          "set": "O'rnatish",
+          "inc": "Qo'shish",
+          "dec": "Hisobdan chiqarish"
+        },
+        "valueLabel": {
+          "set": "Yangi miqdor",
+          "inc": "Qancha qo'shish",
+          "dec": "Qancha hisobdan chiqarish"
+        },
+        "reason": "Sabab (audit uchun)",
+        "reasonPlaceholder": "Masalan: nuqsonli partiya, inventarizatsiya",
+        "submit": "Hammasiga qo'llash",
+        "submitting": "Qo'llanyapti…",
+        "cancel": "Bekor qilish",
+        "patternRequired": "SKU-pattern ko'rsating.",
+        "invalidValue": "Miqdor butun manfiy bo'lmagan son bo'lishi kerak.",
+        "confirm": "«{branch}» filialidagi barcha `{pattern}` SKU'larga tuzatish qo'llansinmi?",
+        "noMatch": "`{pattern}` pattern'iga hech narsa mos kelmadi.",
+        "successAll": "{count, plural, one {# pozitsiya} other {# pozitsiya}} yangilandi.",
+        "successPartial": "{processed} yangilandi, {skipped} o'tkazib yuborildi (no-op yoki DB xato).",
+        "error": "Bulk-tuzatishni bajarib bo'lmadi."
+      },
+      "import": {
+        "title": "Qoldiqlarni import qilish",
+        "subtitle": "`sku`, `branch_id` (yoki `branch_slug`), `quantity` ustunlari bilan CSV yuklang. Mavjud qoldiqlar yangilanadi (upsert).",
+        "hint": "Ustunlar: `sku`, `branch_id` YOKI `branch_slug`, `quantity`. Maksimum 1000 qator.",
+        "submit": "Import qilish",
+        "submitting": "Importlanyapti…",
+        "result": "Importlandi: {processed}",
+        "skippedSummary": "O'tkazib yuborilgan qatorlar: {count}",
+        "skippedRow": "Qator {row} (SKU {sku})",
+        "errors": {
+          "empty": "Fayl bo'sh.",
+          "missing_columns": "CSV'da majburiy ustunlar yo'q: `sku`, `quantity` va `branch_id` yoki `branch_slug`.",
+          "too_many_rows": "Juda ko'p qator (maksimum 1000).",
+          "generic": "Import qilib bo'lmadi."
+        }
+      },
+      "errors": {
+        "invalid_body": "So'rovni qayta ishlab bo'lmadi.",
+        "invalid_value": "Miqdor butun manfiy bo'lmagan son bo'lishi kerak.",
+        "not_found": "Yozuv topilmadi.",
+        "has_reserved": "O'chirib bo'lmaydi — rezerv qilingan birliklar mavjud.",
+        "invalid_relation": "Ko'rsatilgan mahsulot yoki filial topilmadi.",
+        "reason_too_short": "Sabab juda qisqa (minimum 3 belgi).",
+        "reason_too_long": "Sabab juda uzun (maksimum 500 belgi).",
+        "generic": "Operatsiyani bajarib bo'lmadi."
+      }
+    },
+    "orders": {
+      "list": {
+        "title": "Buyurtmalar",
+        "subtitle": "Buyurtmalarni qidirish, filtrlash va statusini boshqarish.",
+        "searchPlaceholder": "Buyurtma raqami yoki mijoz emaili…",
+        "search": "Topish",
+        "filterAll": "Barcha statuslar",
+        "table": {
+          "number": "№ buyurtma",
+          "createdAt": "Sana",
+          "customer": "Mijoz",
+          "items": "Mahsulotlar",
+          "total": "Jami",
+          "payment": "To'lov",
+          "status": "Status"
+        },
+        "empty": "Tanlangan filtr bo'yicha buyurtma topilmadi.",
+        "itemsCount": "{count, plural, one {# mahsulot} other {# mahsulot}}",
+        "open": "Ochish",
+        "fromDate": "Sanadan",
+        "toDate": "Sanagacha",
+        "dateRange": "Sana diapazoni",
+        "apply": "Qo'llash",
+        "reset": "Bekor qilish"
+      },
+      "detail": {
+        "back": "← Buyurtmalar ro'yxatiga",
+        "title": "Buyurtma {number}",
+        "createdAt": "Rasmiylashtirilgan {date}",
+        "customer": {
+          "title": "Xaridor",
+          "name": "Ism",
+          "email": "Email",
+          "phone": "Telefon"
+        },
+        "delivery": {
+          "title": "Yetkazib berish",
+          "method": "Usul",
+          "courier": "Kuryer",
+          "pickup": "Olib ketish",
+          "address": "Manzil",
+          "branch": "Filial",
+          "comment": "Izoh"
+        },
+        "items": {
+          "title": "Buyurtma tarkibi",
+          "name": "Nomi",
+          "qty": "Soni",
+          "price": "Narxi",
+          "sum": "Jami"
+        },
+        "totals": {
+          "title": "Jami",
+          "subtotal": "Subtotal",
+          "delivery": "Yetkazib berish",
+          "discount": "Chegirma",
+          "total": "Jami"
+        },
+        "payments": {
+          "title": "To'lovlar",
+          "provider": "Provayder",
+          "status": "Status",
+          "amount": "Summa",
+          "billnumber": "Billnumber",
+          "card": "Karta",
+          "capturedAt": "Captured",
+          "empty": "To'lovlar yo'q."
+        },
+        "refunds": {
+          "title": "Qaytarishlar",
+          "empty": "Qaytarishlar yo'q."
+        },
+        "invoice": {
+          "title": "Hujjat",
+          "download": "PDF yuklash"
+        }
+      },
+      "status": {
+        "title": "Buyurtma statusi",
+        "current": "Hozir: {status}",
+        "to": "O'tkazish",
+        "reasonLabel": "Izoh (ixtiyoriy)",
+        "reasonPlaceholder": "Masalan: mahsulot tugadi",
+        "submit": "Statusni o'zgartirish",
+        "submitting": "O'zgartirilyapti…",
+        "successTitle": "Status yangilandi",
+        "successBody": "Buyurtma «{status}» statusiga o'tkazildi.",
+        "noTransitions": "«{status}» dan o'tish imkoniyati yo'q."
+      },
+      "statuses": {
+        "pending": "To'lovni kutmoqda",
+        "confirmed": "Tasdiqlangan",
+        "packing": "Yig'ish",
+        "shipped": "Yuborilgan",
+        "delivered": "Yetkazilgan",
+        "cancelled": "Bekor qilingan",
+        "refunded": "Qaytarish"
+      },
+      "errors": {
+        "invalid_body": "So'rovni qayta ishlab bo'lmadi.",
+        "illegal_transition": "Bunday status o'tishi mumkin emas.",
+        "status_unchanged": "Buyurtma allaqachon shu statusda.",
+        "not_found": "Buyurtma topilmadi.",
+        "generic": "Statusni yangilab bo'lmadi."
+      },
+      "bulk": {
+        "selected": "{count, plural, one {# buyurtma tanlandi} other {# buyurtma tanlandi}}",
+        "selectAll": "Hammasini tanlash",
+        "selectRow": "Buyurtmani tanlash",
+        "reasonPlaceholder": "Statusni o'zgartirish izohi",
+        "apply": "Statusni o'zgartirish",
+        "applying": "O'zgartirilyapti…",
+        "clear": "Tanlovni bekor qilish",
+        "confirm": "{count, plural, one {# buyurtma} other {# buyurtma}} statusini o'zgartirilsinmi?",
+        "successAll": "{count, plural, one {# buyurtma yangilandi} other {# buyurtma yangilandi}}.",
+        "successPartial": "{updated} ta yangilandi, {skipped} ta o'tkazib yuborildi (mos kelmaydigan o'tishlar).",
+        "error": "Buyurtmalarni yangilab bo'lmadi."
+      }
+    },
+    "promo": {
+      "list": {
+        "title": "Promokodlar",
+        "subtitle": "Xaridorlar uchun chegirmalar: foiz, qat'iy summa yoki bepul yetkazib berish. Amal qilish muddati va foydalanish chegarasi — ixtiyoriy.",
+        "create": "Promokod yaratish",
+        "empty": "Hozircha promokodlar yo'q. Mijozlarni jalb qilish uchun birinchisini yarating.",
+        "table": {
+          "code": "Kod",
+          "type": "Turi",
+          "value": "Chegirma",
+          "minOrder": "Min. buyurtma",
+          "usage": "Foydalanildi",
+          "status": "Holat"
+        },
+        "usageUnlimited": "{used} · cheksiz",
+        "usageOfLimit": "{used} / {limit}"
+      },
+      "new": {
+        "title": "Yangi promokod",
+        "subtitle": "Chegirma parametrlarini kiriting. Kod avtomatik bosh harflarga o'tkaziladi.",
+        "breadcrumb": "Yaratish"
+      },
+      "edit": {
+        "title": "Promokod · {code}",
+        "subtitle": "O'zgarishlar yangi buyurtmalar uchun darhol kuchga kiradi."
+      },
+      "types": {
+        "percent": "Foiz",
+        "fixed": "Qat'iy summa",
+        "free_delivery": "Bepul yetkazib berish"
+      },
+      "status": {
+        "active": "Faol",
+        "inactive": "O'chirilgan"
+      },
+      "form": {
+        "fields": {
+          "code": "Kod",
+          "codeHint": "Lotin harflari, raqamlar, «_» yoki «-». 3–64 ta belgi. UPPER saqlanadi.",
+          "type": "Chegirma turi",
+          "minOrder": "Minimal buyurtma summasi (tiyin)",
+          "minOrderHint": "0 = chegara yo'q. 1 so'm = 100 tiyin.",
+          "startsAt": "Boshlanishi",
+          "endsAt": "Tugashi",
+          "usageLimit": "Foydalanish chegarasi",
+          "usageLimitUnlimited": "Cheksiz",
+          "usageLimitHint": "Bo'sh = cheksiz. Chegara faqat to'lov captured bo'lganda oshadi.",
+          "isActive": "Faol"
+        },
+        "valueLabel": {
+          "percent": "Chegirma foizi (0–100)",
+          "fixed": "Chegirma summasi (tiyin)",
+          "free_delivery": "Qiymat ishlatilmaydi"
+        },
+        "valueHint": {
+          "percent": "0 dan 100 gacha butun son. Masalan, 10 = 10%.",
+          "fixed": "1 so'm = 100 tiyin. Chegirma savat summasidan oshmaydi.",
+          "free_delivery": "Chegirma yetkazib berish narxiga qo'llaniladi."
+        },
+        "usageUnlimited": "Foydalanildi: {used} (chegarasiz)",
+        "usageOfLimit": "Foydalanildi: {used} / {limit}",
+        "create": "Yaratish",
+        "submit": "Saqlash",
+        "submitting": "Saqlanmoqda…",
+        "cancel": "Bekor qilish",
+        "delete": "O'chirish",
+        "deleteConfirm": "Ushbu promokodni o'chirib tashlaysizmi? Mavjud buyurtmalardagi iz saqlanib qoladi.",
+        "created": "Promokod yaratildi.",
+        "updated": "Promokod yangilandi.",
+        "deleted": "Promokod o'chirildi."
+      },
+      "errors": {
+        "code_too_short": "Kod juda qisqa (kamida 3 ta belgi).",
+        "code_too_long": "Kod juda uzun (ko'pi bilan 64 ta belgi).",
+        "code_invalid": "Ruxsat: lotin harflari, raqamlar, «_» va «-».",
+        "code_exists": "Bunday kod bilan promokod allaqachon mavjud.",
+        "percent_out_of_range": "Foiz 0 dan 100 gacha bo'lishi kerak.",
+        "ends_before_starts": "Tugash sanasi boshlanish sanasidan keyin bo'lishi kerak.",
+        "value_required_when_type_changes": "Turini o'zgartirganda yangi qiymat ko'rsating.",
+        "value_invalid": "Qiymat manfiy bo'lmagan butun son bo'lishi kerak.",
+        "invalid_body": "So'rovni qayta ishlab bo'lmadi.",
+        "not_found": "Promokod topilmadi.",
+        "generic": "Operatsiyani bajarib bo'lmadi."
+      }
+    },
+    "customers": {
+      "list": {
+        "title": "Mijozlar",
+        "subtitle": "Qidirish, rol bo'yicha filtrlash, rollarni o'zgartirish va parolni tiklash.",
+        "searchPlaceholder": "Email, telefon yoki ism…",
+        "filterRole": "Rol",
+        "filterAllRoles": "Barcha rollar",
+        "summary": "{count, plural, one {# mijoz} other {# mijoz}}",
+        "empty": "Tanlangan filtr bo'yicha mijoz topilmadi.",
+        "table": {
+          "name": "Ism",
+          "noName": "(ismsiz)",
+          "contact": "Kontaktlar",
+          "role": "Rol",
+          "orders": "Buyurtmalar",
+          "loyalty": "Bonuslar",
+          "createdAt": "Ro'yxat",
+          "blocked": "Bloklangan"
+        }
+      },
+      "detail": {
+        "back": "← Mijozlar ro'yxatiga",
+        "noName": "(ismsiz)",
+        "blockedBadge": "Bloklangan",
+        "profile": {
+          "title": "Profil",
+          "language": "Til",
+          "loyaltyPoints": "Bonus balansi",
+          "totalSpent": "Jami sarflagan",
+          "ordersCount": "Buyurtmalar",
+          "createdAt": "Ro'yxat",
+          "updatedAt": "Yangilangan"
+        },
+        "actions": {
+          "title": "Xavfsizlik"
+        },
+        "orders": {
+          "title": "Buyurtmalar (jami {count})",
+          "empty": "Mijozda buyurtmalar yo'q.",
+          "number": "№ buyurtma",
+          "createdAt": "Sana",
+          "total": "Jami",
+          "status": "Status"
+        },
+        "addresses": {
+          "title": "Manzillar (jami {count})",
+          "empty": "Mijozda saqlangan manzillar yo'q.",
+          "default": "Asosiy"
+        },
+        "loyalty": {
+          "title": "Bonus tarixi",
+          "empty": "Bonus tranzaksiyalari yo'q.",
+          "when": "Qachon",
+          "type": "Tur",
+          "order": "Buyurtma",
+          "points": "Ballar"
+        },
+        "cards": {
+          "title": "Saqlangan kartalar",
+          "default": "Asosiy",
+          "blocked": "Bloklangan"
+        }
+      },
+      "roles": {
+        "customer": "Mijoz",
+        "manager": "Menejer",
+        "admin": "Administrator"
+      },
+      "loyaltyTypes": {
+        "earn": "Hisoblash",
+        "spend": "Sarflash"
+      },
+      "role": {
+        "title": "Rolni o'zgartirish",
+        "current": "Joriy rol: {role}",
+        "selfBlocked": "O'z rolingizni pasaytira olmaysiz (kirishni yo'qotmaslik uchun himoya).",
+        "targetLabel": "Yangi rol",
+        "reason": "Sabab (audit uchun)",
+        "reasonPlaceholder": "Masalan: menejerlikka ko'tarish, vazifalarni topshirish",
+        "submit": "Rolni o'zgartirish",
+        "submitting": "O'zgartirilyapti…",
+        "successTitle": "Rol yangilandi",
+        "successBody": "«{role}» roli tayinlandi."
+      },
+      "resetPassword": {
+        "trigger": "Parolni tiklash",
+        "title": "Mijoz parolini tiklash",
+        "reason": "Tiklash sababi",
+        "reasonPlaceholder": "Masalan: mijoz parolni yo'qotgan, telefon orqali tasdiqlangan",
+        "submit": "Vaqtincha parol yaratish",
+        "submitting": "Yaratilyapti…",
+        "cancel": "Bekor qilish",
+        "close": "Yopish",
+        "successHelp": "Vaqtincha parol yaratildi. Uni mijozga xavfsiz kanal orqali yetkazing — dialog yopilgandan keyin parol qayta ko'rsatilmaydi.",
+        "warning": "⚠️ Bu parol faqat hozir ko'rsatilgan. DB'da faqat hash saqlanadi.",
+        "copy": "Nusxalash",
+        "copied": "Parol buferga nusxalandi.",
+        "copyFailed": "Nusxalab bo'lmadi. Qo'lda tanlang.",
+        "otpUserWarning": "Diqqat: mijozda parol yo'q (OTP orqali kiradi). Reset mavjud emas — OTP-flow'dan foydalaning."
+      },
+      "errors": {
+        "invalid_body": "So'rovni qayta ishlab bo'lmadi.",
+        "user_not_found": "Mijoz topilmadi.",
+        "cannot_self_demote": "O'z rolingizni pasaytira olmaysiz.",
+        "cannot_self_block": "O'zingizni bloklab bo'lmaydi.",
+        "role_unchanged": "Bu rol allaqachon tayinlangan.",
+        "already_blocked": "Mijoz allaqachon bloklangan.",
+        "not_blocked": "Mijoz bloklanmagan.",
+        "forbidden": "Bu operatsiya uchun ruxsat yetarli emas.",
+        "user_has_no_password": "Mijozda parol yo'q (OTP-only login). Reset mumkin emas.",
+        "reason_too_short": "Sabab juda qisqa (minimum 3 belgi).",
+        "reason_too_long": "Sabab juda uzun (maksimum 500 belgi).",
+        "generic": "Operatsiyani bajarib bo'lmadi."
+      },
+      "block": {
+        "blockTrigger": "Bloklash",
+        "unblockTrigger": "Blokdan chiqarish",
+        "blockTitle": "Mijozni bloklash",
+        "unblockTitle": "Mijozni blokdan chiqarish",
+        "blockHelp": "Bloklangan mijoz email yoki OTP orqali kira olmaydi. Buyurtmalar va bonuslar tarixi saqlanadi.",
+        "unblockHelp": "Blokni olib tashlash — mijoz qayta kira oladi.",
+        "reason": "Sabab (audit uchun)",
+        "reasonPlaceholder": "Masalan: shubhali faollik, qoidalar buzilishi",
+        "blockSubmit": "Bloklash",
+        "unblockSubmit": "Blokdan chiqarish",
+        "submitting": "Qo'llanyapti…",
+        "cancel": "Bekor qilish",
+        "blockSuccess": "Mijoz bloklandi.",
+        "unblockSuccess": "Mijoz blokdan chiqarildi."
+      },
+      "bulkRole": {
+        "selected": "{count, plural, one {# mijoz tanlandi} other {# mijoz tanlandi}}",
+        "selectAll": "Hammasini tanlash",
+        "selectRow": "Mijozni tanlash",
+        "targetLabel": "Yangi rol",
+        "reasonLabel": "Sabab (audit uchun)",
+        "reasonPlaceholder": "Masalan: yangi menejerlar guruhi",
+        "reasonRequired": "Sababni ko'rsating (minimum 3 belgi).",
+        "apply": "Rolni tayinlash",
+        "applying": "Qo'llanyapti…",
+        "clear": "Tanlovni bekor qilish",
+        "confirm": "{count, plural, one {# mijozga} other {# mijozga}} «{role}» roli tayinlansinmi?",
+        "successAll": "{count, plural, one {# mijoz yangilandi} other {# mijoz yangilandi}}.",
+        "successPartial": "{processed} yangilandi, {skipped} o'tkazib yuborildi (self-demote/forbidden/already-set).",
+        "error": "Bulk-rol o'zgartirishni bajarib bo'lmadi."
+      }
+    },
+    "features": {
+      "list": {
+        "title": "Feature-flaglar",
+        "subtitle": "Ilovaning runtime sozlamalari. O'zgarishlar ≤ 60 sekundda kuchga kiradi (Redis TTL).",
+        "empty": "Hozircha feature-flaglar yo'q. Ular DB migratsiyalari orqali qo'shiladi.",
+        "seedHint": "Yangi feature-flaglar DB migratsiyalari orqali qo'shiladi (qarang `packages/db/prisma/migrations/`). UI faqat `value`'ni o'zgartirishga ruxsat beradi.",
+        "toggleAriaLabel": "{key} ni almashtirish",
+        "toggleSuccess": "{key} yangilandi",
+        "table": {
+          "key": "Kalit",
+          "type": "Turi",
+          "value": "Qiymat",
+          "updatedAt": "Yangilangan"
+        }
+      },
+      "audit": {
+        "title": "O'zgarishlar tarixi",
+        "limitHint": "Oxirgi {limit} yozuv ko'rsatilgan. To'liq jurnal — /admin/audit?group=feature.",
+        "empty": "Hozircha o'zgarishlar tarixi yo'q. Birinchi PATCH'dan keyin yozuvlar paydo bo'ladi.",
+        "actions": {
+          "updated": "Qiymat o'zgartirildi",
+          "invalidated": "Kesh tozalandi"
+        },
+        "arrow": "→",
+        "by": "admin: {email}",
+        "unknownAdmin": "noma'lum",
+        "revert": "Qaytarish",
+        "revertAriaLabel": "Ushbu qiymatga qaytarish",
+        "revertTitle": "Ushbu qiymatga qaytarish",
+        "revertNoOpTitle": "Bu qiymat hozir o'rnatilgan",
+        "revertConfirmTitle": "O'zgarishni qaytarish",
+        "revertConfirmBody": "`{key}` ni shu o'zgarishdan oldingi qiymatga o'rnatish. Bu yangi PATCH sifatida audit-log'ga yoziladi.",
+        "revertProceed": "Ha, qaytarish",
+        "revertCancel": "Bekor qilish",
+        "revertSuccess": "{key} «{value}» ga qaytarildi"
+      },
+      "confirm": {
+        "title": "O'zgarishni tasdiqlang",
+        "body": "Siz yuqori xavfli flag'ni `{key}` o'zgartirmoqdasiz. Bu barcha foydalanuvchilar uchun production-flow'ga ta'sir qiladi. Aminmisiz?",
+        "proceed": "Ha, o'zgartirish",
+        "cancel": "Bekor qilish"
+      },
+      "gate": {
+        "title": "Faqat admin roli uchun",
+        "body": "Bu flag moliyaviy oqimga ta'sir qiladi va faqat administratorlar tomonidan o'zgartirilishi mumkin. Sizning rolingiz ({role}) faqat qiymatni ko'rishi mumkin.",
+        "currentValueLabel": "Joriy qiymat"
+      },
+      "edit": {
+        "title": "Feature · {key}",
+        "subtitle": "Turi: {type}. Oxirgi yangilanish: {updatedAt}."
+      },
+      "types": {
+        "number": "Son",
+        "boolean": "Mantiqiy",
+        "string": "Satr"
+      },
+      "form": {
+        "valueLabel": {
+          "number": "Yangi sonli qiymat",
+          "boolean": "Qiymat",
+          "string": "Yangi satr qiymati"
+        },
+        "hint": {
+          "number": "Butun yoki kasr son (ajratuvchi — nuqta). Float sifatida parsed.",
+          "boolean": "Aniq biri: `true` (ha) yoki `false` (yo'q). Boshqa har qanday qiymat e'tiborga olinmaydi.",
+          "string": "Ixtiyoriy satr. 2000 belgigacha."
+        },
+        "boolean": {
+          "true": "Ha (true)",
+          "false": "Yo'q (false)"
+        },
+        "submit": "Saqlash",
+        "submitting": "Saqlanmoqda…",
+        "cancel": "Bekor qilish",
+        "updated": "Feature yangilandi. Kesh tozalandi.",
+        "invalidate": "Keshni tozalash",
+        "invalidating": "Tozalanmoqda…",
+        "invalidated": "Kesh tozalandi. Yangi qiymat darhol qo'llaniladi."
+      },
+      "errors": {
+        "invalid_body": "So'rovni qayta ishlab bo'lmadi.",
+        "invalid_number": "Qiymat son bo'lishi kerak.",
+        "invalid_boolean": "Qiymat `true` yoki `false` bo'lishi kerak.",
+        "empty_string": "Satr bo'sh bo'lishi mumkin emas.",
+        "not_found": "Feature topilmadi.",
+        "generic": "Operatsiyani bajarib bo'lmadi."
+      }
+    },
+    "imagesCleanup": {
+      "breadcrumb": "Rasm tozalash",
+      "title": "Orphan rasmlarni tozalash",
+      "subtitle": "Public/uploads/products/ ichidagi mahsulot variantlariga bog'liq bo'lmagan fayllarni o'chiradi.",
+      "intro": {
+        "title": "Bu nima",
+        "body": "Variant rasmlari almashtirilganda yoki o'chirilganda eski fayllar diskda qoladi. Bu vosita ularni topib o'chiradi. Avval dry-run, keyin haqiqiy tozalashni ishga tushiring."
+      },
+      "fields": {
+        "minAgeHours": "Fayllarning minimal yoshi (soat)",
+        "minAgeHint": "Yangi (yuklash davomida) fayllarni o'chirmaslik uchun guard. Default — 24 soat."
+      },
+      "buttons": {
+        "preview": "Oldindan ko'rish (dry-run)",
+        "run": "Orphan fayllarni o'chirish"
+      },
+      "runConfirm": "Haqiqatan orphan fayllarni o'chirasizmi? Bu amalni qaytarib bo'lmaydi.",
+      "toastSuccess": "O'chirildi: {count} papka. Bo'shatildi: {freed}.",
+      "result": {
+        "previewTitle": "Oldindan ko'rish (hech narsa o'chirilmadi)",
+        "realTitle": "Tozalash tugadi",
+        "minAgeBadge": "Yosh ≥ {hours}s",
+        "stat": {
+          "scanned": "Diskdagi papkalar",
+          "referenced": "Bazada ishlatilgan",
+          "orphans": "Orphan nomzodlar",
+          "toDelete": "O'chiriladi",
+          "deleted": "O'chirildi"
+        },
+        "bytesFreed": "Bo'shatildi: {freed}.",
+        "sampleTitleDry": "O'chiriladigan papkalar ({n})",
+        "sampleTitleReal": "O'chirilgan papkalar ({n})",
+        "errorsTitle": "O'chirish xatolari: {n}"
+      },
+      "error": {
+        "rate_limited": "Juda ko'p so'rov — bir daqiqa kuting.",
+        "invalid_body": "Noto'g'ri parametrlar.",
+        "internal_error": "Server xatosi.",
+        "network": "Server bilan ulanish yo'q.",
+        "generic": "Tozalash bajarilmadi."
+      }
+    },
+    "audit": {
+      "title": "Harakatlar jurnali",
+      "subtitle": "Barcha admin operatsiyalari (status o'zgarishi, refund, role change, block, …) bitta timeline'da.",
+      "filterGroup": "Hodisa turi",
+      "filterAllGroups": "Barcha hodisalar",
+      "groups": {
+        "user": "Mijozlar",
+        "order": "Buyurtmalar",
+        "refund": "Qaytarishlar",
+        "recheck": "Recheck",
+        "cancel": "Bekor qilishlar",
+        "webhook": "Webhook",
+        "feature": "Feature-flaglar"
+      },
+      "searchPlaceholder": "Action yoki error bo'yicha qidirish…",
+      "fromDate": "Sanadan",
+      "toDate": "Sanagacha",
+      "dateRange": "Sana diapazoni",
+      "apply": "Qo'llash",
+      "reset": "Bekor qilish",
+      "summary": "{count, plural, one {# hodisa} other {# hodisa}}",
+      "empty": "Hodisalar topilmadi.",
+      "table": {
+        "when": "Qachon",
+        "action": "Harakat",
+        "status": "Kod",
+        "message": "Tafsilotlar",
+        "payment": "Payment ID"
+      }
+    },
+    "taxonomyErrors": {
+      "name_too_short": "Nom juda qisqa.",
+      "name_too_long": "Nom juda uzun.",
+      "name_ru_too_short": "Nom (RU) juda qisqa.",
+      "name_uz_too_short": "Nom (UZ) juda qisqa.",
+      "name_en_too_short": "Nom (EN) juda qisqa.",
+      "address_ru_too_short": "Manzil (RU) juda qisqa.",
+      "address_uz_too_short": "Manzil (UZ) juda qisqa.",
+      "address_en_too_short": "Manzil (EN) juda qisqa.",
+      "address_too_long": "Manzil juda uzun.",
+      "slug_too_short": "Slug juda qisqa.",
+      "slug_too_long": "Slug juda uzun.",
+      "slug_invalid": "Slug faqat lotin, raqam va defisni o'z ichiga oladi.",
+      "slug_exists": "Bu slug bilan yozuv mavjud.",
+      "icon_url_invalid": "Ikonka URL noto'g'ri.",
+      "logo_url_invalid": "Logotip URL noto'g'ri.",
+      "invalid_relation": "Bog'langan ob'ekt topilmadi.",
+      "invalid_body": "Formani qayta ishlab bo'lmadi.",
+      "category_in_use": "Kategoriya {count, plural, one {# mahsulotda} other {# ta mahsulotda}} ishlatilgan — o'chirib bo'lmaydi.",
+      "parent_cycle": "Kategoriya o'zining ota-kategoriyasi bo'lolmaydi.",
+      "generic": "Saqlab bo'lmadi."
+    }
+  }
+}

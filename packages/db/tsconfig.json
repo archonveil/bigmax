@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": ".",
+    "noEmit": true,
+    "types": ["node"],
+    // Prisma client generates optional fields as `T?: U | null`, что конфликтует
+    // с exactOptionalPropertyTypes при передаче `{ field: undefined }`.
+    // Локально ослабляем; в application-коде флаг остаётся включённым.
+    "exactOptionalPropertyTypes": false
+  },
+  "include": ["prisma/**/*.ts", "src/**/*.ts"],
+  "exclude": ["node_modules", "dist", "prisma/migrations"]
+}
