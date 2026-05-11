@@ -87,13 +87,13 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    working_dir: /app/packages/db
+    working_dir: /app
     command:
       - sh
-      - -c
+      - -ec
       - |
         echo "Running prisma migrate deploy..."
-        pnpm exec prisma migrate deploy --schema=prisma/schema.prisma
+        pnpm --filter @bigmax/db exec prisma migrate deploy --schema=prisma/schema.prisma
         echo "Migrations complete."
 
   # ----- Worker (BullMQ jobs: P4-T9 pull, notifications) -----

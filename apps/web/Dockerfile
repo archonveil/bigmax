@@ -22,8 +22,15 @@ ENV PNPM_HOME=/usr/local/pnpm-home
 ENV PATH=$PNPM_HOME:$PATH
 # HUSKY=0 — husky's `prepare` script пытается установить git-hooks в /app/.git/,
 # которого нет в Docker'е → fail. Этот env-flag заставляет husky no-op'ить.
-# Альтернатива --ignore-scripts ломала prisma's postinstall (`.bin/prisma`).
 ENV HUSKY=0
+
+# Prisma binary engine на bookworm требует libssl3 + openssl runtime'а.
+# Без него `Schema engine error` (engine не может прочесть DB-протокол).
+# ca-certificates — для https-calls (Uniteller, Telegram API).
+RUN apt-get update -y \
+ && apt-get install -y --no-install-recommends openssl libssl3 ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
+
 RUN corepack enable && corepack prepare pnpm@9.12.0 --activate
 
 WORKDIR /app
@@ -63,7 +70,7 @@ COPY . .
 
 # Prisma client + binary engines — нужны до next build (catalog.ts читает
 # `@bigmax/db` который re-export'ит client).
-RUN pnpm --filter @bigmax/db exec prisma generate --schema=packages/db/prisma/schema.prisma
+RUN pnpm --filter @bigmax/db exec prisma generate --schema=prisma/schema.prisma
 
 # i18n parity check — safety-net перед build'ом.
 WORKDIR /app
@@ -78,15 +85,18 @@ FROM node:22-bookworm-slim AS runner
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
-ENV PNPM_HOME=/usr/local/pnpm-home
-ENV PATH=$PNPM_HOME:$PATH
-RUN corepack enable && corepack prepare pnpm@9.12.0 --activate
+
+# Runtime SSL deps + ca-certificates (Prisma engine, Uniteller HTTPS calls).
+RUN apt-get update -y \
+ && apt-get install -y --no-install-recommends openssl libssl3 ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-# Non-root user — security best practice.
+# Non-root user с writable home (-m) — иначе corepack/pnpm пытается mkdir
+# в `/home/nextjs/.cache/` и падает с EACCES.
 RUN groupadd --system --gid 1001 nodejs \
- && useradd --system --uid 1001 --gid nodejs nextjs
+ && useradd --system --uid 1001 --gid nodejs -m -d /home/nextjs nextjs
 
 # Copy entire built app + node_modules. Pragmatic — reliable prisma resolution.
 COPY --from=builder --chown=nextjs:nodejs /app /app
@@ -100,4 +110,6 @@ EXPOSE 3000
 ENV PORT=3000 HOSTNAME=0.0.0.0
 
 WORKDIR /app/apps/web
-CMD ["pnpm", "exec", "next", "start"]
+# Запускаем next напрямую через node, без pnpm — экономим corepack-download'ы
+# на каждом container-restart'е.
+CMD ["node", "/app/node_modules/next/dist/bin/next", "start"]
