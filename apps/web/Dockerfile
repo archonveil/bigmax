@@ -1,14 +1,18 @@
 # =====================================================================
-# Бигмах web — production Next.js 14 standalone build.
+# Бигмах web — production Next.js 14 build.
 #
 # Multi-stage:
 #   1. deps    — pnpm install (workspace-aware, frozen lockfile).
-#   2. builder — prisma generate + next build (output: 'standalone').
-#   3. runner  — минимальный node-runtime с standalone output + sharp.
+#   2. builder — prisma generate + next build (full type-check + i18n parity).
+#   3. runner  — копируем целиком собранное app + node_modules.
 #
-# Sharp + AVIF: используем bookworm-slim вместо alpine — gwarantирует
-# libvips + libavif prebuilt без extra setup'а (на alpine AVIF иногда
-# требует пересборки нативных модулей). +30Mb image size, но reliable.
+# Размер runner-образа ~400MB. Standalone-output (`output: 'standalone'` в
+# next.config.mjs) трассирует JS-deps, но не справляется с Prisma'ы
+# generated-client + binary engines в pnpm-workspace layout'е. Pragmatic
+# trade-off: чуть больше image vs reliable Prisma resolution.
+#
+# Sharp + AVIF: bookworm-slim — гарантирует libvips+libavif prebuilt без
+# extra setup'а. +30Mb image size vs alpine, но reliable AVIF encoding.
 # =====================================================================
 
 # ===== Stage 1: deps =====
@@ -20,7 +24,7 @@ RUN corepack enable && corepack prepare pnpm@9.12.0 --activate
 
 WORKDIR /app
 
-# Копируем все package.json'ы workspace'а — pnpm должен resolve'ить весь граф.
+# Workspace package.json'ы — pnpm должен resolve'ить весь dep-граф.
 COPY pnpm-workspace.yaml package.json pnpm-lock.yaml ./
 COPY apps/web/package.json apps/web/
 COPY apps/api/package.json apps/api/
@@ -45,23 +49,18 @@ RUN corepack enable && corepack prepare pnpm@9.12.0 --activate
 WORKDIR /app
 
 COPY --from=deps /app/node_modules ./node_modules
-# Workspace symlink'ы хранятся в .pnpm/ — копируем целиком.
-COPY --from=deps /app/apps ./apps
-COPY --from=deps /app/packages ./packages
 COPY . .
 
-# Prisma client — обязательная пре-сборка перед next build (catalog.ts +
-# admin-products.ts читают `@bigmax/db` который re-export'ит client).
+# Prisma client + binary engines — нужны до next build (catalog.ts читает
+# `@bigmax/db` который re-export'ит client).
 WORKDIR /app/packages/db
 RUN pnpm exec prisma generate --schema=prisma/schema.prisma
 
+# i18n parity check — safety-net перед build'ом.
+WORKDIR /app
+RUN pnpm tsx scripts/check-translation-keys.ts
+
 WORKDIR /app/apps/web
-
-# i18n parity check как safety-net — деплоить с unbalanced locale нельзя.
-RUN cd /app && pnpm tsx scripts/check-translation-keys.ts
-
-# Next build с `output: 'standalone'` собирает minimal-зависимости в
-# `.next/standalone/`, готовые к copy в runner stage без node_modules.
 RUN pnpm build
 
 
@@ -70,27 +69,18 @@ FROM node:22-bookworm-slim AS runner
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV PNPM_HOME=/usr/local/pnpm-home
+ENV PATH=$PNPM_HOME:$PATH
+RUN corepack enable && corepack prepare pnpm@9.12.0 --activate
+
 WORKDIR /app
 
-# Non-root user — security best practice для serve'я production traffic.
+# Non-root user — security best practice.
 RUN groupadd --system --gid 1001 nodejs \
  && useradd --system --uid 1001 --gid nodejs nextjs
 
-# Standalone output: `server.js` + минимальные node_modules + .next/
-COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/static ./apps/web/.next/static
-COPY --from=builder --chown=nextjs:nodejs /app/apps/web/public ./apps/web/public
-
-# Prisma client engine — standalone-build уже включает `@prisma/client` через
-# nft trace, но binary engine .so/.dylib живут отдельно в .pnpm/, копируем
-# вручную чтобы runtime-query'и работали (next-traced deps включают только
-# JS-файлы, не native binaries).
-COPY --from=builder --chown=nextjs:nodejs /app/node_modules/.prisma/client ./node_modules/.prisma/client
-
-# Schema — нужен на runtime для Prisma'е (`prisma client` читает schema.prisma
-# для метаданных). Migrations прогоняются отдельным `migrate` сервисом из
-# `target: builder` (см. docker-compose.prod.yml).
-COPY --from=builder --chown=nextjs:nodejs /app/packages/db/prisma ./packages/db/prisma
+# Copy entire built app + node_modules. Pragmatic — reliable prisma resolution.
+COPY --from=builder --chown=nextjs:nodejs /app /app
 
 # Uploads-dir — здесь docker-compose маунтит persistent volume.
 RUN mkdir -p /app/apps/web/public/uploads/products \
@@ -100,6 +90,5 @@ USER nextjs
 EXPOSE 3000
 ENV PORT=3000 HOSTNAME=0.0.0.0
 
-# Standalone-output генерирует apps/web/server.js — entry-point. Внутри
-# next.config.mjs наш `output: 'standalone'` (см. конфиг).
-CMD ["node", "apps/web/server.js"]
+WORKDIR /app/apps/web
+CMD ["pnpm", "exec", "next", "start"]
