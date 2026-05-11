@@ -25,6 +25,13 @@ export function generateStaticParams(): Array<{ locale: Locale }> {
 
 export const dynamicParams = false;
 
+// Pages под этим layout'ом hit'ят Prisma в RSC (catalog, account, etc.).
+// `force-dynamic` отключает SSG-prerender при `next build` — без него
+// build падает с PrismaClientInitializationError'ом потому что DB на
+// этапе build'а недоступна. Pages всё равно cached через `unstable_cache`
+// на read-side (taxonomy, categories — 10min TTL).
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata({
   params,
 }: {

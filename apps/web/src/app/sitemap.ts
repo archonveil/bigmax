@@ -4,6 +4,12 @@ import type { MetadataRoute } from "next";
 import { absoluteUrl } from "@/seo/config";
 import { getCategoriesForSitemap, getProductsForSitemap } from "@/server/catalog";
 
+// Sitemap читает Prisma (categories + products). Без `force-dynamic` Next
+// пытается prerender'ить на build'е → PrismaClientInitializationError.
+// `revalidate: 3600` даёт on-demand-revalidation в runtime (раз в час).
+export const dynamic = "force-dynamic";
+export const revalidate = 3600;
+
 /**
  * Динамический sitemap.xml: home + /catalog + все категории + все товары
  * на каждой из 3 локалей. Для каждого URL добавляем `alternates.languages`
