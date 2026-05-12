@@ -54,6 +54,13 @@ RUN pnpm install --frozen-lockfile
 # ===== Stage 3: builder =====
 FROM base AS builder
 
+# NEXT_PUBLIC_* vars are baked into the bundle at build time — pass them as
+# ARGs so `next build` can inline them. Runtime env_file is too late.
+ARG NEXT_PUBLIC_SITE_URL
+ARG NEXT_PUBLIC_TELEGRAM_BOT_USERNAME
+ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
+ENV NEXT_PUBLIC_TELEGRAM_BOT_USERNAME=$NEXT_PUBLIC_TELEGRAM_BOT_USERNAME
+
 # Полная среда из deps (включая весь pnpm-граф + установленные linkers).
 COPY --from=deps /app /app
 # Source files. Не перекрывают `/app/node_modules` — в host context node_modules excluded.
