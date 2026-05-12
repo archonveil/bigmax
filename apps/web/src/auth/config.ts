@@ -52,6 +52,10 @@ declare module "next-auth" {
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   session: { strategy: "jwt" },
+  // Required when running behind a reverse proxy (Caddy). Without this,
+  // Auth.js v5 rejects the session cookie because the forwarded host doesn't
+  // match the origin it expects, causing silent logout on every page load.
+  trustHost: true,
   pages: {
     signIn: "/auth/login",
   },
