@@ -93,4 +93,6 @@ ENV PORT=3000 HOSTNAME=0.0.0.0
 
 WORKDIR /app/apps/web
 # Прямо node без pnpm — избегаем corepack-download'ы на каждом restart'е.
-CMD ["node", "/app/node_modules/next/dist/bin/next", "start"]
+# В pnpm workspace next живёт в /app/apps/web/node_modules/.bin/next (symlink
+# на /app/node_modules/.pnpm/next@14.X/node_modules/next/dist/bin/next).
+CMD ["node", "./node_modules/next/dist/bin/next", "start"]

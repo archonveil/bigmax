@@ -7,7 +7,7 @@
 #   2. runner  — копируем deps + sources, запускаем через tsx.
 #
 # Запускается в `docker-compose.yml` как сервис `worker`. Зависит от
-# postgres + redis.
+# postgres + redis. `
 # =====================================================================
 
 FROM node:22-alpine AS deps
