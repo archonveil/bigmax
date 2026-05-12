@@ -12,20 +12,19 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  # Prisma generate читает DATABASE_URL из schema.prisma, но не коннектится.
-  # Значение dummy и не используется — только чтобы valid() прошёл.
-  DATABASE_URL: postgresql://ci:ci@localhost:5432/ci_dummy
-  REDIS_URL: redis://localhost:6379
   AUTH_SECRET: ci-dummy-secret-not-used-outside-ci-at-least-32ch
   AUTH_URL: http://localhost:3000
   NEXTAUTH_SECRET: ci-dummy-secret-not-used-outside-ci-at-least-32ch
   NEXTAUTH_URL: http://localhost:3000
-  # Все секреты Uniteller / Eskiz в CI пустые — stub-коду хватает.
   UNITELLER_MODE: test
   ESKIZ_SENDER: BIGMAX
-  # NEXT_PUBLIC_* нужны при next build (baked into bundle).
+  # NEXT_PUBLIC_* baked into the bundle at build time.
   NEXT_PUBLIC_SITE_URL: http://localhost:3000
   NEXT_PUBLIC_TELEGRAM_BOT_USERNAME: ci_stub_bot
+  # DATABASE_URL and REDIS_URL are intentionally NOT set here.
+  # Worker integration/BullMQ tests use describe.skipIf(!DATABASE_URL) —
+  # if these are set but services aren't running the tests fail with ECONNREFUSED.
+  # They are only set in the e2e job which has real postgres/redis services.
 
 jobs:
   ci:
@@ -53,6 +52,8 @@ jobs:
 
       - name: Generate Prisma client
         run: pnpm --filter @bigmax/db exec prisma generate
+        env:
+          DATABASE_URL: postgresql://ci:ci@localhost:5432/ci_dummy
 
       - name: Typecheck
         run: pnpm run typecheck
