@@ -1,10 +1,12 @@
 # =====================================================================
 # Бигмах (domtextile.uz) — production stack.
 #
-# Запуск:
-#   docker compose -f docker-compose.prod.yml up -d --build
-# Миграции (одноразово после первого запуска или новых migrations):
-#   docker compose -f docker-compose.prod.yml run --rm migrate
+# Images are built in GitHub Actions and pushed to GHCR.
+# Server only pulls and restarts — no local docker build needed.
+#
+# Первый запуск / смена образов:
+#   docker compose -f docker-compose.prod.yml pull
+#   docker compose -f docker-compose.prod.yml up -d
 # Логи:
 #   docker compose -f docker-compose.prod.yml logs -f web
 # =====================================================================
@@ -23,8 +25,6 @@ services:
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
       - postgres-data:/var/lib/postgresql/data
-    # NB: НЕТ `ports:` — Postgres доступен только внутри docker-сети.
-    # Если нужен внешний доступ для бэкапов — добавь `ports: ["127.0.0.1:5432:5432"]`.
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-bigmax} -d ${POSTGRES_DB:-bigmax}"]
       interval: 5s
@@ -44,45 +44,9 @@ services:
       timeout: 5s
       retries: 20
 
-  # ----- Web (Next.js standalone) -----
-  web:
-    build:
-      context: .
-      dockerfile: apps/web/Dockerfile
-      args:
-        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-https://domtextile.uz}
-        NEXT_PUBLIC_TELEGRAM_BOT_USERNAME: ${NEXT_PUBLIC_TELEGRAM_BOT_USERNAME}
-    restart: unless-stopped
-    env_file: .env.prod
-    environment:
-      # Override URL'ов на internal-сеть docker'а — БД и Redis доступны
-      # только по service-name'у, не по localhost.
-      DATABASE_URL: "postgresql://${POSTGRES_USER:-bigmax}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-bigmax}"
-      REDIS_URL: "redis://redis:6379"
-      NODE_ENV: production
-    volumes:
-      # Persistent uploads — admin картинки переживают rebuild контейнера.
-      - uploads-data:/app/apps/web/public/uploads
-    depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      migrate:
-        condition: service_completed_successfully
-    # Web не публикует ports — Caddy reverse-proxy'ит через internal-сеть.
-
-  # ----- Migrate (one-off, gates web start) -----
-  # Использует `target: builder` — в builder-stage'е лежит полный pnpm-граф
-  # включая `prisma` CLI. Standalone runner-stage urезан и `prisma` бы
-  # пришлось копировать вручную (что хрупко при .pnpm-flat-dirs). Buildkit
-  # переиспользует кэш для builder'а: миграционный образ не пересобирается
-  # с нуля.
+  # ----- Migrate (one-off, gates web+worker start) -----
   migrate:
-    build:
-      context: .
-      dockerfile: apps/web/Dockerfile
-      target: builder
+    image: ghcr.io/archonveil/bigmax/migrate:latest
     restart: "no"
     env_file: .env.prod
     environment:
@@ -99,11 +63,28 @@ services:
         pnpm --filter @bigmax/db exec prisma migrate deploy --schema=prisma/schema.prisma
         echo "Migrations complete."
 
-  # ----- Worker (BullMQ jobs: P4-T9 pull, notifications) -----
+  # ----- Web (Next.js standalone) -----
+  web:
+    image: ghcr.io/archonveil/bigmax/web:latest
+    restart: unless-stopped
+    env_file: .env.prod
+    environment:
+      DATABASE_URL: "postgresql://${POSTGRES_USER:-bigmax}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-bigmax}"
+      REDIS_URL: "redis://redis:6379"
+      NODE_ENV: production
+    volumes:
+      - uploads-data:/app/apps/web/public/uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+
+  # ----- Worker (BullMQ) -----
   worker:
-    build:
-      context: .
-      dockerfile: apps/worker/Dockerfile
+    image: ghcr.io/archonveil/bigmax/worker:latest
     restart: unless-stopped
     env_file: .env.prod
     environment:
@@ -125,7 +106,7 @@ services:
     ports:
       - "80:80"
       - "443:443"
-      - "443:443/udp" # HTTP/3
+      - "443:443/udp"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy-data:/data
