@@ -78,6 +78,8 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      packages: read
 
     steps:
       - name: Set up SSH
@@ -90,16 +92,18 @@ jobs:
 
       - name: Pull & restart
         env:
-          GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
-          GITHUB_ACTOR: ${{ github.actor }}
+          # GITHUB_TOKEN is auto-provided and has packages:read for this repo.
+          # No separate GHCR_TOKEN secret needed.
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_ACTOR: ${{ github.actor }}
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
         run: |
           ssh "$DEPLOY_USER@$DEPLOY_HOST" \
             "set -e
              cd /opt/bigmax
-             echo '$GHCR_TOKEN' | docker login ghcr.io -u '$GITHUB_ACTOR' --password-stdin
-             docker compose -f docker-compose.prod.yml pull web worker
+             echo '$GH_TOKEN' | docker login ghcr.io -u '$GH_ACTOR' --password-stdin
+             docker compose -f docker-compose.prod.yml pull web worker migrate
              docker compose -f docker-compose.prod.yml up -d web worker
              sleep 5
              docker compose -f docker-compose.prod.yml ps
