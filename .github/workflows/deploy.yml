@@ -23,38 +23,27 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up SSH key
-        env:
-          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
-          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
         run: |
           mkdir -p ~/.ssh
-          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
+          printf '%s' "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          # Skip host-key verification — server IP is pinned via secret.
-          printf 'Host %s\n  StrictHostKeyChecking no\n  IdentityFile ~/.ssh/deploy_key\n' "$DEPLOY_HOST" > ~/.ssh/config
-          chmod 600 ~/.ssh/config
 
       - name: Sync code to server
-        env:
-          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
-          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
         run: |
           rsync -az --delete \
-            -e "ssh -F ~/.ssh/config" \
+            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
             --exclude='.git' \
             --exclude='node_modules' \
             --exclude='**/node_modules' \
             --exclude='.env*' \
             --exclude='**/.next' \
             --exclude='**/dist' \
-            ./ "$DEPLOY_USER@$DEPLOY_HOST:/opt/bigmax/"
+            ./ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:/opt/bigmax/
 
       - name: Rebuild and restart
-        env:
-          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
-          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
         run: |
-          ssh -F ~/.ssh/config "$DEPLOY_USER@$DEPLOY_HOST" \
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no \
+            ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} \
             "cd /opt/bigmax && \
              docker compose -f docker-compose.prod.yml up -d --build web worker && \
              sleep 5 && \
