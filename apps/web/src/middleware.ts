@@ -5,6 +5,10 @@
  * (только декод JWT, без Prisma/bcrypt) — поэтому middleware остаётся
  * в Edge Runtime и не тянет Node-only зависимости.
  *
+ * Auth.js v5 изменил имя куки с `next-auth.session-token` на
+ * `authjs.session-token` (и `__Secure-authjs.session-token` для HTTPS).
+ * getToken без явного cookieName не находит сессию — передаём явно.
+ *
  * Правила:
  *   - `/admin/*`  + аноним          → `/{locale}/auth/login`
  *   - `/admin/*`  + role=customer   → `/{locale}`
@@ -47,7 +51,11 @@ export default async function middleware(req: NextRequest): Promise<NextResponse
   const { pathname } = req.nextUrl;
   const { locale, rest } = splitLocale(pathname);
 
-  const token = await getToken({ req, secret: AUTH_SECRET });
+  // Auth.js v5 renamed cookie: next-auth.session-token → authjs.session-token
+  const secureCookie = req.nextUrl.protocol === "https:";
+  const cookieName = secureCookie ? "__Secure-authjs.session-token" : "authjs.session-token";
+
+  const token = await getToken({ req, secret: AUTH_SECRET, cookieName });
   const isAuthenticated = typeof token?.["id"] === "string";
   const role = token?.["role"];
   const isPrivileged = role === "admin" || role === "manager";
