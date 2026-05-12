@@ -27,11 +27,20 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.DEPLOY_SSH_KEY }}" | base64 -d > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
+          # Keep connection alive during long docker builds (Next.js ~5-10 min).
+          cat >> ~/.ssh/config <<'EOF'
+          Host *
+            StrictHostKeyChecking no
+            IdentityFile ~/.ssh/deploy_key
+            ServerAliveInterval 30
+            ServerAliveCountMax 20
+          EOF
+          chmod 600 ~/.ssh/config
 
       - name: Sync code to server
         run: |
           rsync -az --delete \
-            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
+            -e "ssh -F ~/.ssh/config" \
             --exclude='.git' \
             --exclude='node_modules' \
             --exclude='**/node_modules' \
@@ -41,8 +50,9 @@ jobs:
             ./ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:/opt/bigmax/
 
       - name: Rebuild and restart
+        timeout-minutes: 15
         run: |
-          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no \
+          ssh -F ~/.ssh/config \
             ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} \
             "cd /opt/bigmax && \
              docker compose -f docker-compose.prod.yml up -d --build web worker && \
