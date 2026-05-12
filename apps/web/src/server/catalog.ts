@@ -256,25 +256,30 @@ export const getActiveCategories = unstable_cache(
  * Кэш: 10 мин + tag `taxonomy`. Inval'идация — из admin-CRUD ручек категорий
  * через `revalidateTag`.
  */
-export const getCategoryTree = unstable_cache(
-  async (): Promise<CategoryNode[]> => {
-    const rows = await prisma.category.findMany({
-      where: { isActive: true },
-      orderBy: [{ parentId: "asc" }, { order: "asc" }],
-      select: {
-        id: true,
-        slug: true,
-        nameRu: true,
-        nameUz: true,
-        nameEn: true,
-        parentId: true,
-      },
-    });
-    return buildCategoryTree(rows);
-  },
-  ["category-tree"],
-  { revalidate: 600, tags: [TAXONOMY_TAG] },
-);
+let _categoryTreeCache: { data: CategoryNode[]; at: number } | null = null;
+const CATEGORY_TREE_TTL = 600_000; // 10 min in ms
+
+export async function getCategoryTree(): Promise<CategoryNode[]> {
+  const now = Date.now();
+  if (_categoryTreeCache && now - _categoryTreeCache.at < CATEGORY_TREE_TTL) {
+    return _categoryTreeCache.data;
+  }
+  const rows = await prisma.category.findMany({
+    where: { isActive: true },
+    orderBy: [{ parentId: "asc" }, { order: "asc" }],
+    select: {
+      id: true,
+      slug: true,
+      nameRu: true,
+      nameUz: true,
+      nameEn: true,
+      parentId: true,
+    },
+  });
+  const data = buildCategoryTree(rows);
+  _categoryTreeCache = { data, at: now };
+  return data;
+}
 
 export const getActiveBrands = unstable_cache(
   async (): Promise<BrandCard[]> => {

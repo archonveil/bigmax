@@ -1,0 +1,50 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+# Never cancel a running deploy — let it finish, then run the next one.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy to production
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Sync code to server
+        run: |
+          rsync -az --delete \
+            -e "ssh -i ~/.ssh/deploy_key" \
+            --exclude='.git' \
+            --exclude='node_modules' \
+            --exclude='**/node_modules' \
+            --exclude='.env*' \
+            --exclude='**/.next' \
+            --exclude='**/dist' \
+            ./ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:/opt/bigmax/
+
+      - name: Rebuild and restart
+        run: |
+          ssh -i ~/.ssh/deploy_key ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} bash -s <<'ENDSSH'
+            set -e
+            cd /opt/bigmax
+            docker compose -f docker-compose.prod.yml up -d --build web worker
+            sleep 5
+            docker compose -f docker-compose.prod.yml ps
+            docker compose -f docker-compose.prod.yml logs --tail=10 web
+          ENDSSH

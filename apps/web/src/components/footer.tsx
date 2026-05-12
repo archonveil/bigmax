@@ -24,7 +24,16 @@ export async function Footer(): Promise<JSX.Element> {
                 {BRAND.ordersEmail}
               </a>
             </li>
-            <li>{formatPhone(BRAND.phoneTemplate)}</li>
+            <li>
+              <a className="hover:text-primary" href={`tel:${BRAND.phone1}`}>
+                {formatPhone(BRAND.phone1)}
+              </a>
+            </li>
+            <li>
+              <a className="hover:text-primary" href={`tel:${BRAND.phone2}`}>
+                {formatPhone(BRAND.phone2)}
+              </a>
+            </li>
           </ul>
         </div>
 

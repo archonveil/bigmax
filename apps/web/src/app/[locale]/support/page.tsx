@@ -48,7 +48,15 @@ export default async function SupportPage({ params }: SupportPageProps): Promise
           </dd>
 
           <dt className="font-medium text-foreground">{t("phoneLabel")}</dt>
-          <dd>{formatPhone(BRAND.phoneTemplate)}</dd>
+          <dd>
+            <a className="hover:text-primary" href={`tel:${BRAND.phone1}`}>
+              {formatPhone(BRAND.phone1)}
+            </a>
+            {" · "}
+            <a className="hover:text-primary" href={`tel:${BRAND.phone2}`}>
+              {formatPhone(BRAND.phone2)}
+            </a>
+          </dd>
 
           <dt className="font-medium text-foreground">{t("telegramLabel")}</dt>
           <dd>
