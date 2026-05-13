@@ -842,6 +842,7 @@ function OptionDialogBody({
 
   const submit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
+    event.stopPropagation(); // portal events bubble through React tree; block outer form
     const v = draft.value.trim();
     if (v === "") return setError(t("errors.valueRequired"));
     if (!/^[a-z][a-z0-9_-]*$/.test(v)) return setError(t("errors.valueInvalid"));
