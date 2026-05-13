@@ -15,6 +15,7 @@ import { useState, type FormEvent } from "react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
+import { useConfirm } from "@/components/ui/confirm-dialog";
 import {
   Dialog,
   DialogContent,
@@ -50,6 +51,7 @@ export function StockBulkAdjustDialog({ branchId, branchName }: Props): JSX.Elem
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const confirm = useConfirm();
   const onSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     if (submitting) return;
@@ -64,11 +66,11 @@ export function StockBulkAdjustDialog({ branchId, branchName }: Props): JSX.Elem
       return;
     }
     if (
-      typeof window !== "undefined" &&
-      !window.confirm(t("confirm", { pattern: skuPattern.trim(), branch: branchName }))
-    ) {
+      !(await confirm({
+        description: t("confirm", { pattern: skuPattern.trim(), branch: branchName }),
+      }))
+    )
       return;
-    }
     setSubmitting(true);
     try {
       const res = await fetch("/api/admin/stock/bulk-adjust", {

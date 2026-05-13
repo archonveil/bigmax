@@ -3,8 +3,9 @@ import { getTranslations } from "next-intl/server";
 
 import { getActiveBrands } from "@/server/catalog";
 
-export async function BrandsStrip(): Promise<JSX.Element> {
+export async function BrandsStrip(): Promise<JSX.Element | null> {
   const brands = await getActiveBrands();
+  if (brands.length === 0) return null;
   const t = await getTranslations("home");
 
   return (

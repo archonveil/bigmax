@@ -38,6 +38,7 @@ import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { useConfirm } from "@/components/ui/confirm-dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
@@ -88,6 +89,7 @@ const ERROR_REASON_KEYS = new Set([
 
 export function ProductImageManager({ value, onChange, disabled }: Props): JSX.Element {
   const t = useTranslations("admin.products.form.images");
+  const confirm = useConfirm();
   const [draftUrl, setDraftUrl] = useState("");
   const [draftAlt, setDraftAlt] = useState("");
   const [showUrlInput, setShowUrlInput] = useState(false);
@@ -245,8 +247,9 @@ export function ProductImageManager({ value, onChange, disabled }: Props): JSX.E
     onChange(value.map((img, idx) => (idx === i ? { ...img, ...patch } : img)));
   };
   const removeAt = (i: number): void => {
-    if (typeof window !== "undefined" && !window.confirm(t("removeConfirm"))) return;
-    onChange(value.filter((_, idx) => idx !== i));
+    void confirm({ description: t("removeConfirm"), variant: "destructive" }).then((ok) => {
+      if (ok) onChange(value.filter((_, idx) => idx !== i));
+    });
   };
   const moveTo = (from: number, to: number): void => {
     if (from === to || to < 0 || to >= value.length) return;

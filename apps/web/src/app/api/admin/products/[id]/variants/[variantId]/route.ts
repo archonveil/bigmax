@@ -2,11 +2,9 @@
  * `PATCH /api/admin/products/[id]/variants/[variantId]` — update variant.
  * `DELETE /api/admin/products/[id]/variants/[variantId]` — hard-delete.
  *
- * DELETE: ProductVariant ↔ OrderItem связь без cascade'а (history-preserving),
- * поэтому если variant хоть раз попал в Order → DELETE упадёт с FK-violation
- * P2003 → 409 `variant_in_use` + hint deactivate Product вместо variant
- * (или менять цену на 0). Hard-delete безопасен только для variant'ов без
- * заказов.
+ * DELETE: OrderItem.variantId is now nullable (SetNull FK), so hard-delete is
+ * always safe. Existing order rows keep productSnapshot; variantId becomes NULL.
+ * Image files on disk are cleaned up via fire-and-forget orphan cleanup.
  */
 
 import { Prisma, prisma } from "@bigmax/db";
@@ -15,6 +13,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { requireAdminSession } from "@/server/admin-auth";
 import { syncProductColorFromVariants } from "@/server/admin-products";
 import { VariantUpdateSchema } from "@/server/admin-variants";
+import { runOrphanCleanup } from "@/server/orphan-images";
 
 interface RouteContext {
   params: { id: string; variantId: string };
@@ -168,45 +167,23 @@ export async function DELETE(_req: NextRequest, ctx: RouteContext): Promise<Resp
 
   const existing = await prisma.productVariant.findFirst({
     where: { id: ctx.params.variantId, productId: ctx.params.id },
-    select: { id: true, _count: { select: { orderItems: true } } },
+    select: { id: true },
   });
   if (!existing) {
     return NextResponse.json({ ok: false, reason: "not_found" }, { status: 404 });
   }
 
-  // Pre-check: если variant в любом заказе — отказываем без попытки delete
-  // (FK-violation тоже сработает, но pre-check даёт чёткую причину).
-  if (existing._count.orderItems > 0) {
-    return NextResponse.json(
-      {
-        ok: false,
-        reason: "variant_in_use",
-        ordersCount: existing._count.orderItems,
-      },
-      { status: 409 },
-    );
-  }
+  await prisma.productVariant.delete({
+    where: { id: ctx.params.variantId },
+    select: { id: true },
+  });
+  await syncProductColorFromVariants(ctx.params.id);
 
-  try {
-    await prisma.productVariant.delete({
-      where: { id: ctx.params.variantId },
-      select: { id: true },
-    });
-    await syncProductColorFromVariants(ctx.params.id);
-    return NextResponse.json(
-      { ok: true, deleted: true },
-      { status: 200, headers: { "Cache-Control": "no-store, private" } },
-    );
-  } catch (err) {
-    // Гонка: variant попал в заказ между pre-check'ом и delete'ом — fallback
-    // на 409.
-    const code =
-      err && typeof err === "object" && "code" in err && typeof err.code === "string"
-        ? err.code
-        : null;
-    if (code === "P2003") {
-      return NextResponse.json({ ok: false, reason: "variant_in_use" }, { status: 409 });
-    }
-    throw err;
-  }
+  // Fire-and-forget: clean up image files whose DB rows were just cascade-deleted.
+  void runOrphanCleanup({ minAgeMs: 0 }).catch(() => undefined);
+
+  return NextResponse.json(
+    { ok: true, deleted: true },
+    { status: 200, headers: { "Cache-Control": "no-store, private" } },
+  );
 }

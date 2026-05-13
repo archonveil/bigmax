@@ -19,6 +19,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
+import { useConfirm } from "@/components/ui/confirm-dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
@@ -46,6 +47,7 @@ function formatBytes(n: number): string {
 
 export function ImagesCleanupRunner(): JSX.Element {
   const t = useTranslations("admin.imagesCleanup");
+  const confirm = useConfirm();
   const [minAgeHours, setMinAgeHours] = useState<string>("24");
   const [running, setRunning] = useState(false);
   const [summary, setSummary] = useState<CleanupSummary | null>(null);
@@ -81,10 +83,9 @@ export function ImagesCleanupRunner(): JSX.Element {
   }
 
   function onRunReal(): void {
-    if (typeof window === "undefined") return;
-    const confirmed = window.confirm(t("runConfirm"));
-    if (!confirmed) return;
-    void callApi(false);
+    void confirm({ description: t("runConfirm"), variant: "destructive" }).then((ok) => {
+      if (ok) void callApi(false);
+    });
   }
 
   return (

@@ -40,6 +40,7 @@ import { useMemo, useState } from "react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
+import { useConfirm } from "@/components/ui/confirm-dialog";
 import type { AdminCategoryItem } from "@/server/admin-taxonomy";
 
 interface TreeNode extends AdminCategoryItem {
@@ -147,9 +148,10 @@ export function CategoryTree({ items }: { items: AdminCategoryItem[] }): JSX.Ele
     setSelected(new Set());
   };
 
+  const confirm = useConfirm();
   const onBulk = async (action: "deactivate" | "activate"): Promise<void> => {
     if (selected.size === 0 || submitting) return;
-    if (typeof window !== "undefined" && !window.confirm(tBulk("bulkConfirm"))) return;
+    if (!(await confirm({ description: tBulk("bulkConfirm") }))) return;
     setSubmitting(true);
     try {
       const res = await fetch("/api/admin/categories/bulk", {

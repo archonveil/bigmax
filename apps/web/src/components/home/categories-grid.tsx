@@ -32,8 +32,9 @@ const CATEGORY_ICONS: Record<string, LucideIcon> = {
   accessories: Sparkles,
 };
 
-export async function CategoriesGrid({ locale }: CategoriesGridProps): Promise<JSX.Element> {
+export async function CategoriesGrid({ locale }: CategoriesGridProps): Promise<JSX.Element | null> {
   const categories = await getActiveCategories();
+  if (categories.length === 0) return null;
   const t = await getTranslations("home");
 
   return (

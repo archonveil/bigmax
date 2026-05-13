@@ -17,6 +17,17 @@ domtextile.uz, www.domtextile.uz {
     # Gzip + zstd compression для текстовых ответов.
     encode gzip zstd
 
+    # Uploaded product images served directly from the shared volume.
+    # Next.js standalone does not serve runtime-written public/ files;
+    # Caddy reads from the same named volume that the web container writes to.
+    # Cache-Control: 1 year immutable — content-addressable filenames never
+    # change, so long-lived caching is safe.
+    handle /uploads/* {
+        root * /srv
+        file_server
+        header Cache-Control "public, max-age=31536000, immutable"
+    }
+
     # Reverse proxy на Next.js standalone. Caddy сам balance'ит при
     # будущей multi-replica конфигурации (по dns lookup).
     reverse_proxy web:3000 {

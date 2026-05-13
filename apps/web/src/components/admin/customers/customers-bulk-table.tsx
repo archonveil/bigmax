@@ -19,6 +19,7 @@ import { CUSTOMER_ROLE_META, StatusOption } from "@/components/admin/status-meta
 import { Highlight } from "@/components/highlight";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useConfirm } from "@/components/ui/confirm-dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -74,6 +75,7 @@ export function CustomersBulkTable({ items, query }: CustomersBulkTableProps): J
     );
   };
 
+  const confirm = useConfirm();
   const onApply = async (): Promise<void> => {
     if (submitting || selected.size === 0) return;
     if (reason.trim().length < 3) {
@@ -81,11 +83,11 @@ export function CustomersBulkTable({ items, query }: CustomersBulkTableProps): J
       return;
     }
     if (
-      typeof window !== "undefined" &&
-      !window.confirm(tBulk("confirm", { count: selected.size, role: tRole(target) }))
-    ) {
+      !(await confirm({
+        description: tBulk("confirm", { count: selected.size, role: tRole(target) }),
+      }))
+    )
       return;
-    }
     setSubmitting(true);
     try {
       const res = await fetch("/api/admin/customers/bulk-role", {

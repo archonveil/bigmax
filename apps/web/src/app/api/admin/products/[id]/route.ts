@@ -1,9 +1,10 @@
 /**
  * `PATCH /api/admin/products/[id]` — update (любой набор полей из
  * `ProductUpdateSchema`).
- * `DELETE /api/admin/products/[id]` — soft-delete (`isActive = false`),
- * не hard-delete: OrderItem'ы по FK на ProductVariant держат references,
- * физическое удаление прорастёт через cascade и потеряет историю заказов.
+ * `DELETE /api/admin/products/[id]` — tiered delete:
+ *   - Нет заказов → hard delete (cascade + orphan-image cleanup).
+ *   - Есть заказы → soft delete (isActive=false); productSnapshot сохраняет
+ *     историю, variantId в OrderItem обнуляется через SetNull FK.
  */
 
 import { Prisma, prisma } from "@bigmax/db";
@@ -13,6 +14,7 @@ import { type AttributeValue, validateAttributes } from "@/catalog/category-attr
 import { requireAdminSession } from "@/server/admin-auth";
 import { ProductUpdateSchema, syncProductColorFromVariants } from "@/server/admin-products";
 import { getCategoryAttributes } from "@/server/category-attributes";
+import { runOrphanCleanup } from "@/server/orphan-images";
 
 interface RouteContext {
   params: { id: string };
@@ -141,8 +143,6 @@ export async function DELETE(_req: NextRequest, ctx: RouteContext): Promise<Resp
   const auth = await requireAdminSession();
   if (!auth.ok) return auth.response;
 
-  // Soft-delete: isActive=false. Hard-delete отложен в P8 (нужен cascade-
-  // план через OrderItem.variant references).
   const exists = await prisma.product.findUnique({
     where: { id: ctx.params.id },
     select: { id: true },
@@ -150,13 +150,34 @@ export async function DELETE(_req: NextRequest, ctx: RouteContext): Promise<Resp
   if (!exists) {
     return NextResponse.json({ ok: false, reason: "not_found" }, { status: 404 });
   }
-  await prisma.product.update({
-    where: { id: ctx.params.id },
-    data: { isActive: false },
-    select: { id: true },
+
+  const ordersCount = await prisma.orderItem.count({
+    where: { variant: { productId: ctx.params.id } },
   });
+
+  if (ordersCount > 0) {
+    // Has order history → soft delete. productSnapshot preserves display data;
+    // variantId in OrderItem nullifies via SetNull FK on cascade.
+    await prisma.product.update({
+      where: { id: ctx.params.id },
+      data: { isActive: false },
+      select: { id: true },
+    });
+    return NextResponse.json(
+      { ok: true, deleted: false, deactivated: true },
+      { status: 200, headers: { "Cache-Control": "no-store, private" } },
+    );
+  }
+
+  // No order history → hard delete. Cascades: variants, images (DB rows),
+  // reviews, favorites, cart items, stock rows.
+  await prisma.product.delete({ where: { id: ctx.params.id } });
+
+  // Fire-and-forget: clean up image files on disk (minAgeMs=0 — rows already gone).
+  void runOrphanCleanup({ minAgeMs: 0 }).catch(() => undefined);
+
   return NextResponse.json(
-    { ok: true, deactivated: true },
+    { ok: true, deleted: true },
     { status: 200, headers: { "Cache-Control": "no-store, private" } },
   );
 }

@@ -23,7 +23,10 @@
     "categoriesTitle": "Kategoriyalar",
     "brandsTitle": "Brendlar",
     "featuredTitle": "Tavsiya etamiz",
-    "fromPrice": "{price} dan"
+    "fromPrice": "{price} dan",
+    "emptyTitle": "Do'kon tez orada ochiladi",
+    "emptySubtitle": "Biz faol ravishda katalogni tovarlar bilan to'ldiryapmiz. Biroz kutib turing — bu yerda farzandingiz uchun ko'p narsa bo'ladi.",
+    "emptyContactUs": "Biz bilan bog'laning"
   },
   "errors": {
     "notFound": {
@@ -1099,8 +1102,8 @@
         "submitting": "Saqlanmoqda…",
         "submitCreate": "Yaratish",
         "cancel": "Bekor qilish",
-        "deactivate": "Katalogdan yashirish",
-        "deactivateConfirm": "Mahsulotni yashirasizmi? U xaridorlarga ko'rinmaydi, lekin tarixda qoladi.",
+        "delete": "O'chirish",
+        "deleteConfirm": "Mahsulotni o'chirasizmi? Buyurtmalar bo'lmasa — butunlay o'chiriladi. Buyurtmalar bo'lsa — katalogdan yashiriladi, tarix saqlanadi.",
         "errors": {
           "name_ru_too_short": "Nom (RU) juda qisqa (kamida 2 belgi).",
           "name_uz_too_short": "Nom (UZ) juda qisqa.",
@@ -1124,7 +1127,8 @@
         },
         "successCreate": "Mahsulot yaratildi.",
         "successUpdate": "O'zgarishlar saqlandi.",
-        "successDeactivate": "Mahsulot katalogdan yashirildi."
+        "successDelete": "Mahsulot o'chirildi.",
+        "successDeactivate": "Mahsulot katalogdan yashirildi (buyurtma tarixi bor)."
       },
       "detail": {
         "back": "← Mahsulotlar ro'yxatiga",

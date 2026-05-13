@@ -20,6 +20,7 @@ import { toast } from "sonner";
 
 import { PROMO_TYPES, type PromoType } from "@/cart/promo";
 import { Button } from "@/components/ui/button";
+import { useConfirm } from "@/components/ui/confirm-dialog";
 import { FieldLabel } from "@/components/ui/field-label";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -163,9 +164,10 @@ export function PromoForm({
     }
   };
 
+  const confirm = useConfirm();
   const onDelete = async (): Promise<void> => {
     if (!promo) return;
-    if (typeof window !== "undefined" && !window.confirm(t("deleteConfirm"))) return;
+    if (!(await confirm({ description: t("deleteConfirm"), variant: "destructive" }))) return;
     setSubmitting(true);
     try {
       const res = await fetch(`/api/admin/promo/${promo.id}`, { method: "DELETE" });

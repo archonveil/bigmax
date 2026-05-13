@@ -23,7 +23,10 @@
     "categoriesTitle": "Categories",
     "brandsTitle": "Brands",
     "featuredTitle": "Featured",
-    "fromPrice": "from {price}"
+    "fromPrice": "from {price}",
+    "emptyTitle": "Store opening soon",
+    "emptySubtitle": "We're busy stocking up the catalog. Check back soon — there's plenty for your little one on the way.",
+    "emptyContactUs": "Contact us"
   },
   "errors": {
     "notFound": {
@@ -1099,8 +1102,8 @@
         "submitting": "Saving…",
         "submitCreate": "Create",
         "cancel": "Cancel",
-        "deactivate": "Hide from catalog",
-        "deactivateConfirm": "Hide this product? Customers won't see it, but order history is preserved.",
+        "delete": "Delete",
+        "deleteConfirm": "Delete this product? If it has no orders it will be permanently removed. Otherwise it will be hidden from catalog with order history preserved.",
         "errors": {
           "name_ru_too_short": "Name (RU) is too short (min 2 chars).",
           "name_uz_too_short": "Name (UZ) is too short.",
@@ -1124,7 +1127,8 @@
         },
         "successCreate": "Product created.",
         "successUpdate": "Changes saved.",
-        "successDeactivate": "Product hidden from catalog."
+        "successDelete": "Product deleted.",
+        "successDeactivate": "Product hidden from catalog (has order history)."
       },
       "detail": {
         "back": "← Back to products",

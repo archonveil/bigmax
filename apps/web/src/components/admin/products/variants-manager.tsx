@@ -2,8 +2,7 @@
 
 /**
  * `<VariantsManager>` (P6-T3 follow-up) — inline-table вариантов товара
- * + Dialog с формой для create/edit. Delete — через `window.confirm` +
- * DELETE API.
+ * + Dialog с формой для create/edit. Delete — confirm modal + DELETE API.
  *
  * UX:
  *   - Список variants — table со всеми полями + Edit/Delete кнопки.
@@ -32,6 +31,7 @@ import {
   type ProductImageInput,
 } from "@/components/admin/products/product-image-manager";
 import { Button } from "@/components/ui/button";
+import { useConfirm } from "@/components/ui/confirm-dialog";
 import {
   Dialog,
   DialogContent,
@@ -552,9 +552,10 @@ function DeleteButton({
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
 
+  const confirm = useConfirm();
   const onClick = async (): Promise<void> => {
     if (submitting) return;
-    if (typeof window !== "undefined" && !window.confirm(tForm("deleteConfirm"))) return;
+    if (!(await confirm({ description: tForm("deleteConfirm"), variant: "destructive" }))) return;
     setSubmitting(true);
     try {
       const res = await fetch(`/api/admin/products/${productId}/variants/${variantId}`, {
@@ -565,19 +566,10 @@ function DeleteButton({
         router.refresh();
         return;
       }
-      const body = (await res.json().catch(() => ({}))) as {
-        reason?: string;
-        ordersCount?: number;
-      };
-      if (body.reason === "variant_in_use") {
-        toast.error(tForm("errors.variant_in_use", { count: body.ordersCount ?? 0 }));
-        return;
-      }
       toast.error(tForm("errors.generic"));
     } finally {
       setSubmitting(false);
     }
-    void sku;
   };
 
   return (

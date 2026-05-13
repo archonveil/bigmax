@@ -25,6 +25,7 @@ import { toast } from "sonner";
 import { PaymentStatusBadge } from "@/components/admin/payments/payment-status-badge";
 import { Highlight } from "@/components/highlight";
 import { Button } from "@/components/ui/button";
+import { useConfirm } from "@/components/ui/confirm-dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import type { AdminPaymentListItem } from "@/server/admin-payments";
@@ -66,6 +67,7 @@ export function PaymentsBulkTable({ items, query }: PaymentsBulkTableProps): JSX
     );
   };
 
+  const confirm = useConfirm();
   const onApply = async (): Promise<void> => {
     if (submitting || selected.size === 0) return;
     if (reason.trim().length < 3) {
@@ -79,12 +81,7 @@ export function PaymentsBulkTable({ items, query }: PaymentsBulkTableProps): JSX
         return;
       }
     }
-    if (
-      typeof window !== "undefined" &&
-      !window.confirm(tBulk("confirm", { count: selected.size }))
-    ) {
-      return;
-    }
+    if (!(await confirm({ description: tBulk("confirm", { count: selected.size }) }))) return;
     setSubmitting(true);
     try {
       const payload: Record<string, unknown> = {

@@ -28,6 +28,7 @@ import { CategoryAttributesEditor } from "@/components/admin/products/category-a
 import { ProductImagesOverview } from "@/components/admin/products/product-images-overview";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useConfirm } from "@/components/ui/confirm-dialog";
 import { FieldLabel } from "@/components/ui/field-label";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -330,15 +331,32 @@ export function ProductForm({
     }
   };
 
-  const onDeactivate = async (): Promise<void> => {
+  const confirm = useConfirm();
+  const onDelete = async (): Promise<void> => {
     if (!product) return;
-    if (typeof window !== "undefined" && !window.confirm(t("deactivateConfirm"))) return;
+    if (
+      !(await confirm({
+        description: t("deleteConfirm"),
+        variant: "destructive",
+        confirmLabel: t("delete"),
+      }))
+    )
+      return;
     setSubmitting(true);
     try {
       const res = await fetch(`/api/admin/products/${product.id}`, { method: "DELETE" });
       if (res.ok) {
-        toast.success(t("successDeactivate"));
-        router.refresh();
+        const body = (await res.json().catch(() => ({}))) as {
+          deleted?: boolean;
+          deactivated?: boolean;
+        };
+        if (body.deleted) {
+          toast.success(t("successDelete"));
+          router.push("/admin/products");
+        } else {
+          toast.success(t("successDeactivate"));
+          router.refresh();
+        }
       } else {
         const errBody = (await res.json().catch(() => ({}))) as { reason?: string };
         setError(translateError(errBody.reason ?? "generic", t));
@@ -771,15 +789,15 @@ export function ProductForm({
         <Button type="submit" disabled={submitting} data-testid="product-form-submit">
           {submitting ? t("submitting") : mode === "create" ? t("submitCreate") : t("submit")}
         </Button>
-        {mode === "edit" && product?.isActive ? (
+        {mode === "edit" && product ? (
           <Button
             type="button"
             variant="outline"
             disabled={submitting}
-            onClick={() => void onDeactivate()}
-            data-testid="product-form-deactivate"
+            onClick={() => void onDelete()}
+            data-testid="product-form-delete"
           >
-            {t("deactivate")}
+            {t("delete")}
           </Button>
         ) : null}
       </footer>

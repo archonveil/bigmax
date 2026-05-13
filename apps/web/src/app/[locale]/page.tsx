@@ -7,6 +7,8 @@ import { BrandsStrip } from "@/components/home/brands-strip";
 import { CategoriesGrid } from "@/components/home/categories-grid";
 import { FeaturedProducts } from "@/components/home/featured-products";
 import { HeroSection } from "@/components/home/hero-section";
+import { HomeEmptyState } from "@/components/home/home-empty-state";
+import { getActiveBrands, getActiveCategories, getFeaturedProducts } from "@/server/catalog";
 
 interface HomePageProps {
   params: { locale: string };
@@ -19,6 +21,24 @@ interface HomePageProps {
 export default async function HomePage({ params }: HomePageProps): Promise<JSX.Element> {
   if (!isLocale(params.locale)) notFound();
   setRequestLocale(params.locale);
+
+  // Parallel prefetch — all three use unstable_cache so no extra DB cost on
+  // subsequent renders. We only need counts here to decide the empty state.
+  const [categories, featured, brands] = await Promise.all([
+    getActiveCategories(),
+    getFeaturedProducts(1),
+    getActiveBrands(),
+  ]);
+  const isEmpty = categories.length === 0 && featured.length === 0 && brands.length === 0;
+
+  if (isEmpty) {
+    return (
+      <>
+        <HeroSection />
+        <HomeEmptyState />
+      </>
+    );
+  }
 
   return (
     <>

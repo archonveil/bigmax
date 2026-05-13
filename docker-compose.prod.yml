@@ -111,6 +111,10 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy-data:/data
       - caddy-config:/config
+      # Serve uploaded product images directly — Next.js standalone does not
+      # serve runtime-written files from public/. Caddy reads from the same
+      # named volume that the web container writes to.
+      - uploads-data:/srv/uploads:ro
     depends_on:
       - web
     environment:

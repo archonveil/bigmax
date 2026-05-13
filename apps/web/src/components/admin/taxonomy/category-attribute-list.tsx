@@ -18,6 +18,7 @@ import { toast } from "sonner";
 
 import type { AttributeKind } from "@/catalog/category-attributes";
 import { Button } from "@/components/ui/button";
+import { useConfirm } from "@/components/ui/confirm-dialog";
 import type { AdminCategoryAttributeRow } from "@/server/admin-category-attributes";
 
 export interface InheritedAttribute {
@@ -42,6 +43,7 @@ export function CategoryAttributeList({ categoryId, initial, inherited = [] }: P
   const router = useRouter();
   const [items, setItems] = useState(initial);
   const [busy, setBusy] = useState(false);
+  const confirm = useConfirm();
 
   if (items.length === 0 && inherited.length === 0) {
     return (
@@ -81,7 +83,7 @@ export function CategoryAttributeList({ categoryId, initial, inherited = [] }: P
   };
 
   const remove = async (id: string): Promise<void> => {
-    if (typeof window !== "undefined" && !window.confirm(t("deleteConfirm"))) return;
+    if (!(await confirm({ description: t("deleteConfirm"), variant: "destructive" }))) return;
     setBusy(true);
     try {
       const res = await fetch(`/api/admin/categories/${categoryId}/attributes/${id}`, {

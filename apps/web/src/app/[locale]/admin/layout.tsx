@@ -21,6 +21,7 @@ import { auth } from "@/auth";
 import { AdminMobileNav } from "@/components/admin/admin-mobile-nav";
 import { AdminNav } from "@/components/admin/admin-nav";
 import { RoleBadge, type AdminRole } from "@/components/admin/role-badge";
+import { ConfirmDialogProvider } from "@/components/ui/confirm-dialog";
 
 export const metadata: Metadata = {
   robots: { index: false, follow: false },
@@ -74,7 +75,9 @@ export default async function AdminLayout({
           </header>
           <AdminNav />
         </aside>
-        <section className="rounded-lg border bg-card p-6 sm:p-8">{children}</section>
+        <section className="rounded-lg border bg-card p-6 sm:p-8">
+          <ConfirmDialogProvider>{children}</ConfirmDialogProvider>
+        </section>
       </div>
     </div>
   );

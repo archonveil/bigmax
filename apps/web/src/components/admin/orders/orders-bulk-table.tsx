@@ -22,6 +22,7 @@ import { ORDER_STATUS_META, StatusOption } from "@/components/admin/status-meta"
 import { Highlight } from "@/components/highlight";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useConfirm } from "@/components/ui/confirm-dialog";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -79,14 +80,10 @@ export function OrdersBulkTable({ items, query }: OrdersBulkTableProps): JSX.Ele
     );
   };
 
+  const confirm = useConfirm();
   const onApply = async (): Promise<void> => {
     if (submitting || selected.size === 0) return;
-    if (
-      typeof window !== "undefined" &&
-      !window.confirm(tBulk("confirm", { count: selected.size }))
-    ) {
-      return;
-    }
+    if (!(await confirm({ description: tBulk("confirm", { count: selected.size }) }))) return;
     setSubmitting(true);
     try {
       const res = await fetch("/api/admin/orders/bulk", {
