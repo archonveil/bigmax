@@ -151,8 +151,13 @@ export async function DELETE(_req: NextRequest, ctx: RouteContext): Promise<Resp
     return NextResponse.json({ ok: false, reason: "not_found" }, { status: 404 });
   }
 
+  // Only non-terminal orders block hard delete. Cancelled/refunded orders
+  // preserve display data via productSnapshot; variantId is nulled on cascade.
   const ordersCount = await prisma.orderItem.count({
-    where: { variant: { productId: ctx.params.id } },
+    where: {
+      variant: { productId: ctx.params.id },
+      order: { status: { notIn: ["cancelled", "refunded"] } },
+    },
   });
 
   if (ordersCount > 0) {
