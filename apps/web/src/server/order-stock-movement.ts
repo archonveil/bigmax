@@ -114,12 +114,15 @@ export async function reserveOrderStock(input: OperationInput): Promise<Movement
     const skipped: SkippedItem[] = [];
 
     for (const item of order.items) {
+      if (!item.variantId || !item.variant) continue;
+      const variantId = item.variantId;
+      const sku = item.variant.sku;
       const stock = await client.stock.findUnique({
-        where: { variantId_branchId: { variantId: item.variantId, branchId } },
+        where: { variantId_branchId: { variantId, branchId } },
         select: { id: true, quantity: true, reserved: true },
       });
       if (!stock) {
-        skipped.push({ sku: item.variant.sku, reason: "no_stock_row" });
+        skipped.push({ sku, reason: "no_stock_row" });
         continue;
       }
       const newReserved = stock.reserved + item.quantity;
@@ -132,7 +135,7 @@ export async function reserveOrderStock(input: OperationInput): Promise<Movement
         await client.stockLog.create({
           data: {
             stockId: stock.id,
-            variantId: item.variantId,
+            variantId,
             branchId,
             action: "reserve",
             oldQty: stock.quantity,
@@ -148,7 +151,7 @@ export async function reserveOrderStock(input: OperationInput): Promise<Movement
         });
         committed.push({
           stockId: stock.id,
-          sku: item.variant.sku,
+          sku,
           oldQty: stock.quantity,
           newQty: stock.quantity,
           delta: 0,
@@ -157,7 +160,7 @@ export async function reserveOrderStock(input: OperationInput): Promise<Movement
           reservedDelta: item.quantity,
         });
       } catch {
-        skipped.push({ sku: item.variant.sku, reason: "db_error" });
+        skipped.push({ sku, reason: "db_error" });
       }
     }
 
@@ -177,16 +180,19 @@ export async function releaseOrderStock(input: OperationInput): Promise<Movement
     const skipped: SkippedItem[] = [];
 
     for (const item of order.items) {
+      if (!item.variantId || !item.variant) continue;
+      const variantId = item.variantId;
+      const sku = item.variant.sku;
       const stock = await client.stock.findUnique({
-        where: { variantId_branchId: { variantId: item.variantId, branchId } },
+        where: { variantId_branchId: { variantId, branchId } },
         select: { id: true, quantity: true, reserved: true },
       });
       if (!stock) {
-        skipped.push({ sku: item.variant.sku, reason: "no_stock_row" });
+        skipped.push({ sku, reason: "no_stock_row" });
         continue;
       }
       if (stock.reserved <= 0) {
-        skipped.push({ sku: item.variant.sku, reason: "no_reserved_to_release" });
+        skipped.push({ sku, reason: "no_reserved_to_release" });
         continue;
       }
       const newReserved = Math.max(0, stock.reserved - item.quantity);
@@ -199,7 +205,7 @@ export async function releaseOrderStock(input: OperationInput): Promise<Movement
         await client.stockLog.create({
           data: {
             stockId: stock.id,
-            variantId: item.variantId,
+            variantId,
             branchId,
             action: "release",
             oldQty: stock.quantity,
@@ -215,7 +221,7 @@ export async function releaseOrderStock(input: OperationInput): Promise<Movement
         });
         committed.push({
           stockId: stock.id,
-          sku: item.variant.sku,
+          sku,
           oldQty: stock.quantity,
           newQty: stock.quantity,
           delta: 0,
@@ -224,7 +230,7 @@ export async function releaseOrderStock(input: OperationInput): Promise<Movement
           reservedDelta: newReserved - stock.reserved,
         });
       } catch {
-        skipped.push({ sku: item.variant.sku, reason: "db_error" });
+        skipped.push({ sku, reason: "db_error" });
       }
     }
 
@@ -244,12 +250,15 @@ export async function commitOrderShipment(input: OperationInput): Promise<Moveme
     const skipped: SkippedItem[] = [];
 
     for (const item of order.items) {
+      if (!item.variantId || !item.variant) continue;
+      const variantId = item.variantId;
+      const sku = item.variant.sku;
       const stock = await client.stock.findUnique({
-        where: { variantId_branchId: { variantId: item.variantId, branchId } },
+        where: { variantId_branchId: { variantId, branchId } },
         select: { id: true, quantity: true, reserved: true },
       });
       if (!stock) {
-        skipped.push({ sku: item.variant.sku, reason: "no_stock_row" });
+        skipped.push({ sku, reason: "no_stock_row" });
         continue;
       }
       const newQty = Math.max(0, stock.quantity - item.quantity);
@@ -265,7 +274,7 @@ export async function commitOrderShipment(input: OperationInput): Promise<Moveme
         await client.stockLog.create({
           data: {
             stockId: stock.id,
-            variantId: item.variantId,
+            variantId,
             branchId,
             action: "ship",
             oldQty: stock.quantity,
@@ -281,7 +290,7 @@ export async function commitOrderShipment(input: OperationInput): Promise<Moveme
         });
         committed.push({
           stockId: stock.id,
-          sku: item.variant.sku,
+          sku,
           oldQty: stock.quantity,
           newQty,
           delta: qtyDelta,
@@ -290,7 +299,7 @@ export async function commitOrderShipment(input: OperationInput): Promise<Moveme
           reservedDelta,
         });
       } catch {
-        skipped.push({ sku: item.variant.sku, reason: "db_error" });
+        skipped.push({ sku, reason: "db_error" });
       }
     }
 
@@ -320,10 +329,12 @@ async function runMovement(
     return {
       kind: "ok",
       committed: [],
-      skipped: order.items.map((it) => ({
-        sku: it.variant.sku,
-        reason: "no_branch_resolved" as const,
-      })),
+      skipped: order.items
+        .filter((it) => it.variant)
+        .map((it) => ({
+          sku: it.variant!.sku,
+          reason: "no_branch_resolved" as const,
+        })),
     };
   }
   const out = await fn(client, order, branchId);

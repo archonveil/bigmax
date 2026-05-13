@@ -68,7 +68,9 @@ export async function loadOrderItemsForReorder(
 
   // Берём текущие variants — цена/наличие/название могли измениться. Если
   // продукт деактивирован или вариант удалён — пропускаем.
-  const variantIds = order.items.map((it) => it.variantId);
+  const variantIds = order.items
+    .map((it) => it.variantId)
+    .filter((id): id is string => id !== null);
   const variants = await prisma.productVariant.findMany({
     where: {
       id: { in: variantIds },
@@ -101,6 +103,7 @@ export async function loadOrderItemsForReorder(
   const variantById = new Map(variants.map((v) => [v.id, v]));
   const addedItems: ReorderCartItem[] = [];
   for (const orderItem of order.items) {
+    if (!orderItem.variantId) continue;
     const v = variantById.get(orderItem.variantId);
     if (!v) continue; // skipped
     addedItems.push({

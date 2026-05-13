@@ -246,7 +246,7 @@ export interface AdminOrderItemSnapshot {
 
 export interface AdminOrderItem {
   id: string;
-  variantId: string;
+  variantId: string | null;
   quantity: number;
   priceCents: number;
   snapshot: AdminOrderItemSnapshot;

@@ -12,7 +12,7 @@ import { prisma, type OrderStatus } from "@bigmax/db";
 
 export interface OrderItemDetail {
   id: string;
-  variantId: string;
+  variantId: string | null;
   quantity: number;
   priceCents: number;
   /**
