@@ -18,8 +18,10 @@ import path from "node:path";
 
 import type { ProcessImageResult, TargetWidth } from "./image-pipeline";
 
-/** Корень storage'а, относительно cwd процесса Next.js. */
-const STORAGE_ROOT = path.join(process.cwd(), "public", "uploads", "products");
+/** Корень storage'а. Env var UPLOAD_STORAGE_ROOT позволяет явно задать
+ *  абсолютный путь в продакшн-контейнере вместо runtime process.cwd(). */
+const STORAGE_ROOT =
+  process.env["UPLOAD_STORAGE_ROOT"] ?? path.join(process.cwd(), "public", "uploads", "products");
 /** Public URL prefix — то что увидит браузер. */
 const PUBLIC_PREFIX = "/uploads/products";
 

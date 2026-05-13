@@ -75,6 +75,9 @@ services:
       DATABASE_URL: "postgresql://${POSTGRES_USER:-bigmax}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-bigmax}"
       REDIS_URL: "redis://redis:6379"
       NODE_ENV: production
+      # Explicit absolute path — avoids any process.cwd() ambiguity in the
+      # standalone Next.js container. Must match the volume mount below.
+      UPLOAD_STORAGE_ROOT: /app/apps/web/public/uploads/products
     volumes:
       - uploads-data:/app/apps/web/public/uploads
     depends_on:
