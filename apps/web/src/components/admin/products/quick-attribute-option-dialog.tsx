@@ -117,6 +117,7 @@ export function QuickAttributeOptionDialog({
 
   const onSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
+    event.stopPropagation();
     if (submitting) return;
 
     const labelRu = state.labelRu.trim();

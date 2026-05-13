@@ -89,6 +89,7 @@ export function QuickBrandDialog({
 
   const onSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
+    event.stopPropagation();
     if (submitting) return;
     const body = {
       name: state.name.trim(),

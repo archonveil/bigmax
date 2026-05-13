@@ -155,6 +155,7 @@ export function QuickAttributeDialog({
 
   const onSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
+    event.stopPropagation();
     if (submitting) return;
 
     // Validate locally first — option-required check and pre-clean.

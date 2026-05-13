@@ -111,6 +111,7 @@ export function QuickCategoryDialog({
 
   const onSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
+    event.stopPropagation();
     if (submitting) return;
     const body = {
       nameRu: state.nameRu.trim(),
