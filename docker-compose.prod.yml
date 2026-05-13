@@ -45,8 +45,11 @@ services:
       retries: 20
 
   # ----- Migrate (one-off, gates web+worker start) -----
+  # Reuses the web image — it contains pnpm, prisma CLI, and all migration
+  # files. No separate migrate image needed, which saves one large image
+  # transfer (~2-4 GB builder stage) on every deploy.
   migrate:
-    image: ghcr.io/archonveil/bigmax/migrate:latest
+    image: ghcr.io/archonveil/bigmax/web:latest
     restart: "no"
     env_file: .env.prod
     environment:

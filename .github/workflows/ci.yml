@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [main]
 
-# PRs: cancel stale runs when a new commit is pushed.
+# PRs: cancel stale runs on new push.
 # Main: never cancel — don't interrupt a running deploy.
 concurrency:
   group: ${{ github.ref == 'refs/heads/main' && 'deploy-production' || format('ci-{0}', github.ref) }}
@@ -23,10 +23,7 @@ env:
   NEXT_PUBLIC_TELEGRAM_BOT_USERNAME: ci_stub_bot
 
 jobs:
-  # ── Checks: typecheck / lint / test ────────────────────────────────
-  # No Next.js build here — Docker already builds the app; running it twice
-  # was the single biggest time sink (~8-10 min). TypeScript + lint catch
-  # virtually all build-time errors.
+  # ── Checks ─────────────────────────────────────────────────────────
   checks:
     name: typecheck / lint / test
     runs-on: ubuntu-latest
@@ -67,34 +64,34 @@ jobs:
       - name: Unit tests
         run: pnpm run test
 
-  # ── Build web + migrate images (parallel with worker) ──────────────
+  # ── Build web image, pipe to server (parallel with worker) ─────────
+  #
+  # The server cannot pull from ghcr.io (outbound HTTPS blocked by VPS
+  # network). Instead we: build the image on the GHA runner using the
+  # GHA layer cache, then stream it directly to the server over the
+  # already-open SSH tunnel with docker save | gzip | docker load.
+  # No registry login required on the server side.
   build-web:
-    name: Build web + migrate images
+    name: Build & ship web image
     needs: checks
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
     permissions:
       contents: read
-      packages: write
 
     steps:
       - uses: actions/checkout@v4
 
-      - uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
       - uses: docker/setup-buildx-action@v3
 
-      - name: Build & push web
+      - name: Build web image
         uses: docker/build-push-action@v6
         with:
           context: .
           file: apps/web/Dockerfile
-          push: true
+          push: false
+          load: true
           tags: ghcr.io/${{ github.repository }}/web:latest
           build-args: |
             NEXT_PUBLIC_SITE_URL=https://domtextile.uz
@@ -102,60 +99,73 @@ jobs:
           cache-from: type=gha,scope=web
           cache-to: type=gha,scope=web,mode=max
 
-      # migrate = builder stage of web Dockerfile — all layers already cached
-      # from the step above, so this completes in ~15 seconds.
-      - name: Build & push migrate
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          file: apps/web/Dockerfile
-          target: builder
-          push: true
-          tags: ghcr.io/${{ github.repository }}/migrate:latest
-          cache-from: type=gha,scope=web
-          cache-to: type=gha,scope=web,mode=max
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" | base64 -d > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          printf 'Host *\n  StrictHostKeyChecking no\n  IdentityFile ~/.ssh/deploy_key\n  ServerAliveInterval 30\n  ServerAliveCountMax 10\n' > ~/.ssh/config
+          chmod 600 ~/.ssh/config
 
-  # ── Build worker image (parallel with web) ─────────────────────────
+      - name: Transfer web image to server
+        env:
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+        run: |
+          docker save ghcr.io/${{ github.repository }}/web:latest \
+            | gzip \
+            | ssh "$DEPLOY_USER@$DEPLOY_HOST" "gunzip | docker load"
+
+  # ── Build worker image, pipe to server (parallel with web) ─────────
   build-worker:
-    name: Build worker image
+    name: Build & ship worker image
     needs: checks
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     permissions:
       contents: read
-      packages: write
 
     steps:
       - uses: actions/checkout@v4
 
-      - uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
       - uses: docker/setup-buildx-action@v3
 
-      - name: Build & push worker
+      - name: Build worker image
         uses: docker/build-push-action@v6
         with:
           context: .
           file: apps/worker/Dockerfile
-          push: true
+          push: false
+          load: true
           tags: ghcr.io/${{ github.repository }}/worker:latest
           cache-from: type=gha,scope=worker
           cache-to: type=gha,scope=worker,mode=max
 
-  # ── Deploy to production (after both images are ready) ─────────────
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" | base64 -d > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          printf 'Host *\n  StrictHostKeyChecking no\n  IdentityFile ~/.ssh/deploy_key\n  ServerAliveInterval 30\n  ServerAliveCountMax 10\n' > ~/.ssh/config
+          chmod 600 ~/.ssh/config
+
+      - name: Transfer worker image to server
+        env:
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+        run: |
+          docker save ghcr.io/${{ github.repository }}/worker:latest \
+            | gzip \
+            | ssh "$DEPLOY_USER@$DEPLOY_HOST" "gunzip | docker load"
+
+  # ── Deploy: restart services with the loaded images ─────────────────
   deploy:
     name: Deploy to production
     needs: [build-web, build-worker]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    permissions:
-      packages: read
 
     steps:
       - name: Set up SSH
@@ -166,19 +176,16 @@ jobs:
           printf 'Host *\n  StrictHostKeyChecking no\n  IdentityFile ~/.ssh/deploy_key\n  ServerAliveInterval 30\n' > ~/.ssh/config
           chmod 600 ~/.ssh/config
 
-      - name: Pull images & restart services
+      - name: Restart services
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_ACTOR: ${{ github.actor }}
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
           DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
         run: |
           ssh "$DEPLOY_USER@$DEPLOY_HOST" "
             set -e
             cd /opt/bigmax
-            echo '$GH_TOKEN' | docker login ghcr.io -u '$GH_ACTOR' --password-stdin
-            docker compose -f docker-compose.prod.yml pull web worker migrate
             docker compose -f docker-compose.prod.yml up -d web worker caddy
+            docker image prune -f
             docker compose -f docker-compose.prod.yml ps
-            docker compose -f docker-compose.prod.yml logs --tail=10 web
+            docker compose -f docker-compose.prod.yml logs --tail=20 web
           "
