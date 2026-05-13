@@ -1,4 +1,4 @@
-name: CI
+name: CI / Deploy
 
 on:
   push:
@@ -6,10 +6,11 @@ on:
   pull_request:
     branches: [main]
 
-# Отменяем устаревшие прогоны при быстрых follow-up пушах.
+# PRs: cancel stale runs when a new commit is pushed.
+# Main: never cancel — don't interrupt a running deploy.
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  group: ${{ github.ref == 'refs/heads/main' && 'deploy-production' || format('ci-{0}', github.ref) }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 env:
   AUTH_SECRET: ci-dummy-secret-not-used-outside-ci-at-least-32ch
@@ -18,31 +19,27 @@ env:
   NEXTAUTH_URL: http://localhost:3000
   UNITELLER_MODE: test
   ESKIZ_SENDER: BIGMAX
-  # NEXT_PUBLIC_* baked into the bundle at build time.
   NEXT_PUBLIC_SITE_URL: http://localhost:3000
   NEXT_PUBLIC_TELEGRAM_BOT_USERNAME: ci_stub_bot
-  # DATABASE_URL and REDIS_URL are intentionally NOT set here.
-  # Worker integration/BullMQ tests use describe.skipIf(!DATABASE_URL) —
-  # if these are set but services aren't running the tests fail with ECONNREFUSED.
-  # They are only set in the e2e job which has real postgres/redis services.
 
 jobs:
-  ci:
-    name: typecheck / lint / test / build
+  # ── Checks: typecheck / lint / test ────────────────────────────────
+  # No Next.js build here — Docker already builds the app; running it twice
+  # was the single biggest time sink (~8-10 min). TypeScript + lint catch
+  # virtually all build-time errors.
+  checks:
+    name: typecheck / lint / test
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v4
         with:
           version: 9.12.0
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20.11.0
           cache: pnpm
@@ -70,5 +67,118 @@ jobs:
       - name: Unit tests
         run: pnpm run test
 
-      - name: Build apps/web
-        run: pnpm --filter @bigmax/web run build
+  # ── Build web + migrate images (parallel with worker) ──────────────
+  build-web:
+    name: Build web + migrate images
+    needs: checks
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build & push web
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: apps/web/Dockerfile
+          push: true
+          tags: ghcr.io/${{ github.repository }}/web:latest
+          build-args: |
+            NEXT_PUBLIC_SITE_URL=https://domtextile.uz
+            NEXT_PUBLIC_TELEGRAM_BOT_USERNAME=bigmax_shop_bot
+          cache-from: type=gha,scope=web
+          cache-to: type=gha,scope=web,mode=max
+
+      # migrate = builder stage of web Dockerfile — all layers already cached
+      # from the step above, so this completes in ~15 seconds.
+      - name: Build & push migrate
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: apps/web/Dockerfile
+          target: builder
+          push: true
+          tags: ghcr.io/${{ github.repository }}/migrate:latest
+          cache-from: type=gha,scope=web
+          cache-to: type=gha,scope=web,mode=max
+
+  # ── Build worker image (parallel with web) ─────────────────────────
+  build-worker:
+    name: Build worker image
+    needs: checks
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build & push worker
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: apps/worker/Dockerfile
+          push: true
+          tags: ghcr.io/${{ github.repository }}/worker:latest
+          cache-from: type=gha,scope=worker
+          cache-to: type=gha,scope=worker,mode=max
+
+  # ── Deploy to production (after both images are ready) ─────────────
+  deploy:
+    name: Deploy to production
+    needs: [build-web, build-worker]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      packages: read
+
+    steps:
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" | base64 -d > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          printf 'Host *\n  StrictHostKeyChecking no\n  IdentityFile ~/.ssh/deploy_key\n  ServerAliveInterval 30\n' > ~/.ssh/config
+          chmod 600 ~/.ssh/config
+
+      - name: Pull images & restart services
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_ACTOR: ${{ github.actor }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+        run: |
+          ssh "$DEPLOY_USER@$DEPLOY_HOST" "
+            set -e
+            cd /opt/bigmax
+            echo '$GH_TOKEN' | docker login ghcr.io -u '$GH_ACTOR' --password-stdin
+            docker compose -f docker-compose.prod.yml pull web worker migrate
+            docker compose -f docker-compose.prod.yml up -d web worker caddy
+            docker compose -f docker-compose.prod.yml ps
+            docker compose -f docker-compose.prod.yml logs --tail=10 web
+          "
