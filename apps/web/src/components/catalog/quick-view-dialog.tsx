@@ -152,11 +152,7 @@ function QuickViewBody({ product, locale, attributeConfigs }: QuickViewBodyProps
         ) : null}
         <h2 className="text-xl font-bold leading-tight sm:text-2xl">{name}</h2>
 
-        {description ? (
-          <p className="line-clamp-3 text-sm text-muted-foreground sm:line-clamp-4">
-            {description}
-          </p>
-        ) : null}
+        {description ? <p className="text-sm text-muted-foreground">{description}</p> : null}
 
         <VariantPicker
           product={{
