@@ -168,6 +168,8 @@ jobs:
     timeout-minutes: 10
 
     steps:
+      - uses: actions/checkout@v4
+
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh
@@ -175,6 +177,13 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           printf 'Host *\n  StrictHostKeyChecking no\n  IdentityFile ~/.ssh/deploy_key\n  ServerAliveInterval 30\n' > ~/.ssh/config
           chmod 600 ~/.ssh/config
+
+      - name: Sync compose and Caddyfile to server
+        env:
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+        run: |
+          scp docker-compose.prod.yml Caddyfile "$DEPLOY_USER@$DEPLOY_HOST:/opt/bigmax/"
 
       - name: Restart services
         env:
