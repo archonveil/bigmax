@@ -14,5 +14,6 @@
 export * from "./client";
 export * from "./constants";
 export * from "./mask";
+export * from "./mock-helpers";
 export * from "./signature";
 export * from "./types";

@@ -295,7 +295,13 @@ export async function POST(req: NextRequest): Promise<Response> {
     Lifetime: 30,
   };
 
-  const html = renderUnitellerRedirectHtml(uniteller.UNITELLER.payUrl, fields);
+  const isMock =
+    process.env["UNITELLER_MODE"] === "mock" && process.env["NODE_ENV"] !== "production";
+  const payUrl = isMock
+    ? `${(process.env["APP_URL"] ?? "http://localhost:3000").replace(/\/$/, "")}/api/mock/uniteller/pay`
+    : uniteller.UNITELLER.payUrl;
+
+  const html = renderUnitellerRedirectHtml(payUrl, fields);
   // §5.12 audit-trail: PaymentLog row при выдаче redirect-формы. Signature
   // сохранится — она вычислена из `Order_IDP+Subtotal+password`, но `password`
   // в payload'е нет, а `Signature` сама по себе не secret (Uniteller её

@@ -73,7 +73,7 @@ export function reportError(err: unknown, ctx: ErrorContext): void {
     // best-effort; никогда не throw'им из observability.
   }
 
-  // 2. Sentry — только если init прошёл.
+  // 2. Sentry — только если init прошёл./
   if (!sentryReady) return;
   try {
     Sentry.withScope((scope) => {
