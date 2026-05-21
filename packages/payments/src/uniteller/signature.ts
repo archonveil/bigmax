@@ -1,27 +1,29 @@
 /**
- * Построение подписи для формы оплаты Uniteller (§5.5 master-prompt Бигмах,
- * «Интернет-эквайринг» v1.43+).
+ * Построение подписи для формы оплаты Uniteller («Интернет-эквайринг» v1.43,
+ * табл. 1 на стр. 16):
  *
- *   Signature = MD5(
- *     MD5(Shop_IDP) + "&" +
- *     MD5(Order_IDP) + "&" +
- *     MD5(Subtotal_P) + "&" +
- *     MD5(MeanType) + "&" +
- *     MD5(EMoneyType) + "&" +
+ *   Signature = uppercase(MD5(
+ *     MD5(Shop_IDP)    + "&" +
+ *     MD5(Order_IDP)   + "&" +
+ *     MD5(Subtotal_P)  + "&" +
+ *     MD5(MeanType)    + "&" +
+ *     MD5(EMoneyType)  + "&" +
+ *     MD5(Lifetime)    + "&" +
+ *     MD5(Customer_IDP)+ "&" +
+ *     MD5(Card_IDP)    + "&" +
+ *     MD5(IData)       + "&" +
+ *     MD5(PT_Code)     + "&" +
  *     MD5(Password)
- *   ).toUpperCase()
+ *   ))
  *
- * Возвращается ровно 32-символьный hex-upper. Опциональные `MeanType` и
- * `EMoneyType` передаются в hash как пустая строка (MD5("") =
- * "d41d8cd98f00b204e9800998ecf8427e").
+ * Все 10 полей участвуют в hash'е независимо от того, передаются ли они в
+ * форме — отсутствующее поле подставляется как пустая строка
+ * (MD5("") = "d41d8cd98f00b204e9800998ecf8427e"). НО если поле передаётся
+ * в форме на /pay/, то и в hash оно должно идти со своим значением (Uniteller
+ * проверяет подпись с учётом значений из POST'а).
  *
- * Модуль только вычисляет подпись — никаких побочных эффектов, никаких
- * операций с БД/сетью. Используется сервером при создании платежа в P4-T5
- * (`POST /api/checkout/pay`); тот же алгоритм будет переиспользован в
- * P4-T12 (mock-server с валидацией подписи для e2e-тестов).
- *
- * Безопасность: `password` — `env.UNITELLER_PASSWORD`, **только на сервере**
- * (§5.12). Никогда не передавать в клиентский код / `NEXT_PUBLIC_*`.
+ * Безопасность: `password` — `env.UNITELLER_PASSWORD`, **только на сервере**.
+ * Никогда не передавать в клиентский код / `NEXT_PUBLIC_*`.
  */
 
 import { createHash, timingSafeEqual } from "node:crypto";
@@ -37,6 +39,17 @@ export interface BuildSignatureParams {
   meanType?: string;
   /** Опциональный тип электронных денег. Пропуск = передать `""`. */
   eMoneyType?: string;
+  /** Время жизни формы оплаты в секундах. Если передаётся в форме — должно
+   *  совпадать со значением в hash'е. Пропуск = `""`. */
+  lifetime?: string;
+  /** Идентификатор покупателя (registered-card flow). Пропуск = `""`. */
+  customerIdp?: string;
+  /** Идентификатор зарегистрированной карты. Пропуск = `""`. */
+  cardIdp?: string;
+  /** «Длинная запись» (ГДС-платежи). Пропуск = `""`. */
+  iData?: string;
+  /** Тип платежа. Пропуск = `""`. */
+  ptCode?: string;
   /** `UNITELLER_PASSWORD` — секрет для подписи. Только на сервере. */
   password: string;
 }
@@ -44,15 +57,23 @@ export interface BuildSignatureParams {
 /**
  * Считает Uniteller Signature для POST /pay/.
  *
- * @throws {TypeError} если `shopId`, `orderId`, `subtotal` или `password` пусты:
- *   Uniteller отвергает такие формы и их подписи бессмысленно считать.
- *   `meanType`/`eMoneyType` могут быть пустыми (штатное поведение).
+ * @throws {TypeError} если `shopId`, `orderId`, `subtotal` или `password` пусты.
  */
 export function buildSignature(params: BuildSignatureParams): string {
-  const { shopId, orderId, subtotal, meanType = "", eMoneyType = "", password } = params;
+  const {
+    shopId,
+    orderId,
+    subtotal,
+    meanType = "",
+    eMoneyType = "",
+    lifetime = "",
+    customerIdp = "",
+    cardIdp = "",
+    iData = "",
+    ptCode = "",
+    password,
+  } = params;
 
-  // Пустоты в обязательных полях — скорее всего баг вызывающего кода.
-  // Валим громко, чтобы не отправить невалидную форму Uniteller'у.
   if (shopId === "") throw new TypeError("Uniteller buildSignature: shopId is empty");
   if (orderId === "") throw new TypeError("Uniteller buildSignature: orderId is empty");
   if (subtotal === "") throw new TypeError("Uniteller buildSignature: subtotal is empty");
@@ -68,6 +89,16 @@ export function buildSignature(params: BuildSignatureParams): string {
     md5(meanType) +
     "&" +
     md5(eMoneyType) +
+    "&" +
+    md5(lifetime) +
+    "&" +
+    md5(customerIdp) +
+    "&" +
+    md5(cardIdp) +
+    "&" +
+    md5(iData) +
+    "&" +
+    md5(ptCode) +
     "&" +
     md5(password);
 

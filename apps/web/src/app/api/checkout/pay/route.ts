@@ -274,10 +274,14 @@ export async function POST(req: NextRequest): Promise<Response> {
 
   // --- Uniteller Signature + self-submit HTML ------------------------------
   const subtotalStr = uniteller.centsToUnitellerSubtotal(totalCents);
+  // Lifetime sent in the form must be included in the hash with its actual
+  // value (Uniteller spec §4.1.2, table 1). Mismatched signature = /pay/error.
+  const lifetimeStr = "30";
   const signature = uniteller.buildSignature({
     shopId,
     orderId: order.number,
     subtotal: subtotalStr,
+    lifetime: lifetimeStr,
     password,
   });
 
@@ -292,7 +296,7 @@ export async function POST(req: NextRequest): Promise<Response> {
     Email: request.contacts.email,
     Phone: request.contacts.phone.replace(/\s+/g, ""),
     Language: locale,
-    Lifetime: 30,
+    Lifetime: lifetimeStr,
   };
 
   const isMock =

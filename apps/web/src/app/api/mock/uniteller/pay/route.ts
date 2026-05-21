@@ -30,11 +30,19 @@ export async function POST(req: NextRequest): Promise<Response> {
   const orderId = params.get("Order_IDP") ?? "";
   const subtotal = params.get("Subtotal_P") ?? "";
   const signature = params.get("Signature") ?? "";
+  const lifetime = params.get("Lifetime") ?? "";
   const returnOkUrl = params.get("URL_RETURN_OK") ?? "";
 
   const password = process.env["UNITELLER_PASSWORD"] ?? "";
 
-  const verify = uniteller.verifyPayForm({ shopId, orderId, subtotal, signature, password });
+  const verify = uniteller.verifyPayForm({
+    shopId,
+    orderId,
+    subtotal,
+    signature,
+    lifetime,
+    password,
+  });
   if (!verify.ok) {
     return new NextResponse(`Bad Request: ${verify.reason}`, { status: 400 });
   }

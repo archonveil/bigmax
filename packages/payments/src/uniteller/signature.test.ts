@@ -15,6 +15,11 @@ function referenceSignature(p: {
   subtotal: string;
   meanType?: string;
   eMoneyType?: string;
+  lifetime?: string;
+  customerIdp?: string;
+  cardIdp?: string;
+  iData?: string;
+  ptCode?: string;
   password: string;
 }): string {
   const md5 = (s: string): string => createHash("md5").update(s, "utf8").digest("hex");
@@ -28,6 +33,16 @@ function referenceSignature(p: {
     md5(p.meanType ?? "") +
     "&" +
     md5(p.eMoneyType ?? "") +
+    "&" +
+    md5(p.lifetime ?? "") +
+    "&" +
+    md5(p.customerIdp ?? "") +
+    "&" +
+    md5(p.cardIdp ?? "") +
+    "&" +
+    md5(p.iData ?? "") +
+    "&" +
+    md5(p.ptCode ?? "") +
     "&" +
     md5(p.password);
   return md5(raw).toUpperCase();

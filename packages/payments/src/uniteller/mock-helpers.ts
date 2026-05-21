@@ -42,6 +42,9 @@ export interface VerifyPayFormInput {
   subtotal: string;
   signature: string;
   password: string;
+  /** Lifetime value as it appears in the form — included in signature hash
+   *  when the form sends it (Uniteller spec table 1). */
+  lifetime?: string;
 }
 
 export type VerifyPayFormResult =
@@ -66,6 +69,7 @@ export function verifyPayForm(input: VerifyPayFormInput): VerifyPayFormResult {
     shopId: input.shopId,
     orderId: input.orderId,
     subtotal: input.subtotal,
+    lifetime: input.lifetime ?? "",
     password: input.password,
   });
   if (expected !== input.signature.toUpperCase()) {
