@@ -1,6 +1,6 @@
 {
   "common": {
-    "brandSlogan": "everything for babies and moms",
+    "brandSlogan": "more than just textile",
     "comingSoon": "Coming soon",
     "cancel": "Cancel",
     "confirm": "Confirm",
@@ -17,15 +17,15 @@
     "home": "Home"
   },
   "home": {
-    "heroTitle": "Bigmax — everything for babies and moms",
-    "heroSubtitle": "Baby and mom goods delivered across Uzbekistan.",
+    "heroTitle": "Bigmax — more than just textile",
+    "heroSubtitle": "Quality home textiles delivered across Uzbekistan.",
     "heroCta": "Browse the catalog",
     "categoriesTitle": "Categories",
     "brandsTitle": "Brands",
     "featuredTitle": "Featured",
     "fromPrice": "from {price}",
     "emptyTitle": "Store opening soon",
-    "emptySubtitle": "We're busy stocking up the catalog. Check back soon — there's plenty for your little one on the way.",
+    "emptySubtitle": "We're busy stocking the catalog. Check back soon — plenty of textiles for your home are on the way.",
     "emptyContactUs": "Contact us"
   },
   "errors": {
@@ -429,12 +429,12 @@
   },
   "seo": {
     "home": {
-      "title": "Bigmax — everything for babies and moms",
-      "description": "Bigmax online store: baby and mom goods delivered across Uzbekistan. Clothing, food, strollers, toys. Pay by card or on delivery."
+      "title": "Bigmax — more than just textile",
+      "description": "Bigmax online store: home textiles delivered across Uzbekistan. Bed linen, towels, tablecloths, curtains. Pay by card or on delivery."
     },
     "catalogIndex": {
       "title": "Catalog",
-      "description": "Baby and mom goods catalog: clothing, diapers, food, strollers, hygiene, toys. Filter by age, gender, price and brand."
+      "description": "Home textile catalog: bed linen, towels, tablecloths, curtains. Filter by price, brand and material."
     },
     "category": {
       "title": "{name}",

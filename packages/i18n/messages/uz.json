@@ -1,6 +1,6 @@
 {
   "common": {
-    "brandSlogan": "chaqaloq va ona uchun hamma narsa",
+    "brandSlogan": "to'qimachilikdan ko'p narsa",
     "comingSoon": "Tez kunda",
     "cancel": "Bekor qilish",
     "confirm": "Tasdiqlash",
@@ -17,15 +17,15 @@
     "home": "Bosh sahifa"
   },
   "home": {
-    "heroTitle": "Bigmax — chaqaloq va ona uchun hamma narsa",
-    "heroSubtitle": "Bolalar uchun tovarlar O'zbekiston bo'ylab yetkazib berish bilan.",
+    "heroTitle": "Bigmax — to'qimachilikdan ko'p narsa",
+    "heroSubtitle": "Sifatli uy to'qimachiligi O'zbekiston bo'ylab yetkazib berish bilan.",
     "heroCta": "Katalogga o'tish",
     "categoriesTitle": "Kategoriyalar",
     "brandsTitle": "Brendlar",
     "featuredTitle": "Tavsiya etamiz",
     "fromPrice": "{price} dan",
     "emptyTitle": "Do'kon tez orada ochiladi",
-    "emptySubtitle": "Biz faol ravishda katalogni tovarlar bilan to'ldiryapmiz. Biroz kutib turing — bu yerda farzandingiz uchun ko'p narsa bo'ladi.",
+    "emptySubtitle": "Biz faol ravishda katalogni to'ldiryapmiz. Biroz kutib turing — bu yerda uyingiz uchun ko'p to'qimachilik bo'ladi.",
     "emptyContactUs": "Biz bilan bog'laning"
   },
   "errors": {
@@ -429,12 +429,12 @@
   },
   "seo": {
     "home": {
-      "title": "Bigmax — chaqaloq va ona uchun hamma narsa",
-      "description": "Bigmax onlayn do'koni: bolalar va onalar uchun mahsulotlar O'zbekiston bo'ylab yetkazib berish bilan. Kiyim, oziq-ovqat, aravachalar, o'yinchoqlar. Karta orqali yoki yetkazib berganda to'lov."
+      "title": "Bigmax — to'qimachilikdan ko'p narsa",
+      "description": "Bigmax onlayn do'koni: uy to'qimachiligi O'zbekiston bo'ylab yetkazib berish bilan. Choyshab, sochiq, dasturxon, parda. Karta orqali yoki yetkazib berganda to'lov."
     },
     "catalogIndex": {
       "title": "Katalog",
-      "description": "Chaqaloq va onalar uchun mahsulotlar katalogi: kiyim, tagliklar, oziq-ovqat, aravachalar, gigiena, o'yinchoqlar. Yosh, jins, narx va brend bo'yicha filtrlar."
+      "description": "Uy to'qimachiligi katalogi: choyshab, sochiq, dasturxon, parda. Narx, brend va material bo'yicha filtrlar."
     },
     "category": {
       "title": "{name}",
