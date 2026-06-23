@@ -285,6 +285,12 @@ export async function POST(req: NextRequest): Promise<Response> {
     password,
   });
 
+  // Currency: per Uniteller spec §4.1.2 table 1, this parameter is REQUIRED for
+  // shops configured for any currency other than RUB. Defaults to RUB if omitted.
+  // Configured via env (matches the shop's currency in Uniteller LK); the value
+  // is not part of the Signature hash so changing it doesn't affect signing.
+  const unitellerCurrency = process.env["UNITELLER_CURRENCY"] ?? "RUB";
+
   const fields: Record<string, string | number> = {
     Shop_IDP: shopId,
     Order_IDP: order.number,
@@ -297,6 +303,7 @@ export async function POST(req: NextRequest): Promise<Response> {
     Phone: request.contacts.phone.replace(/\s+/g, ""),
     Language: locale,
     Lifetime: lifetimeStr,
+    Currency: unitellerCurrency,
   };
 
   const isMock =
