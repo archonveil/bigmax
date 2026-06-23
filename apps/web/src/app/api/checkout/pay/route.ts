@@ -43,6 +43,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { auth } from "@/auth";
 import { computeDeliveryDiscountCents, computeDiscountCents } from "@/cart/promo";
 import { absoluteUrl } from "@/seo/config";
+import { getUsdRate } from "@/server/fx";
 import {
   clampPointsToSpend,
   computeLoyaltyDiscountCents,
@@ -279,16 +280,16 @@ export async function POST(req: NextRequest): Promise<Response> {
   // otherwise Uniteller rejects with "Incorrect currency" or charges the literal
   // soum value as foreign currency (e.g. 160,074 soums → $160,074 USD).
   const unitellerCurrency = process.env["UNITELLER_CURRENCY"] ?? "RUB";
-  // UZS per 1 unit of target currency. e.g. 12700 = 1 USD costs 12700 soums.
-  // Pulled from env so the rate can be tuned without redeploys.
-  const fxRate = Number.parseFloat(process.env["UNITELLER_UZS_RATE"] ?? "12700");
-  // Any currency other than UZS needs conversion since site prices are in soums.
-  // (RUB shops also need it — sending raw soum value as rubles would be ~10× off.)
-  const needsFxConversion = unitellerCurrency !== "UZS" && fxRate > 0;
+  // FX rate: live CBU rate (cached 12h in Redis) when shop currency is USD;
+  // falls back to UNITELLER_UZS_RATE env var if CBU is unreachable. See
+  // `server/fx.ts` for the fallback chain.
+  const needsFxConversion = unitellerCurrency !== "UZS";
+  const fxRate = needsFxConversion && unitellerCurrency === "USD" ? await getUsdRate() : 0;
   // Convert UZS tiyin → target-currency cents. UZS has 100 tiyin per soum, USD has
   // 100 cents per dollar, so the rate factor cancels out cleanly: rate UZS per USD
   // means `targetCents = uzsCents / rate`. Round half-up to avoid undercharging.
-  const subtotalForUniteller = needsFxConversion ? Math.round(totalCents / fxRate) : totalCents;
+  const subtotalForUniteller =
+    needsFxConversion && fxRate > 0 ? Math.round(totalCents / fxRate) : totalCents;
   const subtotalStr = uniteller.centsToUnitellerSubtotal(subtotalForUniteller);
   // Lifetime sent in the form must be included in the hash with its actual
   // value (Uniteller spec §4.1.2, table 1). Mismatched signature = /pay/error.
