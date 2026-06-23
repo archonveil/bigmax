@@ -273,7 +273,23 @@ export async function POST(req: NextRequest): Promise<Response> {
   }
 
   // --- Uniteller Signature + self-submit HTML ------------------------------
-  const subtotalStr = uniteller.centsToUnitellerSubtotal(totalCents);
+  // Currency: per Uniteller spec §4.1.2 table 1, REQUIRED for any non-RUB shop.
+  // Site prices are stored in UZS tiyin (`totalCents`). If the Uniteller shop is
+  // configured for a different currency, convert the amount before signing —
+  // otherwise Uniteller rejects with "Incorrect currency" or charges the literal
+  // soum value as foreign currency (e.g. 160,074 soums → $160,074 USD).
+  const unitellerCurrency = process.env["UNITELLER_CURRENCY"] ?? "RUB";
+  // UZS per 1 unit of target currency. e.g. 12700 = 1 USD costs 12700 soums.
+  // Pulled from env so the rate can be tuned without redeploys.
+  const fxRate = Number.parseFloat(process.env["UNITELLER_UZS_RATE"] ?? "12700");
+  // Any currency other than UZS needs conversion since site prices are in soums.
+  // (RUB shops also need it — sending raw soum value as rubles would be ~10× off.)
+  const needsFxConversion = unitellerCurrency !== "UZS" && fxRate > 0;
+  // Convert UZS tiyin → target-currency cents. UZS has 100 tiyin per soum, USD has
+  // 100 cents per dollar, so the rate factor cancels out cleanly: rate UZS per USD
+  // means `targetCents = uzsCents / rate`. Round half-up to avoid undercharging.
+  const subtotalForUniteller = needsFxConversion ? Math.round(totalCents / fxRate) : totalCents;
+  const subtotalStr = uniteller.centsToUnitellerSubtotal(subtotalForUniteller);
   // Lifetime sent in the form must be included in the hash with its actual
   // value (Uniteller spec §4.1.2, table 1). Mismatched signature = /pay/error.
   const lifetimeStr = "30";
@@ -284,12 +300,6 @@ export async function POST(req: NextRequest): Promise<Response> {
     lifetime: lifetimeStr,
     password,
   });
-
-  // Currency: per Uniteller spec §4.1.2 table 1, this parameter is REQUIRED for
-  // shops configured for any currency other than RUB. Defaults to RUB if omitted.
-  // Configured via env (matches the shop's currency in Uniteller LK); the value
-  // is not part of the Signature hash so changing it doesn't affect signing.
-  const unitellerCurrency = process.env["UNITELLER_CURRENCY"] ?? "RUB";
 
   const fields: Record<string, string | number> = {
     Shop_IDP: shopId,
