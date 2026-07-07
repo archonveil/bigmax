@@ -114,6 +114,7 @@
     "legalTitle": "Legal",
     "legalSupport": "Support",
     "legalOffer": "Public offer",
+    "legalPayment": "Payment & refunds",
     "legalAgreement": "User agreement",
     "legalPrivacy": "Privacy policy"
   },
@@ -149,6 +150,24 @@
       "s4Body": "Delivery is available across Uzbekistan. Times and costs are calculated at checkout based on the region.",
       "s5Title": "5. Returns and exchanges",
       "s5Body": "The buyer may return goods of proper quality within 14 days of receipt. See the Support page for details."
+    },
+    "payment": {
+      "title": "Payment and refunds",
+      "intro": "At the Bigmax online store (domtextile.uz) you can pay for your order online with a bank card. Payments are processed by the Uniteller processing centre.",
+      "s1Title": "1. Accepted cards",
+      "s1Body": "We accept bank cards of the international payment systems Visa and Mastercard, as well as cards of the national payment systems Uzcard and Humo.",
+      "s2Title": "2. How the payment works",
+      "s2Body1": "After confirming your order you are redirected to the secure Uniteller payment page, where you enter the card number, expiry date and CVC/CVV code, then confirm the payment with a one-time 3-D Secure code sent by your bank via SMS.",
+      "s2Body2": "After a successful payment you return to the site, the order is automatically marked as “Paid”, and a confirmation is sent to your e-mail. The payment link is valid for 30 minutes; if the payment was not completed, you can retry it from the order page.",
+      "s3Title": "3. Payment security",
+      "s3Body": "Card details are entered only on the secure page of the Uniteller processing centre and are transmitted in encrypted form (TLS). Payment processing complies with the PCI DSS security standard; the store does not store bank card details and has no access to them.",
+      "s4Title": "4. Refunds",
+      "s4Body1": "If a paid order is cancelled or goods are returned, the money is refunded to the same bank card that was used for the payment. Cash refunds are not available for payments made by card.",
+      "s4Body2": "To request a refund, contact our support team. Goods of proper quality can be returned within 14 days of receipt, provided their appearance and packaging are preserved. Refunds are credited to the card within 3 to 30 calendar days depending on the issuing bank.",
+      "s5Title": "5. Cancelled and failed payments",
+      "s5Body": "If a payment is not completed (insufficient funds, incorrect details, failed 3-D Secure confirmation), no money is charged from the card and the order remains unpaid — you can retry the payment or choose payment on delivery. If money was charged but the order was not marked as “Paid”, please contact support.",
+      "s6Title": "6. Payment questions",
+      "s6Body": "For any questions related to payments and refunds, contact our support team:"
     },
     "agreement": {
       "title": "User agreement",
@@ -459,6 +478,10 @@
     "offer": {
       "title": "Public offer",
       "description": "Public offer terms of the Bigmax online store (bigmax.uz): order placement, payment, delivery and returns."
+    },
+    "payment": {
+      "title": "Payment and refunds",
+      "description": "How to pay for orders with Visa, Mastercard, Uzcard and Humo bank cards at domtextile.uz, and how refunds are processed."
     },
     "agreement": {
       "title": "User agreement",

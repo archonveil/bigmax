@@ -2,6 +2,8 @@ import { Link } from "@bigmax/i18n/navigation";
 import { BRAND, formatPhone } from "@bigmax/shared-types";
 import { getTranslations } from "next-intl/server";
 
+import { PaymentSystemLogos } from "@/components/payment-system-logos";
+
 export async function Footer(): Promise<JSX.Element> {
   const t = await getTranslations();
 
@@ -81,6 +83,11 @@ export async function Footer(): Promise<JSX.Element> {
               </Link>
             </li>
             <li>
+              <Link className="hover:text-primary" href={"/payment" as never}>
+                {t("footer.legalPayment")}
+              </Link>
+            </li>
+            <li>
               <Link className="hover:text-primary" href={"/agreement" as never}>
                 {t("footer.legalAgreement")}
               </Link>
@@ -94,8 +101,13 @@ export async function Footer(): Promise<JSX.Element> {
         </div>
       </div>
 
-      <div className="border-t py-4 text-center text-xs text-muted-foreground">
-        {t("footer.rights")}
+      <div className="border-t py-4">
+        <div className="container flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
+          <p className="text-xs text-muted-foreground">{t("footer.rights")}</p>
+          <Link href={"/payment" as never} aria-label={t("footer.legalPayment")}>
+            <PaymentSystemLogos />
+          </Link>
+        </div>
       </div>
     </footer>
   );
