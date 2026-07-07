@@ -9,8 +9,7 @@ interface PaymentSystemLogosProps {
   className?: string;
 }
 
-const badgeClass =
-  "flex h-9 w-16 items-center justify-center rounded-md border bg-white shadow-sm";
+const badgeClass = "flex h-9 w-16 items-center justify-center rounded-md border bg-white shadow-sm";
 
 export function PaymentSystemLogos({ className }: PaymentSystemLogosProps): JSX.Element {
   return (
@@ -35,10 +34,7 @@ export function PaymentSystemLogos({ className }: PaymentSystemLogosProps): JSX.
         <svg role="img" aria-label="Mastercard" viewBox="0 0 38 24" className="h-6 w-9">
           <circle cx="15" cy="12" r="10" fill="#EB001B" />
           <circle cx="23" cy="12" r="10" fill="#F79E1B" />
-          <path
-            d="M19 4.47a10 10 0 0 1 0 15.06 10 10 0 0 1 0-15.06Z"
-            fill="#FF5F00"
-          />
+          <path d="M19 4.47a10 10 0 0 1 0 15.06 10 10 0 0 1 0-15.06Z" fill="#FF5F00" />
         </svg>
       </li>
       <li className={badgeClass} title="Uzcard">
