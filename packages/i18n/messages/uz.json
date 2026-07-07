@@ -114,6 +114,7 @@
     "legalTitle": "Hujjatlar",
     "legalSupport": "Yordam",
     "legalOffer": "Ommaviy oferta",
+    "legalPayment": "To'lov va qaytarish",
     "legalAgreement": "Foydalanuvchi shartnomasi",
     "legalPrivacy": "Maxfiylik siyosati"
   },
@@ -149,6 +150,24 @@
       "s4Body": "Yetkazib berish O'zbekistonning butun hududi bo'ylab amalga oshiriladi. Muddat va narx buyurtmani rasmiylashtirish bosqichida hududga qarab hisoblanadi.",
       "s5Title": "5. Qaytarish va almashtirish",
       "s5Body": "Xaridor sifatli tovardan qabul qilingan kundan boshlab 14 kun ichida voz kechish huquqiga ega. Tafsilotlar — \"Yordam\" bo'limida."
+    },
+    "payment": {
+      "title": "To'lov va pulni qaytarish",
+      "intro": "Bigmax onlayn do'konida (domtextile.uz) buyurtmani bank kartasi bilan onlayn to'lashingiz mumkin. To'lovlar Uniteller protsessing markazi orqali qabul qilinadi.",
+      "s1Title": "1. Qabul qilinadigan kartalar",
+      "s1Body": "To'lov uchun Visa va Mastercard xalqaro to'lov tizimlari kartalari, shuningdek Uzcard va Humo milliy to'lov tizimlari kartalari qabul qilinadi.",
+      "s2Title": "2. To'lov qanday amalga oshiriladi",
+      "s2Body1": "Buyurtma tasdiqlangandan so'ng siz Uniteller'ning himoyalangan to'lov sahifasiga yo'naltirilasiz: u yerda karta raqami, amal qilish muddati va CVC/CVV kodini kiritib, bank SMS orqali yuboradigan bir martalik kod (3-D Secure) bilan to'lovni tasdiqlaysiz.",
+      "s2Body2": "To'lov muvaffaqiyatli o'tgach, siz saytga qaytasiz, buyurtma avtomatik ravishda «To'langan» holatini oladi va ko'rsatilgan e-mail'ga tasdiq keladi. To'lov havolasi 30 daqiqa amal qiladi; to'lov yakunlanmagan bo'lsa, uni buyurtma sahifasidan qayta amalga oshirish mumkin.",
+      "s3Title": "3. To'lovlar xavfsizligi",
+      "s3Body": "Karta rekvizitlari faqat Uniteller protsessing markazining himoyalangan sahifasida kiritiladi va shifrlangan holda (TLS) uzatiladi. To'lovlarni qayta ishlash PCI DSS xavfsizlik standartiga mos keladi; onlayn do'kon bank kartalari ma'lumotlarini saqlamaydi va ularga kira olmaydi.",
+      "s4Title": "4. Pulni qaytarish",
+      "s4Body1": "To'langan buyurtma bekor qilinganda yoki tovar qaytarilganda pul to'lov amalga oshirilgan bank kartasiga qaytariladi. Karta bilan to'langan buyurtmalar uchun naqd pulda qaytarish amalga oshirilmaydi.",
+      "s4Body2": "Qaytarishni rasmiylashtirish uchun yordam xizmatiga murojaat qiling. Sifatli tovarni olingan kundan boshlab 14 kun ichida, tovar ko'rinishi va qadoqlanishi saqlangan holda qaytarish mumkin. Pul kartaga karta chiqargan bankka qarab 3 kundan 30 kalendar kunigacha bo'lgan muddatda tushadi.",
+      "s5Title": "5. Bekor qilingan va muvaffaqiyatsiz to'lovlar",
+      "s5Body": "Agar to'lov yakunlanmagan bo'lsa (mablag' yetarli emas, rekvizitlar noto'g'ri, 3-D Secure tasdig'idan o'tilmagan), kartadan pul yechilmaydi va buyurtma to'lanmagan holda qoladi — to'lovni qayta amalga oshirishingiz yoki qabul qilganda to'lashni tanlashingiz mumkin. Agar pul yechilgan bo'lsa-yu, buyurtma «To'langan» holatini olmagan bo'lsa, yordam xizmatiga murojaat qiling.",
+      "s6Title": "6. To'lov bo'yicha savollar",
+      "s6Body": "To'lov va pulni qaytarish bilan bog'liq har qanday savollar bo'yicha yordam xizmatiga murojaat qiling:"
     },
     "agreement": {
       "title": "Foydalanuvchi shartnomasi",
@@ -459,6 +478,10 @@
     "offer": {
       "title": "Ommaviy oferta",
       "description": "Bigmax onlayn do'koni (bigmax.uz) ommaviy ofertasi shartlari: buyurtma berish, to'lov, yetkazib berish va qaytarish tartibi."
+    },
+    "payment": {
+      "title": "To'lov va pulni qaytarish",
+      "description": "Domtextile.uz'da buyurtmalarni Visa, Mastercard, Uzcard va Humo bank kartalari bilan to'lash qoidalari va pulni qaytarish tartibi."
     },
     "agreement": {
       "title": "Foydalanuvchi shartnomasi",
