@@ -11,7 +11,14 @@ export async function Footer(): Promise<JSX.Element> {
     <footer className="border-t bg-muted/30">
       <div className="container grid gap-8 py-10 md:grid-cols-4">
         <div>
-          <p className="text-lg font-semibold">{BRAND.nameRu}</p>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/bigmax-logo.svg"
+            alt={BRAND.nameRu}
+            className="h-12 w-auto"
+            width={62}
+            height={48}
+          />
           <p className="mt-2 text-sm text-muted-foreground">{t("common.brandSlogan")}</p>
         </div>
 

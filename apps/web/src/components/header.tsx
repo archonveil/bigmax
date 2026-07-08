@@ -27,10 +27,17 @@ export async function Header(): Promise<JSX.Element> {
         <div className="flex items-center justify-between gap-4 md:justify-start">
           <Link
             href="/"
-            className="flex items-baseline gap-2 font-semibold tracking-tight"
+            className="flex items-center gap-2 font-semibold tracking-tight"
             aria-label={BRAND.nameRu}
           >
-            <span className="text-xl">{BRAND.nameRu}</span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/bigmax-logo.svg"
+              alt={BRAND.nameRu}
+              className="h-10 w-auto"
+              width={52}
+              height={40}
+            />
             <span className="hidden text-xs text-muted-foreground lg:inline">
               {t("common.brandSlogan")}
             </span>
