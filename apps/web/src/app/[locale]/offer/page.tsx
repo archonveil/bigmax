@@ -37,21 +37,27 @@ export default async function OfferPage({ params }: OfferPageProps): Promise<JSX
 
   return (
     <LegalArticle title={t("title")} updatedAt={tShared("updatedAt")}>
-      <p>{t("intro")}</p>
+      <p className="whitespace-pre-line">{t("intro")}</p>
       <LegalSection title={t("s1Title")}>
-        <p>{t("s1Body")}</p>
+        <p className="whitespace-pre-line">{t("s1Body")}</p>
       </LegalSection>
       <LegalSection title={t("s2Title")}>
-        <p>{t("s2Body")}</p>
+        <p className="whitespace-pre-line">{t("s2Body")}</p>
       </LegalSection>
       <LegalSection title={t("s3Title")}>
-        <p>{t("s3Body")}</p>
+        <p className="whitespace-pre-line">{t("s3Body")}</p>
       </LegalSection>
       <LegalSection title={t("s4Title")}>
-        <p>{t("s4Body")}</p>
+        <p className="whitespace-pre-line">{t("s4Body")}</p>
       </LegalSection>
       <LegalSection title={t("s5Title")}>
-        <p>{t("s5Body")}</p>
+        <p className="whitespace-pre-line">{t("s5Body")}</p>
+      </LegalSection>
+      <LegalSection title={t("s6Title")}>
+        <p className="whitespace-pre-line">{t("s6Body")}</p>
+      </LegalSection>
+      <LegalSection title={t("s7Title")}>
+        <p className="whitespace-pre-line">{t("s7Body")}</p>
       </LegalSection>
     </LegalArticle>
   );

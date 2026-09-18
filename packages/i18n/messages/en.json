@@ -110,13 +110,15 @@
   "footer": {
     "contacts": "Contacts",
     "address": "Andijan, Uzbekistan",
-    "rights": "© 2026 Bigmax. All rights reserved.",
+    "rights": "© 2026 LLC “TEXTILE BIGMAN”. All rights reserved.",
     "legalTitle": "Legal",
     "legalSupport": "Support",
     "legalOffer": "Public offer",
     "legalPayment": "Payment & refunds",
     "legalAgreement": "User agreement",
-    "legalPrivacy": "Privacy policy"
+    "legalPrivacy": "Privacy policy",
+    "paymentSecurity3ds": "Bank card payments are processed using 3D Secure technology (where supported by the issuing bank). All payments are protected by 3D Secure and PCI DSS standards.",
+    "paymentAntifraud": "The company monitors payment transactions and enforces anti-fraud prevention measures. Suspicious transactions may be suspended or cancelled with a full refund."
   },
   "legal": {
     "updatedAt": "Last updated: 2026-05-09",
@@ -139,17 +141,21 @@
     },
     "offer": {
       "title": "Public offer",
-      "intro": "This document is the official offer (public offer) of the Bigmax online store (bigmax.uz) and contains all material terms for the sale of goods.",
+      "intro": "This document constitutes an official public offer by LLC “TEXTILE BIGMAN” (hereinafter referred to as the Seller) for the online sale of goods via the Bigmax online store (domtextile.uz). By placing an order on the website, the buyer (hereinafter referred to as the Buyer) fully and unconditionally accepts all the terms and conditions of this offer.",
       "s1Title": "1. General provisions",
-      "s1Body": "By placing an order on the site, the buyer fully accepts the terms of this offer. The seller reserves the right to make changes; the current version is always available on this page.",
+      "s1Body": "1.1. This Public Offer is an official offer in accordance with Articles 367 and 369 of the Civil Code of the Republic of Uzbekistan.\n1.2. The Seller reserves the right to amend this offer unilaterally. Changes take effect from the moment they are published on the website.",
       "s2Title": "2. Subject of the contract",
-      "s2Body": "The seller transfers ownership of goods listed in the catalog to the buyer, who accepts and pays for them at the prices stated at the time of order.",
-      "s3Title": "3. Price and payment",
-      "s3Body": "All prices are listed in soum (UZS) and include VAT. Payment is made online by card, by bank transfer, or in cash to the courier on delivery.",
-      "s4Title": "4. Delivery",
-      "s4Body": "Delivery is available across Uzbekistan. Times and costs are calculated at checkout based on the region.",
-      "s5Title": "5. Returns and exchanges",
-      "s5Body": "The buyer may return goods of proper quality within 14 days of receipt. See the Support page for details."
+      "s2Body": "2.1. The Seller undertakes to transfer into the ownership of the Buyer textile goods, fabrics, and apparel presented in the domtextile.uz catalog, and the Buyer undertakes to accept and pay for the goods at the prices specified at the time of order placement.",
+      "s3Title": "3. Price and payment terms",
+      "s3Body": "3.1. All product prices are indicated in the national currency of the Republic of Uzbekistan — Uzbek Soums (UZS).\n3.2. Payment is made online using bank cards (Uzcard, Humo, Visa, Mastercard) via a secure payment processing system, or upon delivery.\n3.3. When paying by bank card, all data is transferred via an encrypted TLS connection. The store does not store customer payment card details.",
+      "s4Title": "4. Order placement and delivery",
+      "s4Body": "4.1. The Buyer places orders independently on the domtextile.uz website. Upon successful placement, a confirmation is sent via SMS or email.\n4.2. Delivery is carried out throughout the Republic of Uzbekistan: 1–2 business days in Tashkent, 3–7 business days in regional areas.\n4.3. Shipping fees and delivery estimates are calculated at checkout based on destination.",
+      "s5Title": "5. Returns and refund policy",
+      "s5Body": "5.1. In accordance with the Law of the Republic of Uzbekistan \"On Protection of Consumer Rights\", the Buyer has the right to return or exchange goods within 14 days of receipt, provided the merchandise maintains its original condition and packaging.\n5.2. In the event of order cancellation or return, refunds are credited exclusively to the bank card used for the initial purchase. Cash refunds are not provided for card transactions.\n5.3. Refund crediting times depend on the issuing bank and range from 3 to 30 banking days.",
+      "s6Title": "6. Security and fraud prevention (3D Secure and PCI DSS)",
+      "s6Body": "6.1. To ensure transaction safety, all online payments are protected by 3D Secure 2.0 technology and adhere to international PCI DSS security standards.\n6.2. The company continuously monitors payment transactions to prevent fraudulent activity. If a suspicious transaction is detected, the Seller reserves the right to suspend the order, request identity verification, or cancel the order with a full refund to the cardholder.\n6.3. The Buyer undertakes not to disclose payment card credentials or one-time verification SMS codes to third parties.",
+      "s7Title": "7. Legal entity details and contact information",
+      "s7Body": "Company: “TEXTILE BIGMAN” Limited Liability Company (LLC “TEXTILE BIGMAN”)\nAddress: Republic of Uzbekistan, Andijan region, Andijan city, Babur avenue\nPhone: +998 20 009-51-10, +998 20 034-18-88\nEmail: domtextil.uz@gmail.com\nWebsite: https://domtextile.uz\nWorking hours: Monday – Saturday, 09:00 – 18:00 (Sunday is a day off)"
     },
     "payment": {
       "title": "Payment and refunds",
@@ -167,7 +173,9 @@
       "s5Title": "5. Cancelled and failed payments",
       "s5Body": "If a payment is not completed (insufficient funds, incorrect details, failed 3-D Secure confirmation), no money is charged from the card and the order remains unpaid — you can retry the payment or choose payment on delivery. If money was charged but the order was not marked as “Paid”, please contact support.",
       "s6Title": "6. Payment questions",
-      "s6Body": "For any questions related to payments and refunds, contact our support team:"
+      "s6Body": "For any questions related to payments and refunds, contact our support team:",
+      "s7Title": "7. Anti-fraud transaction monitoring",
+      "s7Body": "For security purposes, the company monitors payment operations and implements anti-fraud measures. Upon detection of suspicious activity, the company reserves the right to request additional verification, suspend order processing, or cancel the payment with a refund in accordance with payment and refund terms."
     },
     "agreement": {
       "title": "User agreement",

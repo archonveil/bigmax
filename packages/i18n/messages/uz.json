@@ -110,13 +110,15 @@
   "footer": {
     "contacts": "Aloqa",
     "address": "Andijon sh., O'zbekiston",
-    "rights": "© 2026 Bigmax. Barcha huquqlar himoyalangan.",
+    "rights": "© 2026 “TEXTILE BIGMAN” МЧЖ. Barcha huquqlar himoyalangan.",
     "legalTitle": "Hujjatlar",
     "legalSupport": "Yordam",
     "legalOffer": "Ommaviy oferta",
     "legalPayment": "To'lov va qaytarish",
     "legalAgreement": "Foydalanuvchi shartnomasi",
-    "legalPrivacy": "Maxfiylik siyosati"
+    "legalPrivacy": "Maxfiylik siyosati",
+    "paymentSecurity3ds": "Bank kartalari bilan to‘lash 3D Secure texnologiyasi orqali amalga oshiriladi (agar kartani chiqargan bank uni qo‘llasa). Barcha to‘lovlar 3D Secure va PCI DSS standartlari bilan himoyalangan.",
+    "paymentAntifraud": "Kompaniya to‘lov operatsiyalarini nazorat qiladi va firibgarlikning oldini olish bo‘yicha choralarni amalga oshiradi. Shubhali operatsiyalar to‘xtatilishi yoki mablag‘lar qaytarilgan holda bekor qilinishi mumkin."
   },
   "legal": {
     "updatedAt": "Yangilangan sana: 09.05.2026",
@@ -139,17 +141,21 @@
     },
     "offer": {
       "title": "Ommaviy oferta",
-      "intro": "Mazkur hujjat Bigmax onlayn do'koni (bigmax.uz) tomonidan rasmiy taklif (ommaviy oferta) hisoblanadi va tovarlarni sotib olish-sotishning barcha muhim shartlarini o'z ichiga oladi.",
+      "intro": "Mazkur hujjat “TEXTILE BIGMAN” МЧЖ (keyingi o'rinlarda – Sotuvchi) tomonidan Bigmax onlayn do'koni (domtextile.uz) orqali tovarlarni onlayn sotish bo'yicha rasmiy taklif (ommaviy oferta) hisoblanadi. Saytda buyurtma berish orqali xaridor (keyingi o'rinlarda – Xaridor) mazkur ofertaning barcha shartlarini to'liq va so'zsiz qabul qilgan hisoblanadi.",
       "s1Title": "1. Umumiy qoidalar",
-      "s1Body": "Saytda buyurtma berib, xaridor mazkur ofertaning barcha shartlarini to'liq qabul qiladi. Sotuvchi shartlarga o'zgartirish kiritish huquqini saqlab qoladi; joriy versiya ushbu sahifada doimo mavjud.",
+      "s1Body": "1.1. Mazkur Ommaviy oferta O'zbekiston Respublikasi Fuqarolik kodeksining 367 va 369-moddalariga muvofiq rasmiy ommaviy oferta hisoblanadi.\n1.2. Sotuvchi ushbu ofertaga bir tomonlama o'zgartirishlar kiritish huquqiga ega. Ofertadagi o'zgartirishlar saytda e'lon qilingan paytdan e'tiboran kuchga kiradi.",
       "s2Title": "2. Shartnoma predmeti",
-      "s2Body": "Sotuvchi katalogda taqdim etilgan tovarlarni xaridor mulkiga o'tkazadi, xaridor esa buyurtma paytida ko'rsatilgan narxlar bo'yicha ularni qabul qilib to'laydi.",
-      "s3Title": "3. Narx va to'lov",
-      "s3Body": "Barcha narxlar so'mda (UZS) ko'rsatilgan va QQS bilan birga. To'lov onlayn karta, bank o'tkazmasi yoki yetkazib berishda kuryerga naqd pul orqali amalga oshiriladi.",
-      "s4Title": "4. Yetkazib berish",
-      "s4Body": "Yetkazib berish O'zbekistonning butun hududi bo'ylab amalga oshiriladi. Muddat va narx buyurtmani rasmiylashtirish bosqichida hududga qarab hisoblanadi.",
-      "s5Title": "5. Qaytarish va almashtirish",
-      "s5Body": "Xaridor sifatli tovardan qabul qilingan kundan boshlab 14 kun ichida voz kechish huquqiga ega. Tafsilotlar — \"Yordam\" bo'limida."
+      "s2Body": "2.1. Sotuvchi domtextile.uz sayti katalogida taqdim etilgan to'qimachilik mahsulotlari, matolar va kiyim-kechaklarni Xaridor mulkiga o'tkazish, Xaridor esa tovarlarni qabul qilish va ularning haqini buyurtma rasmiylashtirish paytida belgilangan narx bo'yicha to'lash majburiyatini oladi.",
+      "s3Title": "3. Narx va to'lov shartlari",
+      "s3Body": "3.1. Tovarlarning barcha narxlari O'zbekiston Respublikasi milliy valyutasi — so'mda (UZS) ko'rsatilgan.\n3.2. To'lov onlayn bank kartalari (Uzcard, Humo, Visa, Mastercard) orqali xavfsiz protsessing tizimi vositasida yoki tovar yetkazib berilganda kuryerga amalga oshiriladi.\n3.3. Bank kartasi orqali to'lov amalga oshirilganda, mablag'lar faqat xavfsiz shifrlangan to'lov shlyuzi orqali yechiladi. Do'kon xaridorlarning bank kartasi rekvizitlarini o'z serverlarida saqlamaydi.",
+      "s4Title": "4. Buyurtmani rasmiylashtirish va yetkazib berish",
+      "s4Body": "4.1. Buyurtma Xaridor tomonidan domtextile.uz sayti orqali mustaqil rasmiylashtiriladi. Muvaffaqiyatli rasmiylashtirishdan so'ng xaridorga SMS yoki elektron pochta orqali tasdiqnoma yuboriladi.\n4.2. Yetkazib berish O'zbekiston Respublikasining butun hududi bo'ylab amalga oshiriladi: Toshkent shahri bo'yicha 1–2 ish kuni, boshqa viloyat va hududlarga 3–7 ish kuni.\n4.3. Yetkazib berish narxi va muddatlari buyurtma rasmiylashtirish jarayonida manzilga qarab aniqlanadi.",
+      "s5Title": "5. Tovarni va to'lovni qaytarish tartibi",
+      "s5Body": "5.1. Xaridor O'zbekiston Respublikasining «Iste'molchilarning huquqlarini himoya qilish to'g'risida»gi Qonuniga muvofiq, sifatli tovarni qabul qilgan kundan boshlab 14 kun ichida, tovar ko'rinishi, qadoqlanishi va iste'mol xususiyatlari saqlangan taqdirda qaytarish yoki almashtirish huquqiga ega.\n5.2. Buyurtma bekor qilinganda yoki tovar qaytarilganda, to'langan mablag'lar faqat to'lov amalga oshirilgan bank kartasiga qaytariladi. Naqd pulda qaytarish amalga oshirilmaydi.\n5.3. Mablag'larni kartaga qaytarish muddati to'lov tizimi va emitent bankka bog'liq holda 3 kundan 30 bank kunigacha tashkil etadi.",
+      "s6Title": "6. Xavfsizlik va firibgarlikning oldini olish (3D Secure va PCI DSS)",
+      "s6Body": "6.1. Xavfsizlikni ta'minlash maqsadida onlayn to'lovlar 3D Secure 2.0 (Verified by Visa, Mastercard Identity Check) texnologiyasi hamda PCI DSS xalqaro xavfsizlik standartlariga muvofiq amalga oshiriladi.\n6.2. Kompaniya barcha to'lov operatsiyalarini monitoring qiladi va firibgarlikning oldini olish (antifraud) choralarini ko'radi. Shubhali yoki noqonuniy operatsiyalar aniqlangan taqdirda, Sotuvchi buyurtmani to'xtatib turish, qo'shimcha tasdiqlovchi ma'lumotlarni so'rash yoki to'lovni bekor qilib mablag'larni kartaga qaytarish huquqiga ega.\n6.3. Xaridor o'z bank kartasi rekvizitlari va SMS orqali keladigan bir martalik tasdiqlash kodlarini uchinchi shaxslarga oshkor qilmaslik majburiyatini oladi.",
+      "s7Title": "7. Yuridik shaxs rekvizitlari va aloqa ma'lumotlari",
+      "s7Body": "Tashkilot nomi: “TEXTILE BIGMAN” Mas'uliyati Cheklangan Jamiyati (МЧЖ)\nManzil: O'zbekiston Respublikasi, Andijon viloyati, Andijon shahri, Boburshoh ko'chasi\nTelefonlar: +998 20 009-51-10, +998 20 034-18-88\nElektron pochta: domtextil.uz@gmail.com\nRasmiy veb-sayt: https://domtextile.uz\nIsh tartibi: Dushanba – Shanba, 09:00 – 18:00 (Yakshanba — dam olish kuni)"
     },
     "payment": {
       "title": "To'lov va pulni qaytarish",
@@ -167,7 +173,9 @@
       "s5Title": "5. Bekor qilingan va muvaffaqiyatsiz to'lovlar",
       "s5Body": "Agar to'lov yakunlanmagan bo'lsa (mablag' yetarli emas, rekvizitlar noto'g'ri, 3-D Secure tasdig'idan o'tilmagan), kartadan pul yechilmaydi va buyurtma to'lanmagan holda qoladi — to'lovni qayta amalga oshirishingiz yoki qabul qilganda to'lashni tanlashingiz mumkin. Agar pul yechilgan bo'lsa-yu, buyurtma «To'langan» holatini olmagan bo'lsa, yordam xizmatiga murojaat qiling.",
       "s6Title": "6. To'lov bo'yicha savollar",
-      "s6Body": "To'lov va pulni qaytarish bilan bog'liq har qanday savollar bo'yicha yordam xizmatiga murojaat qiling:"
+      "s6Body": "To'lov va pulni qaytarish bilan bog'liq har qanday savollar bo'yicha yordam xizmatiga murojaat qiling:",
+      "s7Title": "7. Firibgarlik operatsiyalariga nazorat",
+      "s7Body": "Xavfsizlik maqsadida kompaniya to‘lov operatsiyalarini nazorat qiladi va firibgarlikning oldini olish bo‘yicha choralarni amalga oshiradi. Shubhali operatsiya aniqlanganda kompaniya qo‘shimcha ma‘lumot so‘rash, buyurtmani qayta ishlashni to‘xtatish yoki to‘lovni bekor qilish va mablag‘larni to‘lov hamda qaytarish shartlariga muvofiq qaytarish huquqiga ega."
     },
     "agreement": {
       "title": "Foydalanuvchi shartnomasi",

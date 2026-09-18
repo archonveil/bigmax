@@ -72,6 +72,9 @@ export default async function PaymentPage({ params }: PaymentPageProps): Promise
           </li>
         </ul>
       </LegalSection>
+      <LegalSection title={t("s7Title")}>
+        <p>{t("s7Body")}</p>
+      </LegalSection>
     </LegalArticle>
   );
 }

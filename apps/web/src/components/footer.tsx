@@ -109,11 +109,17 @@ export async function Footer(): Promise<JSX.Element> {
       </div>
 
       <div className="border-t py-4">
-        <div className="container flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
-          <p className="text-xs text-muted-foreground">{t("footer.rights")}</p>
-          <Link href={"/payment" as never} aria-label={t("footer.legalPayment")}>
-            <PaymentSystemLogos />
-          </Link>
+        <div className="container flex flex-col items-center gap-3">
+          <div className="flex w-full flex-col items-center gap-3 sm:flex-row sm:justify-between">
+            <p className="text-xs text-muted-foreground">{t("footer.rights")}</p>
+            <Link href={"/payment" as never} aria-label={t("footer.legalPayment")}>
+              <PaymentSystemLogos />
+            </Link>
+          </div>
+          <div className="max-w-3xl space-y-1 text-center text-xs text-muted-foreground">
+            <p>{t("footer.paymentSecurity3ds")}</p>
+            <p>{t("footer.paymentAntifraud")}</p>
+          </div>
         </div>
       </div>
     </footer>
