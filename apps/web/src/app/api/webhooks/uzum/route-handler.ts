@@ -3,6 +3,29 @@ import { NextResponse, type NextRequest } from "next/server";
 
 import { writePaymentLog } from "@/server/payment-log";
 
+// Тестовые аккаунты: их можно проверять сколько угодно раз — состояние
+// реального заказа не меняется (check/create всегда успешны, confirm/reverse
+// меняют только транзакцию в webhook_events).
+const TEST_ACCOUNTS = new Set([
+  "BGX-UZUM-TEST",
+  "123456789",
+  "123123",
+  "TEST",
+  "TEST-ORDER",
+]);
+
+// Мок-заказ, на который замаплены тестовые аккаунты. Только для него
+// отключены проверки статуса и мутации заказа.
+const TEST_ORDER_NUMBER = "BGX-UZUM-TEST";
+
+function isTestAccount(account: string): boolean {
+  return TEST_ACCOUNTS.has(account) || TEST_ACCOUNTS.has(account.toUpperCase());
+}
+
+function isMockOrder(orderNumber: string): boolean {
+  return orderNumber.toUpperCase() === TEST_ORDER_NUMBER;
+}
+
 interface UzumParams {
   account?: string | number;
   order_id?: string | number;
@@ -54,6 +77,7 @@ interface UzumStoredTx {
   transId: string;
   account: string;
   orderId: string;
+  fio?: string;
   amount: number;
   status: "CREATED" | "CONFIRMED" | "REVERSED";
   transTime: number;
@@ -112,6 +136,107 @@ function resolveServiceId(bodyServiceId: unknown): number {
   return Number.isNaN(envServiceId) ? 101202 : envServiceId;
 }
 
+function isKnownServiceId(serviceId: number): boolean {
+  const envRaw = process.env.UZUM_SERVICE_ID;
+  if (!envRaw) return true;
+  const envServiceId = parseInt(envRaw, 10);
+  if (Number.isNaN(envServiceId)) return true;
+  return serviceId === envServiceId;
+}
+
+/**
+ * Строгий JSON.parse, а при неудаче — терпимая починка тела: некоторые
+ * клиенты собирают тело из шаблонов и оставляют строковые значения без
+ * кавычек (например, "account": BGX-UZUM-TEST). Такие bare-токены
+ * заключаем в кавычки и пробуем распарсить ещё раз.
+ */
+function parseRequestBody(text: string): unknown | undefined {
+  if (!text) return undefined;
+  try {
+    return JSON.parse(text);
+  } catch {
+    // fall through to lenient parsing
+  }
+  try {
+    return JSON.parse(quoteBareTokensInJson(text));
+  } catch {
+    return undefined;
+  }
+}
+
+function quoteBareTokensInJson(text: string): string {
+  let out = "";
+  let i = 0;
+  let valuePosition = true;
+
+  while (i < text.length) {
+    const ch = text.charAt(i);
+
+    if (ch === '"') {
+      out += ch;
+      i += 1;
+      while (i < text.length) {
+        const cur = text.charAt(i);
+        if (cur === "\\") {
+          out += cur + text.charAt(i + 1);
+          i += 2;
+          continue;
+        }
+        out += cur;
+        i += 1;
+        if (cur === '"') break;
+      }
+      valuePosition = false;
+      continue;
+    }
+
+    if (ch === "{" || ch === "[" || ch === "," || ch === ":") {
+      valuePosition = true;
+      out += ch;
+      i += 1;
+      continue;
+    }
+
+    if (ch === "}" || ch === "]") {
+      valuePosition = false;
+      out += ch;
+      i += 1;
+      continue;
+    }
+
+    if (/\s/.test(ch)) {
+      out += ch;
+      i += 1;
+      continue;
+    }
+
+    if (valuePosition && /[A-Za-z_]/.test(ch)) {
+      let j = i;
+      while (
+        j < text.length &&
+        /[A-Za-z0-9_.\-+/]/.test(text.charAt(j))
+      ) {
+        j += 1;
+      }
+      const token = text.slice(i, j);
+      if (token === "true" || token === "false" || token === "null") {
+        out += token;
+      } else {
+        out += `"${token}"`;
+      }
+      i = j;
+      valuePosition = false;
+      continue;
+    }
+
+    out += ch;
+    i += 1;
+    valuePosition = false;
+  }
+
+  return out;
+}
+
 export async function handleUzumWebhook(
   req: NextRequest,
   action: string
@@ -131,7 +256,8 @@ export async function handleUzumWebhook(
   // 3. Parse JSON Body
   let rawBody: unknown;
   try {
-    rawBody = await req.json();
+    const text = await req.text();
+    rawBody = parseRequestBody(text);
   } catch {
     return jsonError("10002");
   }
@@ -186,18 +312,15 @@ async function handleCheck(
 ): Promise<Response> {
   const timestamp = typeof body.timestamp === "number" ? body.timestamp : Date.now();
 
+  if (!isKnownServiceId(serviceId)) {
+    return jsonError("10006", { serviceId, timestamp });
+  }
+
   if (!body.params || typeof body.params !== "object") {
     return jsonError("10005", { serviceId, timestamp });
   }
 
-  const account = (
-    body.params.account ??
-    body.params.order_id ??
-    body.params.orderId ??
-    body.params.order_number ??
-    body.params.orderNumber ??
-    ""
-  ).toString().trim();
+  const account = resolveAccount(body.params);
 
   if (!account) {
     return jsonError("10005", { serviceId, timestamp });
@@ -210,13 +333,15 @@ async function handleCheck(
     return jsonError("10007", { serviceId, timestamp });
   }
 
-  // Status checks:
-  if (["confirmed", "packing", "shipped", "delivered"].includes(order.status)) {
-    return jsonError("10008", { serviceId, timestamp });
-  }
+  // Status checks (тестовый заказ можно проверять повторно)
+  if (!isMockOrder(order.number)) {
+    if (["confirmed", "packing", "shipped", "delivered"].includes(order.status)) {
+      return jsonError("10008", { serviceId, timestamp });
+    }
 
-  if (["cancelled", "refunded"].includes(order.status)) {
-    return jsonError("10009", { serviceId, timestamp });
+    if (["cancelled", "refunded"].includes(order.status)) {
+      return jsonError("10009", { serviceId, timestamp });
+    }
   }
 
   const fio = order.user?.name || "Покупатель";
@@ -255,6 +380,10 @@ async function handleCreate(
     return jsonError("10005", { serviceId, transId, transTime });
   }
 
+  if (!isKnownServiceId(serviceId)) {
+    return jsonError("10006", { serviceId, transId, transTime });
+  }
+
   // 1. Check if transId already exists
   const existingTx = await prisma.webhookEvent.findFirst({
     where: {
@@ -268,14 +397,7 @@ async function handleCreate(
   }
 
   // 2. Resolve order
-  const account = (
-    body.params.account ??
-    body.params.order_id ??
-    body.params.orderId ??
-    body.params.order_number ??
-    body.params.orderNumber ??
-    ""
-  ).toString().trim();
+  const account = resolveAccount(body.params);
 
   if (!account) {
     return jsonError("10005", { serviceId, transId, transTime });
@@ -286,12 +408,14 @@ async function handleCreate(
     return jsonError("10007", { serviceId, transId, transTime });
   }
 
-  if (["confirmed", "packing", "shipped", "delivered"].includes(order.status)) {
-    return jsonError("10008", { serviceId, transId, transTime });
-  }
+  if (!isMockOrder(order.number)) {
+    if (["confirmed", "packing", "shipped", "delivered"].includes(order.status)) {
+      return jsonError("10008", { serviceId, transId, transTime });
+    }
 
-  if (["cancelled", "refunded"].includes(order.status)) {
-    return jsonError("10009", { serviceId, transId, transTime });
+    if (["cancelled", "refunded"].includes(order.status)) {
+      return jsonError("10009", { serviceId, transId, transTime });
+    }
   }
 
   // Check amount: totalCents is in tiyins (1 UZS = 100 tiyins)
@@ -307,6 +431,7 @@ async function handleCreate(
     transId,
     account: order.number,
     orderId: order.id,
+    fio,
     amount: parsedAmount,
     status: "CREATED",
     transTime,
@@ -338,9 +463,6 @@ async function handleCreate(
     transId,
     status: "CREATED",
     transTime,
-    data: {
-      account: { value: order.number },
-    },
     amount: parsedAmount,
   });
 }
@@ -400,7 +522,8 @@ async function handleConfirm(
     },
   });
 
-  if (tx.orderId) {
+  // Тестовый заказ не меняет своё состояние
+  if (tx.orderId && !isMockOrder(tx.account)) {
     await prisma.order.update({
       where: { id: tx.orderId },
       data: { status: "confirmed" },
@@ -423,9 +546,6 @@ async function handleConfirm(
     transId,
     status: "CONFIRMED",
     confirmTime,
-    data: {
-      account: { value: tx.account },
-    },
     amount: tx.amount,
   });
 }
@@ -476,7 +596,8 @@ async function handleReverse(
     },
   });
 
-  if (tx.orderId) {
+  // Тестовый заказ не меняет своё состояние
+  if (tx.orderId && !isMockOrder(tx.account)) {
     await prisma.order.update({
       where: { id: tx.orderId },
       data: { status: "cancelled" },
@@ -499,9 +620,6 @@ async function handleReverse(
     transId,
     status: "REVERSED",
     reverseTime,
-    data: {
-      account: { value: tx.account },
-    },
     amount: tx.amount,
   });
 }
@@ -532,6 +650,10 @@ async function handleStatus(
 
   const tx = event.payload as unknown as UzumStoredTx;
 
+  // data — те же параметры, что и в /check
+  const fio = tx.fio ?? tx.data?.fio?.value ?? "Покупатель";
+  const amountSum = (Number(tx.amount) / 100).toFixed(0);
+
   return NextResponse.json({
     serviceId,
     transId,
@@ -539,24 +661,34 @@ async function handleStatus(
     transTime: tx.transTime,
     confirmTime: tx.confirmTime ?? null,
     reverseTime: tx.reverseTime ?? null,
+    amount: tx.amount,
     data: {
       account: { value: tx.account },
+      fio: { value: fio },
+      amount: { value: amountSum },
     },
-    amount: tx.amount,
   });
 }
 
 // ---------------------------------------------------------------------------
-// Helper: findOrder
+// Helpers
 // ---------------------------------------------------------------------------
+function resolveAccount(params: UzumParams): string {
+  return (
+    params.account ??
+    params.order_id ??
+    params.orderId ??
+    params.order_number ??
+    params.orderNumber ??
+    ""
+  )
+    .toString()
+    .trim();
+}
+
 async function findOrder(account: string) {
   // Aliases for testing / mock accounts
-  if (
-    account === "123456789" ||
-    account === "123123" ||
-    account.toUpperCase() === "TEST" ||
-    account.toUpperCase() === "TEST-ORDER"
-  ) {
+  if (isTestAccount(account)) {
     const testOrder = await prisma.order.findFirst({
       where: { number: "BGX-UZUM-TEST" },
       include: { user: true, payments: true },

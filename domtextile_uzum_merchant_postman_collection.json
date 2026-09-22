@@ -1,0 +1,500 @@
+{
+  "info": {
+    "_postman_id": "8f5a2b1c-9e3d-4c7b-91f0-domtextile-uzum",
+    "name": "DomTextil Uzum Merchant API",
+    "description": "Коллекция запросов для интеграции с Uzum Bank Merchant API на сайте domtextile.uz («TEXTILE BIGMAN» МЧЖ).\n\nСодержит все обязательные методы по спецификации Uzum Bank:\n1. /check — Проверка возможности проведения платежа\n2. /create — Инициация платежной транзакции\n3. /confirm — Подтверждение платежа\n4. /status — Проверка статуса транзакции\n5. /reverse — Отмена транзакции\n\nТакже включены негативные сценарии (неверная авторизация, несуществующий заказ, неверная сумма, несуществующая транзакция).\n\nОбновлено 22.09.2026: в /status объект data содержит те же поля, что и в /check (account, fio, amount); в /create, /confirm и /reverse объект data не возвращается (согласно спецификации Uzum Bank Merchant API).\n\nВажно: transId генерируется автоматически для каждого прогона (в pre-request скрипте /create). Повторный /create с тем же transId вернёт errorCode 10010 — это корректное поведение по спецификации.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{username}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{password}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://domtextile.uz/api/webhooks/uzum",
+      "type": "string"
+    },
+    {
+      "key": "username",
+      "value": "uzum_merchant",
+      "type": "string"
+    },
+    {
+      "key": "password",
+      "value": "DomTextil2026Uzum!",
+      "type": "string"
+    },
+    {
+      "key": "serviceId",
+      "value": "101202",
+      "type": "string"
+    },
+    {
+      "key": "account",
+      "value": "BGX-UZUM-TEST",
+      "type": "string"
+    },
+    {
+      "key": "amount",
+      "value": "2500000",
+      "type": "string"
+    },
+    {
+      "key": "phone",
+      "value": "998901234567",
+      "type": "string"
+    },
+    {
+      "key": "transId",
+      "value": "5c398d7e-76b6-11ee-96da-f3a095c6289d",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Check (Проверка возможности оплаты)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"Status is OK\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.status).to.eql(\"OK\");",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"serviceId\": {{serviceId}},\n  \"timestamp\": {{$timestamp}}000,\n  \"params\": {\n    \"account\": \"{{account}}\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/check",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "check"
+          ]
+        },
+        "description": "Проверяет возможность оплаты по номеру заказа/лицевого счета."
+      },
+      "response": []
+    },
+    {
+      "name": "2. Create (Инициация транзакции)",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "// Генерируем уникальный transId для каждого прогона",
+              "var uuid = pm.variables.replaceIn('{{$guid}}');",
+              "pm.collectionVariables.set('transId', uuid);"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"Status is CREATED\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.status).to.eql(\"CREATED\");",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"serviceId\": {{serviceId}},\n  \"timestamp\": {{$timestamp}}000,\n  \"transId\": \"{{transId}}\",\n  \"params\": {\n    \"account\": \"{{account}}\"\n  },\n  \"amount\": {{amount}}\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/create",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "create"
+          ]
+        },
+        "description": "Создает платежную транзакцию в системе продавца."
+      },
+      "response": []
+    },
+    {
+      "name": "3. Confirm (Подтверждение платежа)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"Status is CONFIRMED\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.status).to.eql(\"CONFIRMED\");",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"serviceId\": {{serviceId}},\n  \"timestamp\": {{$timestamp}}000,\n  \"transId\": \"{{transId}}\",\n  \"paymentSource\": \"UZCARD\",\n  \"phone\": \"{{phone}}\",\n  \"tariff\": null,\n  \"processingReferenceNumber\": \"000\",\n  \"cardType\": 2\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/confirm",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "confirm"
+          ]
+        },
+        "description": "Подтверждает платеж после успешного списания в Uzum Bank и переводит заказ в статус подтвержденного."
+      },
+      "response": []
+    },
+    {
+      "name": "4. Status (Проверка статуса транзакции)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"Contains valid status\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect([\"CREATED\", \"CONFIRMED\", \"REVERSED\"]).to.include(jsonData.status);",
+              "});",
+              "pm.test(\"data mirrors /check (account, fio, amount)\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.data.account.value).to.eql(\"{{account}}\");",
+              "    pm.expect(jsonData.data.fio.value).to.be.a(\"string\");",
+              "    pm.expect(jsonData.data.amount.value).to.eql(\"25000\");",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"serviceId\": {{serviceId}},\n  \"timestamp\": {{$timestamp}}000,\n  \"transId\": \"{{transId}}\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/status",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "status"
+          ]
+        },
+        "description": "Возвращает фактический статус транзакции (CREATED, CONFIRMED, REVERSED)."
+      },
+      "response": []
+    },
+    {
+      "name": "5. Reverse (Отмена транзакции)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test(\"Status is REVERSED\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.status).to.eql(\"REVERSED\");",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"serviceId\": {{serviceId}},\n  \"timestamp\": {{$timestamp}}000,\n  \"transId\": \"{{transId}}\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/reverse",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "reverse"
+          ]
+        },
+        "description": "Отменяет транзакцию и переводит заказ в отмененный статус."
+      },
+      "response": []
+    },
+    {
+      "name": "Negative Tests",
+      "item": [
+        {
+          "name": "Check - Неверная авторизация (10001)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function () {",
+                  "    pm.response.to.have.status(400);",
+                  "});",
+                  "pm.test(\"Error code is 10001\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.errorCode).to.eql(\"10001\");",
+                  "    pm.expect(jsonData.status).to.eql(\"FAILED\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "wrong_user",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "wrong_pass",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"serviceId\": {{serviceId}},\n  \"timestamp\": {{$timestamp}}000,\n  \"params\": {\n    \"account\": \"{{account}}\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/check",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "check"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Check - Заказ не найден (10007)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function () {",
+                  "    pm.response.to.have.status(400);",
+                  "});",
+                  "pm.test(\"Error code is 10007\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.errorCode).to.eql(\"10007\");",
+                  "    pm.expect(jsonData.status).to.eql(\"FAILED\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"serviceId\": {{serviceId}},\n  \"timestamp\": {{$timestamp}}000,\n  \"params\": {\n    \"account\": \"NON_EXISTENT_ORDER_999999\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/check",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "check"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create - Неверная сумма (10011)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function () {",
+                  "    pm.response.to.have.status(400);",
+                  "});",
+                  "pm.test(\"Error code is 10011\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.errorCode).to.eql(\"10011\");",
+                  "    pm.expect(jsonData.status).to.eql(\"FAILED\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"serviceId\": {{serviceId}},\n  \"timestamp\": {{$timestamp}}000,\n  \"transId\": \"{{$guid}}\",\n  \"params\": {\n    \"account\": \"{{account}}\"\n  },\n  \"amount\": 999999999\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/create",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "create"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Status - Транзакция не найдена (10014)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function () {",
+                  "    pm.response.to.have.status(400);",
+                  "});",
+                  "pm.test(\"Error code is 10014\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.errorCode).to.eql(\"10014\");",
+                  "    pm.expect(jsonData.status).to.eql(\"FAILED\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"serviceId\": {{serviceId}},\n  \"timestamp\": {{$timestamp}}000,\n  \"transId\": \"00000000-0000-0000-0000-000000000000\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "status"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
