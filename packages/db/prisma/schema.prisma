@@ -59,6 +59,7 @@ enum DeliveryMethod {
 enum PaymentProvider {
   uniteller
   cod
+  uzum
 }
 
 enum PaymentStatus {

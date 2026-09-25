@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowLeft, ArrowRight, CreditCard, Wallet } from "lucide-react";
+import { ArrowLeft, ArrowRight, CreditCard, Smartphone, Wallet } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 
@@ -78,6 +78,29 @@ export function StepPayment(): JSX.Element {
           <span className="flex-1">
             <span className="block text-sm font-semibold">{t("cod")}</span>
             <span className="block text-xs text-muted-foreground">{t("codDescription")}</span>
+          </span>
+        </label>
+
+        <label
+          className={cn(
+            "flex cursor-pointer items-start gap-3 rounded-md border p-4 transition",
+            method === "uzum"
+              ? "border-primary bg-primary/5"
+              : "border-input hover:border-primary/40",
+          )}
+        >
+          <input
+            {...form.register("method")}
+            type="radio"
+            value="uzum"
+            checked={method === "uzum"}
+            onChange={() => form.setValue("method", "uzum")}
+            className="sr-only"
+          />
+          <Smartphone className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" aria-hidden />
+          <span className="flex-1">
+            <span className="block text-sm font-semibold">{t("uzum")}</span>
+            <span className="block text-xs text-muted-foreground">{t("uzumDescription")}</span>
           </span>
         </label>
 

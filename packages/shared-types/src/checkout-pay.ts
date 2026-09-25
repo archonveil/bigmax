@@ -58,7 +58,7 @@ export const CheckoutPayDeliverySchema = z
   });
 
 export const CheckoutPayPaymentSchema = z.object({
-  method: z.enum(["uniteller", "cod"]),
+  method: z.enum(["uniteller", "cod", "uzum"]),
 });
 
 // --- Items (re-fetched from DB by server, so here — только ссылки) ----------
@@ -122,6 +122,25 @@ export const CheckoutPayCodSuccessSchema = z.object({
 
 export type CheckoutPayCodSuccess = z.infer<typeof CheckoutPayCodSuccessSchema>;
 
+/**
+ * Uzum Bank Merchant API: заказ создаётся у нас, оплата проходит в приложении
+ * Uzum Bank. Сервер возвращает `redirectTo` — диплинк
+ * `https://uzumbank.uz/open-service?serviceId=...&account=<orderNumber>`,
+ * по которому открывается форма оплаты в приложении. Дальнейшие переходы
+ * статуса (check/create/confirm/reverse) приходят вебхуками на
+ * `/api/webhooks/uzum`.
+ */
+export const CheckoutPayUzumSuccessSchema = z.object({
+  ok: z.literal(true),
+  provider: z.literal("uzum"),
+  orderId: z.string(),
+  orderNumber: z.string(),
+  /** Диплинк оплаты в приложении Uzum Bank. */
+  redirectTo: z.string(),
+});
+
+export type CheckoutPayUzumSuccess = z.infer<typeof CheckoutPayUzumSuccessSchema>;
+
 export const CheckoutPayErrorSchema = z.object({
   ok: z.literal(false),
   reason: z.enum([
@@ -171,7 +190,7 @@ export const OrderStatusResponseSchema = z.object({
     "refunded",
     "partially_refunded",
   ]),
-  paymentProvider: z.enum(["uniteller", "cod"]),
+  paymentProvider: z.enum(["uniteller", "cod", "uzum"]),
   totalCents: z.number().int().nonnegative(),
   currency: z.string(),
   locale: z.enum(["ru", "uz", "en"]),

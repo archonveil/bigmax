@@ -41,7 +41,7 @@ interface SeedSpec {
   totalCents: number;
   /** Сдвиг от now() в минутах назад — для контроля порядка DESC. */
   ageMin: number;
-  paymentProvider?: "uniteller" | "cod";
+  paymentProvider?: "uniteller" | "cod" | "uzum";
 }
 
 async function seedOrders(specs: SeedSpec[]): Promise<{ id: string; number: string }[]> {

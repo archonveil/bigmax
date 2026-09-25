@@ -38,7 +38,7 @@ async function loginAsAdmin(page: Page): Promise<void> {
 }
 
 interface SeedSpec {
-  provider: "uniteller" | "cod";
+  provider: "uniteller" | "cod" | "uzum";
   status: "pending" | "captured" | "failed";
   amountCents?: number;
   unitellerOrderIdp?: string | null;

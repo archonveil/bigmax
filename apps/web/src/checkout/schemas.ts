@@ -62,7 +62,7 @@ export type DeliveryStepInput = z.infer<typeof DeliveryStepSchema>;
 // === Step 4: Payment ========================================================
 
 export const PaymentStepSchema = z.object({
-  method: z.enum(["uniteller", "cod"]),
+  method: z.enum(["uniteller", "cod", "uzum"]),
 });
 
 export type PaymentStepInput = z.infer<typeof PaymentStepSchema>;

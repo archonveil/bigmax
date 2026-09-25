@@ -36,6 +36,7 @@ import {
   type CheckoutPayCodSuccess,
   type CheckoutPayError,
   type CheckoutPayRequest,
+  type CheckoutPayUzumSuccess,
   type Locale,
 } from "@bigmax/shared-types";
 import { NextResponse, type NextRequest } from "next/server";
@@ -79,11 +80,16 @@ export async function POST(req: NextRequest): Promise<Response> {
   }
   const request = parsed.data;
   const isUniteller = request.payment.method === "uniteller";
+  const isUzum = request.payment.method === "uzum";
 
-  // --- Provider-specific env-check (Uniteller only) ------------------------
+  // --- Provider-specific env-check (Uniteller / Uzum) ----------------------
   const shopId = process.env["UNITELLER_SHOP_ID"] ?? "";
   const password = process.env["UNITELLER_PASSWORD"] ?? "";
   if (isUniteller && (shopId === "" || password === "")) {
+    return jsonError("payment_provider_misconfigured", 503);
+  }
+  const uzumServiceId = (process.env["UZUM_SERVICE_ID"] ?? "").trim();
+  if (isUzum && uzumServiceId === "") {
     return jsonError("payment_provider_misconfigured", 503);
   }
 
@@ -176,9 +182,10 @@ export async function POST(req: NextRequest): Promise<Response> {
     0,
     subtotalCents - discountCents + deliveryCents - loyaltyDiscountCents,
   );
-  // Uniteller отвергает 0-суммы; для полностью-бесплатного заказа (промо +
-  // free_delivery) единственный путь — COD. Поэтому блок только для Uniteller.
-  if (isUniteller && totalCents <= 0) {
+  // Uniteller и Uzum отвергают 0-суммы; для полностью-бесплатного заказа
+  // (промо + free_delivery) единственный путь — COD. Поэтому блок только
+  // для онлайн-способов оплаты.
+  if ((isUniteller || isUzum) && totalCents <= 0) {
     return jsonError("invalid_delivery", 400, "total_zero");
   }
 
@@ -197,7 +204,7 @@ export async function POST(req: NextRequest): Promise<Response> {
       discountCents,
       deliveryCents,
       totalCents,
-      provider: isUniteller ? "uniteller" : "cod",
+      provider: isUniteller ? "uniteller" : isUzum ? "uzum" : "cod",
       promoCode: appliedPromoCode,
       loyaltyPointsSpent,
     });
@@ -207,12 +214,12 @@ export async function POST(req: NextRequest): Promise<Response> {
       scope: "web.checkout.pay",
       extra: {
         userId: session.user.id,
-        provider: isUniteller ? "uniteller" : "cod",
+        provider: isUniteller ? "uniteller" : isUzum ? "uzum" : "cod",
         totalCents,
       },
     });
     await writePaymentLog({
-      action: isUniteller ? "create_uniteller_failed" : "create_cod_failed",
+      action: isUzum ? "create_uzum_failed" : isUniteller ? "create_uniteller_failed" : "create_cod_failed",
       request,
       statusCode: 500,
       errorMessage: err instanceof Error ? err.message : "unknown",
@@ -221,7 +228,7 @@ export async function POST(req: NextRequest): Promise<Response> {
   }
   if (!order) {
     await writePaymentLog({
-      action: isUniteller ? "create_uniteller_failed" : "create_cod_failed",
+      action: isUzum ? "create_uzum_failed" : isUniteller ? "create_uniteller_failed" : "create_cod_failed",
       request,
       statusCode: 500,
       errorMessage: "failed to allocate order number",
@@ -256,10 +263,32 @@ export async function POST(req: NextRequest): Promise<Response> {
     // §5.12 audit-trail: PaymentLog row на каждое создание заказа.
     await writePaymentLog({
       paymentId: order.paymentId,
-      action: "create_cod",
+      action: isUzum ? "create_uzum" : "create_cod",
       request,
       statusCode: 200,
     });
+
+    // --- Uzum branch: диплинк оплаты в приложении Uzum Bank ----------------
+    // Заказ создан, Payment(pending, provider=uzum) записан. Клиент уходит на
+    // диплинк; фактическая оплата и смена статусов приходят вебхуками
+    // /api/webhooks/uzum (check → create → confirm).
+    if (isUzum) {
+      const redirectTo =
+        `https://uzumbank.uz/open-service?serviceId=${encodeURIComponent(uzumServiceId)}` +
+        `&account=${encodeURIComponent(order.number)}`;
+      const body: CheckoutPayUzumSuccess = {
+        ok: true,
+        provider: "uzum",
+        orderId: order.id,
+        orderNumber: order.number,
+        redirectTo,
+      };
+      return NextResponse.json(body, {
+        status: 200,
+        headers: { "Cache-Control": "no-store, private" },
+      });
+    }
+
     const body: CheckoutPayCodSuccess = {
       ok: true,
       provider: "cod",
@@ -373,7 +402,7 @@ interface CreateOrderInput {
   discountCents: number;
   deliveryCents: number;
   totalCents: number;
-  provider: "uniteller" | "cod";
+  provider: "uniteller" | "cod" | "uzum";
   /** UPPER snapshot применённого промокода, либо `null` если промо не было. */
   promoCode: string | null;
   /** P7-T2: количество баллов «Бигмах Бонус» к списанию (уже clamp'ed). */

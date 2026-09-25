@@ -43,7 +43,7 @@ function nextOrderNumber(): string {
 interface SeedSpec {
   orderStatus: OrderStatus;
   paymentStatus?: PaymentStatus;
-  provider?: "cod" | "uniteller";
+  provider?: "cod" | "uniteller" | "uzum";
 }
 
 async function seedOrder(spec: SeedSpec): Promise<{ id: string; number: string }> {

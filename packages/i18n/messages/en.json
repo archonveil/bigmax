@@ -344,7 +344,9 @@
       "card": "Bank card",
       "cardDescription": "Payment via Uniteller. Supports Visa, Mastercard, Uzcard, Humo.",
       "cod": "Cash on delivery",
-      "codDescription": "Pay the courier or at the branch when you receive your order."
+      "codDescription": "Pay the courier or at the branch when you receive your order.",
+      "uzum": "Uzum Bank",
+      "uzumDescription": "Pay via the Uzum Bank app. Your order number is filled in automatically."
     },
     "loyalty": {
       "title": "Bigmax Bonus",
@@ -725,7 +727,8 @@
           "viewDetails": "View details",
           "paymentCod": "Cash on delivery",
           "paymentUniteller": "Card",
-          "createdAt": "Placed on {date}"
+          "createdAt": "Placed on {date}",
+          "paymentUzum": "Uzum Bank"
         },
         "pagination": {
           "prev": "Previous",

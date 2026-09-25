@@ -8,6 +8,7 @@ import {
   type CheckoutPayCodSuccess,
   type CheckoutPayError,
   type CheckoutPayRequest,
+  type CheckoutPayUzumSuccess,
   type Locale,
 } from "@bigmax/shared-types";
 import { ArrowLeft, Check, Loader2, LogIn, ShoppingCart } from "lucide-react";
@@ -108,7 +109,9 @@ export function StepReview({
           branchId: delivery.branchId ?? "",
           comment: delivery.comment ?? "",
         },
-        payment: { method: (payment.method ?? "uniteller") as "uniteller" | "cod" },
+        payment: {
+          method: (payment.method ?? "uniteller") as "uniteller" | "cod" | "uzum",
+        },
         items: items.map((it) => ({ variantId: it.variantId, quantity: it.quantity })),
         locale,
         ...(delivery.method === "courier"
@@ -148,7 +151,7 @@ export function StepReview({
 
       // COD-ветка: JSON с redirectTo → router.push на success-страницу.
       if (res.ok && contentType.includes("application/json")) {
-        const json = (await res.json()) as CheckoutPayCodSuccess;
+        const json = (await res.json()) as CheckoutPayCodSuccess | CheckoutPayUzumSuccess;
         if (json.ok && json.provider === "cod" && json.redirectTo) {
           // Перед редиректом чистим cart + checkout-draft — они больше
           // не нужны, и юзер не должен видеть «старую» корзину при возврате.
@@ -156,6 +159,13 @@ export function StepReview({
           reset();
           // `router.push` из @bigmax/i18n/navigation сам отрезает префикс
           // локали; redirectTo приходит уже с локалью → используем native.
+          window.location.assign(json.redirectTo);
+          return;
+        }
+        // Uzum-ветка: JSON с диплинком → открываем приложение Uzum Bank.
+        if (json.ok && json.provider === "uzum" && json.redirectTo) {
+          clearCart();
+          reset();
           window.location.assign(json.redirectTo);
           return;
         }
@@ -230,7 +240,13 @@ export function StepReview({
         onEdit={() => setStep("payment")}
         editLabel={t("editStep")}
       >
-        <p>{payment.method === "uniteller" ? tPayment("card") : tPayment("cod")}</p>
+        <p>
+          {payment.method === "uniteller"
+            ? tPayment("card")
+            : payment.method === "uzum"
+              ? tPayment("uzum")
+              : tPayment("cod")}
+        </p>
       </ReviewCard>
 
       {isAuthenticated && loyaltyBalance > 0 && loyaltySpendEnabled ? (

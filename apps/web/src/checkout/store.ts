@@ -50,7 +50,7 @@ export interface CheckoutDelivery {
   comment: string;
 }
 
-export type PaymentMethod = "uniteller" | "cod";
+export type PaymentMethod = "uniteller" | "cod" | "uzum";
 
 export interface CheckoutPayment {
   method: PaymentMethod;

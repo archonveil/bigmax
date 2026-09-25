@@ -92,9 +92,11 @@ async function OrderCard({
   const paymentLabel =
     order.paymentProvider === "cod"
       ? t("paymentCod")
-      : order.paymentProvider === "uniteller"
-        ? t("paymentUniteller")
-        : null;
+      : order.paymentProvider === "uzum"
+        ? t("paymentUzum")
+        : order.paymentProvider === "uniteller"
+          ? t("paymentUniteller")
+          : null;
 
   return (
     <li className="rounded-lg border bg-card p-4 transition-colors hover:bg-accent/30">

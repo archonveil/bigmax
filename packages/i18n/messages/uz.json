@@ -344,7 +344,9 @@
       "card": "Bank kartasi",
       "cardDescription": "Uniteller orqali to'lov. Visa, Mastercard, Uzcard, Humo qo'llab-quvvatlanadi.",
       "cod": "Yetkazib berganda",
-      "codDescription": "Naqd to'lov: kuryer yoki filialda qabul qilganda to'laysiz."
+      "codDescription": "Naqd to'lov: kuryer yoki filialda qabul qilganda to'laysiz.",
+      "uzum": "Uzum Bank",
+      "uzumDescription": "Uzum Bank ilovasi orqali to'lov. Buyurtma raqami avtomatik qo'shiladi."
     },
     "loyalty": {
       "title": "Bigmax Bonus",
@@ -725,7 +727,8 @@
           "viewDetails": "Batafsil",
           "paymentCod": "Olganda to'lash",
           "paymentUniteller": "Karta orqali",
-          "createdAt": "{date} sanasida rasmiylashtirilgan"
+          "createdAt": "{date} sanasida rasmiylashtirilgan",
+          "paymentUzum": "Uzum Bank"
         },
         "pagination": {
           "prev": "Orqaga",

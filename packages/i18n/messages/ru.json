@@ -344,7 +344,9 @@
       "card": "Банковская карта",
       "cardDescription": "Оплата через Uniteller. Поддерживаются Visa, Mastercard, Uzcard, Humo.",
       "cod": "При получении",
-      "codDescription": "Наложенный платёж: оплачиваете курьеру или в филиале при получении."
+      "codDescription": "Наложенный платёж: оплачиваете курьеру или в филиале при получении.",
+      "uzum": "Uzum Bank",
+      "uzumDescription": "Оплата через приложение Uzum Bank. Номер заказа подставится автоматически."
     },
     "loyalty": {
       "title": "Бигмах Бонус",
@@ -725,7 +727,8 @@
           "viewDetails": "Подробнее",
           "paymentCod": "При получении",
           "paymentUniteller": "Картой",
-          "createdAt": "Оформлен {date}"
+          "createdAt": "Оформлен {date}",
+          "paymentUzum": "Uzum Bank"
         },
         "pagination": {
           "prev": "Назад",
